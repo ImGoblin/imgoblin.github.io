@@ -1,0 +1,65 @@
+baseURL = "http://example.org/"
+languageCode = "ru-ru"
+title = "Gøblin"
+theme = "ezhil"
+
+copyright = " © "
+
+pygmentsstyle = "solarized-dark"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+defaultContentLanguage = "ru"
+
+[params]
+    disableDisqusTypes = ["page"]
+    featherIconsCDN = true
+    mode = "auto"  # "dark", "auto", "light"
+    mainSections = ["programming", "travel"]
+	subtitle = "Твоя худшая встреча этим летом"
+
+[services.disqus]
+    shortname = "your-disqus-shortname"
+
+summaryLength = 20
+
+[[menu.main]]
+name = "Главная"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "Путешествия"
+url = "/posts/travel"
+weight = 2
+
+[[menu.main]]
+name = "Прогаем жопой"
+url = "/posts/programming"
+weight = 3
+
+[[menu.main]]
+name = "Обо мне"
+url = "/about"
+weight = 4
+
+[[menu.main]]
+name = "Поиск по тегам"
+url = "/tags"
+weight = 5
+
+[[params.social]]
+name = "Github"
+icon = "github"
+url = "https://github.com/ImGoblin"
+[[params.social]]
+name = "Telegram"
+icon = "send"
+url = "https://t.me/itisgoblin"
+
+[taxonomies]
+   tag = "tags"
+
+[Languages]
+[Languages.ru]
+languageName = "Русский"
