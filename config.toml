@@ -1,4 +1,4 @@
-baseURL = "http://example.org/"
+baseURL = "https://imgoblin.github.io/"
 languageCode = "ru-ru"
 title = "Gøblin"
 theme = "ezhil"
