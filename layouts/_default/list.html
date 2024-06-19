@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+{{ partial "header.html" . }}
+<body>
+    <div class="container wrapper">
+        {{ partial "head.html" . }}
+
+        {{ with .Content }}{{ . }}{{ end }}
+
+        <div class="recent-posts section">
+            <h2 class="section-header">
+                {{ if in .Permalink "/travel/" }}
+                    Последние посты про путешествия
+                {{ else if in .Permalink "/programming/" }}
+                    Последние посты о мамкином программисте
+                {{ else }}
+                    Последние посты в {{ .Section }}
+                {{ end }}
+            </h2>
+            <div class="posts">
+                {{ $pages := .Pages }}
+                {{ if gt (len $pages) 0 }}
+                    {{ range $pages }}
+                        <div class="post">
+                            <a href="{{ .RelPermalink }}" class="post-link">
+                                <div class="post-content">
+                                    <div class="title-description">
+                                        <h3 class="title">{{ .Title }}</h3>
+                                        <span class="separator">—</span>
+                                        <p class="description">
+                                            {{ if isset .Params "description" }}
+                                                {{ .Params.description }}
+                                            {{ else }}
+                                                {{ .Summary }}&hellip;
+                                            {{ end }}
+                                        </p>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="publish-date">Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}</span>
+                                        {{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}
+                                    </div>
+                                </div>
+                                {{ with .Params.image }}
+                                    <img src="{{ . }}" alt="Thumbnail" class="post-thumbnail">
+                                {{ end }}
+                            </a>
+                        </div>
+                    {{ end }}
+                {{ else }}
+                    <p>Все посты в {{ if in .Permalink "/travel/" }} путешествиях {{ else if in .Permalink "/programming/" }} программировании {{ else }} этом разделе {{ end }} куда-то разбежались</p>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+    {{ partial "footer.html" . }}
+</body>
+</html>

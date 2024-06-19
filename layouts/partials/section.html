@@ -1,0 +1,13 @@
+{{ $section := .Section }}
+{{ $pages := where .Site.RegularPages "Section" $section }}
+{{ if $pages }}
+    {{ range first 5 $pages }}
+    <div class="post">
+        <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+        <p>{{ .Summary }}</p>
+        <a href="{{ .Permalink }}">Читать дальше...</a>
+    </div>
+    {{ end }}
+{{ else }}
+    <p>Нет постов в разделе {{ $section }}.</p>
+{{ end }}
