@@ -14,7 +14,7 @@ defaultContentLanguage = "ru"
 [params]
     disableDisqusTypes = ["page"]
     featherIconsCDN = true
-    mode = "auto"  # "dark", "auto", "light"
+    mode = "light"  # "dark", "auto", "light"
     mainSections = ["programming", "travel"]
 	subtitle = "Твоя худшая встреча этим летом"
 
