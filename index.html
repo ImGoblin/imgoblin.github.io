@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+{{ partial "header.html" . }}
+<body>
+    <div class="container wrapper">
+        {{ partial "head.html" . }}
+
+        <!-- Секция Travel -->
+        <div class="recent-posts section travel">
+            <h2 class="section-header">
+                Последние посты про путешествия
+            </h2>
+            <div class="posts">
+                {{ $firstTravelPost := true }}
+                {{ $postCount := 0 }}
+                {{ range .Site.RegularPages.ByDate.Reverse }}
+                    {{ if eq .Params.section "travel" }}
+                        {{ $postCount = add $postCount 1 }}
+                        {{ if le $postCount 5 }}
+                            <a href="{{ .RelPermalink }}" class="post">
+                                <div class="post-content">
+                                    <div class="post-header">
+                                        <div class="title-description">
+										<h3 class="title">{{ .Title }}</h3>
+										<span class="separator">—</span>
+                                        <p class="description">
+                                                {{ if .Params.description }}
+                                                    {{ .Params.description }}
+                                                {{ else if $firstTravelPost }}
+                                                    {{ .Summary }}&hellip; <!-- Используем Summary из первого поста -->
+                                                {{ else }}
+                                                    {{ .Summary }}&hellip;
+                                                {{ end }}
+                                        </p>
+                                        </div>
+                                        <div class="meta">
+                                            Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
+                                            {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ if $firstTravelPost }}
+                                    {{ with .Params.image }}
+                                        <img src="{{ . }}" alt="Thumbnail">
+                                    {{ end }}
+                                    {{ $firstTravelPost = false }}
+                                {{ end }}
+                            </a>
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+                {{ if gt $postCount 5 }}
+                    <div class="read-more">
+                        <a href="/section/travel">Читать больше в разделе Travel>>></a>
+                    </div>
+                {{ end }}
+            </div>
+        </div>
+
+        <!-- Секция Programming -->
+        <div class="recent-posts section programming">
+            <h2 class="section-header">
+                Последние посты о мамкином программисте
+            </h2>
+            <div class="posts">
+                {{ $firstProgrammingPost := true }}
+                {{ $postCount = 0 }}
+                {{ range .Site.RegularPages.ByDate.Reverse }}
+                    {{ if eq .Params.section "programming" }}
+                        {{ $postCount = add $postCount 1 }}
+                        {{ if le $postCount 5 }}
+                            <a href="{{ .RelPermalink }}" class="post">
+                                <div class="post-content">
+                                    <div class="post-header">
+                                        <div class="title-description">
+										<h3 class="title">{{ .Title }}</h3>
+                                            <span class="separator">—</span>
+											<p class="description">
+                                                {{ if .Params.description }}
+                                                    {{ .Params.description }}
+                                                {{ else if $firstProgrammingPost }}
+                                                    {{ .Summary }}&hellip; <!-- Используем Summary из первого поста -->
+                                                {{ else }}
+                                                    {{ .Summary }}&hellip;
+                                                {{ end }}
+                                            </p>
+                                            
+                                        </div>
+                                        <div class="meta">
+                                            Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
+                                            {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ if $firstProgrammingPost }}
+                                    {{ with .Params.image }}
+                                        <img src="{{ . }}" alt="Thumbnail">
+                                    {{ end }}
+                                    {{ $firstProgrammingPost = false }}
+                                {{ end }}
+                            </a>
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+                {{ if gt $postCount 5 }}
+                    <div class="read-more">
+                        <a href="/section/programming">Читать больше в разделе Programming>>></a>
+                    </div>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+    {{ partial "footer.html" . }}
+</body>
+</html>
