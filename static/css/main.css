@@ -1,6 +1,6 @@
 /* Основные стили */
 body {
-    font-family: "Ubuntu variable", "Ubuntu", -apple-system, "Segoe UI", "Roboto", "Oxygen", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: "Helvetica Neue", sans-serif;
     font-weight: 400;
     color: #000000;
     line-height: 1.6;
@@ -34,7 +34,7 @@ html, button, input, select, textarea {
 
 /* Заголовки */
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Ubuntu variable", "Ubuntu", -apple-system, "Segoe UI", "Roboto", "Oxygen", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: "Helvetica Neue", sans-serif;
     line-height: 1.2;
     color: #000000;
     font-weight: 200;
@@ -103,7 +103,7 @@ blockquote {
     margin-left: 1rem;
     font-style: italic;
     font-size: 1.4rem;
-    font-family: "Ubuntu variable", "Ubuntu", -apple-system, "Segoe UI", "Roboto", "Oxygen", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", serif;
+    font-family: "Helvetica Neue", serif;
     border-left: 3px solid;
     border-color: #000000;
     padding-left: 20px;
@@ -396,7 +396,7 @@ nav ul.flat li a:hover {
 .description {
     font-size: 1.6rem;  /* Размер шрифта h2 */
     line-height: 1.3em;
-    font-family: "Ubuntu variable", "Ubuntu", -apple-system, "Segoe UI", "Roboto", "Oxygen", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: "Helvetica Neue", sans-serif;
     color: #000000;
     font-weight: 200;
     margin-top: 0.5rem;
