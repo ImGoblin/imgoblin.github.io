@@ -73,18 +73,17 @@
         left: 50%;
         transform: translateX(-50%);
         background-color: white; /* Белый фон */
-        padding: 10px; /* Внутренний отступ */
+        padding: 8px; /* Внутренний отступ */
         box-sizing: border-box;
         margin: 0;
         width: 760px;
         text-align: center;
         font-family: Telegram Sans, sans-serif; /* Используемый шрифт */
-        font-size: 1.2rem; /* Увеличенный размер шрифта */
+        font-size: 1.1rem; /* Размер шрифта для десктопа */
         color: #000000; /* Цвет текста */
         line-height: 1.2; /* Межстрочный интервал */
         z-index: 5; /* Обеспечиваем, чтобы подпись была выше других элементов */
     }
-
     .h4 {
         font-family: Telegram Sans, sans-serif;
         line-height: 1.2;
@@ -95,27 +94,15 @@
 
     @media (max-width: 767px) {
         .slick-carousel {
-            width: 100%; /* Для мобильных устройств ширина будет 100% */
-            height: auto; /* Автоматическая высота */
-        }
-
-        .slick-carousel .slick-slide {
-            width: 100%; /* Ширина слайда равна ширине контейнера */
-            height: auto; /* Автоматическая высота */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            max-width: 100%; /* Для мобильных устройств ширина будет 100% */
         }
 
         .slick-carousel .slick-slide img {
-            max-width: 100%;
-            max-height: calc(100vh - 150px); /* Ограничиваем высоту изображения, чтобы оно помещалось на экране */
-            width: auto;
-            height: auto;
-            margin: auto;
+            height: auto; /* Автоматическое масштабирование высоты */
         }
 
         .slick-carousel-caption {
+            bottom: -25px; /* Уменьшаем отступ подписи в мобильной версии */
             width: 100%; /* Ширина контейнера подписи равна ширине карусели */
             font-size: 0.9rem; /* Уменьшаем размер шрифта для мобильных */
         }
@@ -125,7 +112,6 @@
         }
     }
 </style>
-
 
 <div class="slick-carousel-wrapper">
     <div class="slick-carousel" data-dots="{{ $dots }}" data-arrows="{{ $arrows }}" data-autoplay="{{ $autoplay }}" data-speed="{{ $speed }}">
