@@ -187,9 +187,11 @@ pre code {
 .align-right {
     text-align: right;
 }
+
 .markdown {
-	text-align: justify;
+    text-align: justify;
 }
+
 /* Заголовок страницы */
 .page-title {
     margin: 0;
@@ -393,6 +395,7 @@ nav ul.flat li a:hover {
     margin-top: 5px;
     margin-bottom: 1px;
 }
+
 .description {
     font-size: 1.6rem;  /* Размер шрифта h2 */
     line-height: 1.3em;
@@ -402,6 +405,7 @@ nav ul.flat li a:hover {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
+
 /* Стили для таблиц */
 table th {
     background-color: #f4f4f4;
@@ -436,6 +440,20 @@ table th, table td {
 
     .container {
         margin-top: 10px;
+    }
+
+    .slick-carousel {
+        width: 100%; /* Ширина слайдера на мобильных устройствах */
+        height: auto; /* Высота автоматически подстраивается под содержимое */
+    }
+
+    .slick-carousel .slick-slide {
+        width: 100%; /* Ширина слайда на мобильных устройствах */
+        height: auto; /* Высота автоматически подстраивается под содержимое */
+    }
+
+    .slick-carousel-caption {
+        width: 100%; /* Ширина подписи на мобильных устройствах */
     }
 }
 
