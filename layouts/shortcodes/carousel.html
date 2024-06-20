@@ -14,16 +14,17 @@
     }
 
     .slick-carousel {
-        width: 760px; /* Ширина слайдера */
-        height: 590px; /* Высота слайдера */
+        width: 100%; /* Устанавливаем ширину в 100% */
+        max-width: 760px; /* Максимальная ширина */
+        height: auto; /* Высота будет зависеть от содержания */
         overflow: hidden;
         position: relative;
         margin-bottom: 25px; /* Добавляем место под подпись */
     }
 
     .slick-carousel .slick-slide {
-        width: 760px; /* Ширина слайда */
-        height: 590px; /* Высота слайда */
+        width: 100%; /* Устанавливаем ширину в 100% */
+        height: auto; /* Высота будет зависеть от содержания */
         text-align: center; /* Центрируем изображение */
         display: flex;
         justify-content: center;
@@ -75,7 +76,8 @@
         padding: 10px; /* Внутренний отступ */
         box-sizing: border-box;
         margin: 0;
-        width: 760px;
+        width: 100%; /* Устанавливаем ширину в 100% */
+        max-width: 760px; /* Максимальная ширина */
         text-align: center;
         font-family: Telegram Sans, sans-serif; /* Используемый шрифт */
         font-size: 1.2rem; /* Увеличенный размер шрифта */
@@ -88,6 +90,22 @@
         color: #000000;
         font-weight: 200;
         font-size: 1.2rem; /* Увеличенный размер шрифта */
+    }
+
+    /* Мобильные стили */
+    @media (max-width: 767px) {
+        .slick-carousel-wrapper {
+            margin-bottom: 40px; /* Уменьшаем отступ для мобильных */
+        }
+
+        .slick-carousel-caption {
+            font-size: 1rem; /* Уменьшаем размер шрифта для мобильных */
+            bottom: -25px; /* Уменьшаем отступ для подписи */
+        }
+
+        .slick-prev, .slick-next {
+            top: 45%; /* Корректируем позиционирование стрелок */
+        }
     }
 </style>
 
