@@ -1,3 +1,12 @@
+{{ $imagesParam := .Get "images" }}
+{{ $captionsParam := .Get "captions" }}
+{{ $images := split $imagesParam "," }}
+{{ $captions := split $captionsParam "," }}
+{{ $dots := .Get "dots" | default "true" }}
+{{ $arrows := .Get "arrows" | default "true" }}
+{{ $autoplay := .Get "autoplay" | default "true" }}
+{{ $speed := .Get "speed" | default "500" }}
+
 <style>
     .slick-carousel-wrapper {
         position: relative;
@@ -89,3 +98,51 @@
         }
     }
 </style>
+
+<div class="slick-carousel-wrapper">
+    <div class="slick-carousel" data-dots="{{ $dots }}" data-arrows="{{ $arrows }}" data-autoplay="{{ $autoplay }}" data-speed="{{ $speed }}">
+        {{ range $index, $image := $images }}
+            <div class="slick-slide">
+                <img src="{{ $image }}" alt="{{ index $captions $index }}">
+            </div>
+        {{ end }}
+    </div>
+<button type="button" class="slick-prev">Previous</button>
+<button type="button" class="slick-next">Next</button>
+<figcaption class="slick-carousel-caption h4">{{ index $captions 0 }}</figcaption> <!-- Подпись -->
+</div>
+<script>
+    $(document).ready(function(){
+        var $carousel = $('.slick-carousel');
+        var $caption = $('.slick-carousel-caption');
+
+        $carousel.on('init', function(event, slick){
+            var captionText = $(slick.$slides[0]).find('img').attr('alt');
+            $caption.text(captionText);
+        });
+
+        $carousel.on('beforeChange', function(event, slick, currentSlide, nextSlide){
+            var nextCaption = $(slick.$slides[nextSlide]).find('img').attr('alt');
+            $caption.text(nextCaption);
+        });
+
+        $carousel.slick({
+            dots: $carousel.data('dots') === "true",
+            arrows: $carousel.data('arrows') === "true",
+            autoplay: $carousel.data('autoplay') === "true",
+            speed: parseInt($carousel.data('speed')),
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            prevArrow: '.slick-prev',
+            nextArrow: '.slick-next'
+        });
+
+        $('.slick-prev').click(function(){
+            $carousel.slick('slickPrev');
+        });
+
+        $('.slick-next').click(function(){
+            $carousel.slick('slickNext');
+        });
+    });
+</script>
