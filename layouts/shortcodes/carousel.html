@@ -79,7 +79,7 @@
         width: 760px;
         text-align: center;
         font-family: Telegram Sans, sans-serif; /* Используемый шрифт */
-        font-size: 1.1rem; /* Размер шрифта для десктопа */
+        font-size: 1.1rem; /* Увеличенный размер шрифта */
         color: #000000; /* Цвет текста */
         line-height: 1.2; /* Межстрочный интервал */
         z-index: 5; /* Обеспечиваем, чтобы подпись была выше других элементов */
@@ -92,20 +92,19 @@
         font-size: 1.2rem; /* Увеличенный размер шрифта */
     }
 
-    @media (max-width: 767px) and (max-height: 466px) {
-    .slick-carousel {
-        max-width: 100%; /* Для мобильных устройств ширина будет 100% */
-        height: auto;
+    @media (max-width: 767px) {
+        .slick-carousel {
+            max-width: 100%; /* Для мобильных устройств ширина будет 100% */
+            height: auto; /* Высота будет автоматической */
         }
 
         .slick-carousel .slick-slide img {
-            height: auto; /* Автоматическое масштабирование высоты */
+            height: auto; /* Автоматическая высота */
         }
 
         .slick-carousel-caption {
-            bottom: -25px; /* Уменьшаем отступ подписи в мобильной версии */
-            width: 100%; /* Ширина контейнера подписи равна ширине карусели */
-            font-size: 0.9rem; /* Уменьшаем размер шрифта для мобильных */
+            width: 100%; /* Ширина подписи 100% */
+            font-size: 0.9rem; /* Уменьшаем размер шрифта для мобильных устройств */
         }
 
         .slick-prev, .slick-next {
@@ -122,10 +121,12 @@
             </div>
         {{ end }}
     </div>
-<button type="button" class="slick-prev">Previous</button>
-<button type="button" class="slick-next">Next</button>
-<figcaption class="slick-carousel-caption h4">{{ index $captions 0 }}</figcaption> <!-- Подпись -->
+
+    <button type="button" class="slick-prev">Previous</button>
+    <button type="button" class="slick-next">Next</button>
+    <figcaption class="slick-carousel-caption h4">{{ index $captions 0 }}</figcaption> <!-- Подпись -->
 </div>
+
 <script>
     $(document).ready(function(){
         var $carousel = $('.slick-carousel');
@@ -134,6 +135,8 @@
         $carousel.on('init', function(event, slick){
             var captionText = $(slick.$slides[0]).find('img').attr('alt');
             $caption.text(captionText);
+
+            adjustCarouselHeight(slick);
         });
 
         $carousel.on('beforeChange', function(event, slick, currentSlide, nextSlide){
@@ -159,5 +162,26 @@
         $('.slick-next').click(function(){
             $carousel.slick('slickNext');
         });
+
+        $(window).on('resize', function(){
+            adjustCarouselHeight($carousel.slick('getSlick'));
+        });
+
+        function adjustCarouselHeight(slick) {
+            if (window.innerWidth <= 767) {
+                var maxHeight = 0;
+                slick.$slides.each(function() {
+                    var imgHeight = $(this).find('img').height();
+                    if (imgHeight > maxHeight) {
+                        maxHeight = imgHeight;
+                    }
+                });
+                $carousel.css('height', maxHeight);
+                slick.$slides.css('height', maxHeight);
+            } else {
+                $carousel.css('height', '590px');
+                slick.$slides.css('height', '590px');
+            }
+        }
     });
 </script>
