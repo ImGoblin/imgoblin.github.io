@@ -10,20 +10,20 @@
 <style>
     .slick-carousel-wrapper {
         position: relative;
-        margin-bottom: 30px; /* Уменьшаем отступ подписи */
+        margin-bottom: 60px; /* Добавляем место под подпись и зазор */
     }
 
     .slick-carousel {
-        width: 100%; /* Ширина слайдера на всю ширину контейнера */
-        max-width: 760px; /* Максимальная ширина слайдера */
-        margin: 0 auto; /* Центрируем слайдер по горизонтали */
+        width: 760px; /* Ширина слайдера */
+        height: 590px; /* Высота слайдера */
         overflow: hidden;
         position: relative;
+        margin-bottom: 25px; /* Добавляем место под подпись */
     }
 
     .slick-carousel .slick-slide {
-        width: 100%; /* Ширина слайда на всю ширину слайдера */
-        height: auto; /* Высота будет автоматически подстраиваться */
+        width: 760px; /* Ширина слайда */
+        height: 590px; /* Высота слайда */
         text-align: center; /* Центрируем изображение */
         display: flex;
         justify-content: center;
@@ -43,7 +43,7 @@
         background: none;
         border: none;
         cursor: pointer;
-        border-radius: 50%; /* Круглые стрелки */
+        border-radius: 60%;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -69,19 +69,28 @@
 
     .slick-carousel-caption {
         position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 10px; /* Внутренние отступы */
+        bottom: -35px; /* Смещение подписи под слайдом */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: white; /* Белый фон */
+        padding: 10px; /* Внутренний отступ */
         box-sizing: border-box;
         margin: 0;
+        width: 760px;
         text-align: center;
-        font-family: Telegram Sans, sans-serif;
-        font-size: 14px; /* Размер шрифта под мобильные устройства */
+        font-family: Telegram Sans, sans-serif; /* Используемый шрифт */
+        font-size: 1.2rem; /* Увеличенный размер шрифта */
+        color: #000000; /* Цвет текста */
         line-height: 1.2; /* Межстрочный интервал */
-        z-index: 5; /* Подпись поверх других элементов */
+        z-index: 5; /* Обеспечиваем, чтобы подпись была выше других элементов */
     }
-
+    .h4 {
+        font-family: Telegram Sans, sans-serif;
+        line-height: 1.2;
+        color: #000000;
+        font-weight: 200;
+        font-size: 1.2rem; /* Увеличенный размер шрифта */
+    }
     @media (max-width: 767px) {
         .slick-carousel {
             max-width: 100%; /* Для мобильных устройств ширина будет 100% */
