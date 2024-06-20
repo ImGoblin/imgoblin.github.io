@@ -14,17 +14,16 @@
     }
 
     .slick-carousel {
-        width: 100%; /* Устанавливаем ширину в 100% */
-        max-width: 760px; /* Максимальная ширина */
-        height: auto; /* Высота будет зависеть от содержания */
+        width: 760px; /* Ширина слайдера */
+        height: 590px; /* Высота слайдера */
         overflow: hidden;
         position: relative;
         margin-bottom: 25px; /* Добавляем место под подпись */
     }
 
     .slick-carousel .slick-slide {
-        width: 100%; /* Устанавливаем ширину в 100% */
-        height: auto; /* Высота будет зависеть от содержания */
+        width: 760px; /* Ширина слайда */
+        height: 590px; /* Высота слайда */
         text-align: center; /* Центрируем изображение */
         display: flex;
         justify-content: center;
@@ -70,20 +69,20 @@
 
     .slick-carousel-caption {
         position: absolute;
-        bottom: 0; /* Смещение подписи под слайдом */
+        bottom: -35px; /* Смещение подписи под слайдом */
         left: 50%;
         transform: translateX(-50%);
+        background-color: white; /* Белый фон */
         padding: 10px; /* Внутренний отступ */
         box-sizing: border-box;
         margin: 0;
-        width: 100%; /* Устанавливаем ширину в 100% */
-        max-width: 760px; /* Максимальная ширина */
+        width: 760px;
         text-align: center;
         font-family: Telegram Sans, sans-serif; /* Используемый шрифт */
         font-size: 1.2rem; /* Увеличенный размер шрифта */
+        color: #000000; /* Цвет текста */
         line-height: 1.2; /* Межстрочный интервал */
         z-index: 5; /* Обеспечиваем, чтобы подпись была выше других элементов */
-        background-color: rgba(255, 255, 255, 0.8); /* Добавляем фон для контраста */
     }
     .h4 {
         font-family: Telegram Sans, sans-serif;
@@ -91,39 +90,6 @@
         color: #000000;
         font-weight: 200;
         font-size: 1.2rem; /* Увеличенный размер шрифта */
-    }
-
-    /* Мобильные стили */
-    @media (max-width: 767px) {
-        .slick-carousel-wrapper {
-            margin-bottom: 40px; /* Уменьшаем отступ для мобильных */
-        }
-
-        .slick-carousel {
-            height: auto; /* Обеспечиваем автоматическую высоту для мобильных */
-        }
-
-        .slick-carousel .slick-slide {
-            background-color: #d6d6d6; /* Обеспечиваем серый фон */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .slick-carousel .slick-slide img {
-            max-width: 100%;
-            height: auto; /* Поддерживаем соотношение сторон */
-        }
-
-        .slick-carousel-caption {
-            font-size: 1rem; /* Уменьшаем размер шрифта для мобильных */
-            padding: 5px 10px; /* Уменьшаем внутренние отступы для мобильных */
-        }
-
-        .slick-prev, .slick-next {
-            top: 50%; /* Корректируем позиционирование стрелок */
-            transform: translateY(-50%); /* Корректируем позиционирование стрелок */
-        }
     }
 </style>
 
