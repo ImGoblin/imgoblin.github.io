@@ -1,29 +1,20 @@
-{{ $imagesParam := .Get "images" }}
-{{ $captionsParam := .Get "captions" }}
-{{ $images := split $imagesParam "," }}
-{{ $captions := split $captionsParam "," }}
-{{ $dots := .Get "dots" | default "true" }}
-{{ $arrows := .Get "arrows" | default "true" }}
-{{ $autoplay := .Get "autoplay" | default "true" }}
-{{ $speed := .Get "speed" | default "500" }}
-
 <style>
     .slick-carousel-wrapper {
         position: relative;
-        margin-bottom: 60px; /* Добавляем место под подпись и зазор */
+        margin-bottom: 30px; /* Уменьшаем отступ подписи */
     }
 
     .slick-carousel {
-        width: 760px; /* Ширина слайдера */
-        height: 590px; /* Высота слайдера */
+        width: 100%; /* Ширина слайдера на всю ширину контейнера */
+        max-width: 760px; /* Максимальная ширина слайдера */
+        margin: 0 auto; /* Центрируем слайдер по горизонтали */
         overflow: hidden;
         position: relative;
-        margin-bottom: 25px; /* Добавляем место под подпись */
     }
 
     .slick-carousel .slick-slide {
-        width: 760px; /* Ширина слайда */
-        height: 590px; /* Высота слайда */
+        width: 100%; /* Ширина слайда на всю ширину слайдера */
+        height: auto; /* Высота будет автоматически подстраиваться */
         text-align: center; /* Центрируем изображение */
         display: flex;
         justify-content: center;
@@ -43,7 +34,7 @@
         background: none;
         border: none;
         cursor: pointer;
-        border-radius: 60%;
+        border-radius: 50%; /* Круглые стрелки */
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -69,76 +60,32 @@
 
     .slick-carousel-caption {
         position: absolute;
-        bottom: -35px; /* Смещение подписи под слайдом */
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: white; /* Белый фон */
-        padding: 10px; /* Внутренний отступ */
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон */
+        padding: 10px; /* Внутренние отступы */
         box-sizing: border-box;
         margin: 0;
-        width: 760px;
         text-align: center;
-        font-family: Telegram Sans, sans-serif; /* Используемый шрифт */
-        font-size: 1.2rem; /* Увеличенный размер шрифта */
+        font-family: Telegram Sans, sans-serif;
+        font-size: 14px; /* Размер шрифта под мобильные устройства */
         color: #000000; /* Цвет текста */
         line-height: 1.2; /* Межстрочный интервал */
-        z-index: 5; /* Обеспечиваем, чтобы подпись была выше других элементов */
+        z-index: 5; /* Подпись поверх других элементов */
     }
-    .h4 {
-        font-family: Telegram Sans, sans-serif;
-        line-height: 1.2;
-        color: #000000;
-        font-weight: 200;
-        font-size: 1.2rem; /* Увеличенный размер шрифта */
+
+    @media (max-width: 767px) {
+        .slick-carousel {
+            max-width: 100%; /* Для мобильных устройств ширина будет 100% */
+        }
+
+        .slick-carousel .slick-slide img {
+            height: auto; /* Автоматическое масштабирование высоты */
+        }
+
+        .slick-prev, .slick-next {
+            font-size: 12px; /* Уменьшаем размер стрелок */
+        }
     }
 </style>
-
-<div class="slick-carousel-wrapper">
-    <div class="slick-carousel" data-dots="{{ $dots }}" data-arrows="{{ $arrows }}" data-autoplay="{{ $autoplay }}" data-speed="{{ $speed }}">
-        {{ range $index, $image := $images }}
-            <div class="slick-slide">
-                <img src="{{ $image }}" alt="{{ index $captions $index }}">
-            </div>
-        {{ end }}
-    </div>
-
-    <button type="button" class="slick-prev">Previous</button>
-    <button type="button" class="slick-next">Next</button>
-    <figcaption class="slick-carousel-caption h4">{{ index $captions 0 }}</figcaption> <!-- Подпись -->
-</div>
-
-<script>
-    $(document).ready(function(){
-        var $carousel = $('.slick-carousel');
-        var $caption = $('.slick-carousel-caption');
-
-        $carousel.on('init', function(event, slick){
-            var captionText = $(slick.$slides[0]).find('img').attr('alt');
-            $caption.text(captionText);
-        });
-
-        $carousel.on('beforeChange', function(event, slick, currentSlide, nextSlide){
-            var nextCaption = $(slick.$slides[nextSlide]).find('img').attr('alt');
-            $caption.text(nextCaption);
-        });
-
-        $carousel.slick({
-            dots: $carousel.data('dots') === "true",
-            arrows: $carousel.data('arrows') === "true",
-            autoplay: $carousel.data('autoplay') === "true",
-            speed: parseInt($carousel.data('speed')),
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            prevArrow: '.slick-prev',
-            nextArrow: '.slick-next'
-        });
-
-        $('.slick-prev').click(function(){
-            $carousel.slick('slickPrev');
-        });
-
-        $('.slick-next').click(function(){
-            $carousel.slick('slickNext');
-        });
-    });
-</script>
