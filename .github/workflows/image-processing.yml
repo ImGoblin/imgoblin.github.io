@@ -27,12 +27,20 @@ jobs:
       run: |
         python process_images.py
 
+    - name: Check for changes
+      id: git-status
+      run: |
+        git status
+        echo "::set-output name=status::$(git status --porcelain)"
+
     - name: Commit and push changes
+      if: steps.git-status.outputs.status != ''
       run: |
         git config --local user.email "you@example.com"
         git config --local user.name "Your Name"
         git add .
         git commit -m "Processed images"
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
