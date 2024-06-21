@@ -1,26 +1,30 @@
 import os
 from PIL import Image
 
-def process_image(file_path):
+def process_image(image_path, output_path, size):
     try:
-        img = Image.open(file_path)
-        width, height = img.size
-        if width > height:
-            new_width, new_height = 760, 590
-        else:
-            new_width, new_height = 442, 590
-
-        img = img.resize((int(new_width), int(new_height)), Image.ANTIALIAS)
-        img.save(file_path)
-        print(f"Processed and resized image: {file_path}")
+        with Image.open(image_path) as img:
+            img = img.resize(size, Image.LANCZOS)
+            img.save(output_path)
+        print(f"Processed image {image_path}")
     except Exception as e:
-        print(f"Failed to process image {file_path}: {e}")
+        print(f"Failed to process image {image_path}: {e}")
 
 def process_directory(directory):
     for root, _, files in os.walk(directory):
         for file in files:
-            if file.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp')):
-                process_image(os.path.join(root, file))
+            if file.lower().endswith(('png', 'jpg', 'jpeg', 'gif', 'bmp')):
+                image_path = os.path.join(root, file)
+                output_path = image_path  # Сохраняем обработанное изображение на место исходного
+                # Определяем размер для горизонтальных и вертикальных изображений
+                try:
+                    with Image.open(image_path) as img:
+                        if img.width > img.height:
+                            size = (760, 590)
+                        else:
+                            size = (442, 590)
+                    process_image(image_path, output_path, size)
+                except Exception as e:
+                    print(f"Failed to process image {image_path}: {e}")
 
-if __name__ == "__main__":
-    process_directory("static/images")  # Путь к вашему каталогу изображений
+process_directory("static/images/")
