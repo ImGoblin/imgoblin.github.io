@@ -36,7 +36,8 @@ jobs:
           git config --local user.name "ImGoblin"
           git add .
           git commit -m "Processed images"
-          git push
+          git remote set-url origin https://github.com/ImGoblin/imgoblin.github.io.git
+          git push --quiet --set-upstream origin main
         fi
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
