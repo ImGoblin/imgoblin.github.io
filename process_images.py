@@ -1,4 +1,5 @@
 import os
+import subprocess
 from PIL import Image
 
 def process_image(image_path, output_path, size):
@@ -6,9 +7,9 @@ def process_image(image_path, output_path, size):
         with Image.open(image_path) as img:
             img = img.resize(size, Image.LANCZOS)
             img.save(output_path)
-        print(f"Processed image {image_path}")
+        print(f"Обработано изображение {image_path}")
     except Exception as e:
-        print(f"Failed to process image {image_path}: {e}")
+        print(f"Не удалось обработать изображение {image_path}: {e}")
 
 def process_directory(directory):
     for root, _, files in os.walk(directory):
@@ -24,7 +25,9 @@ def process_directory(directory):
                         else:
                             size = (442, 590)
                     process_image(image_path, output_path, size)
+                    # Добавляем обработанное изображение в git
+                    subprocess.run(["git", "add", image_path])
                 except Exception as e:
-                    print(f"Failed to process image {image_path}: {e}")
+                    print(f"Не удалось обработать изображение {image_path}: {e}")
 
 process_directory("static/images/")
