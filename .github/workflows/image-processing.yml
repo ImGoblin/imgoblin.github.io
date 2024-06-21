@@ -1,0 +1,38 @@
+name: Image Processing
+
+on:
+  push:
+    branches:
+      - main  # Укажите вашу основную ветку
+
+jobs:
+  resize-images:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository content
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install Pillow
+
+    - name: Process images
+      run: |
+        python process_images.py
+
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "you@example.com"
+        git config --local user.name "Your Name"
+        git add .
+        git commit -m "Processed images"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
