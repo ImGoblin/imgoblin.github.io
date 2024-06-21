@@ -1,3 +1,4 @@
+{{ $id := .Get "id" }}
 {{ $imagesParam := .Get "images" }}
 {{ $captionsParam := .Get "captions" }}
 {{ $images := split $imagesParam "," }}
@@ -10,25 +11,25 @@
 <style>
     .slick-carousel-wrapper {
         position: relative;
-        margin-bottom: 60px; /* Добавляем место под подпись и зазор */
+        margin-bottom: 60px;
     }
 
     .slick-carousel {
-        width: 760px; /* Ширина слайдера */
-        height: 590px; /* Высота слайдера */
+        width: 760px;
+        height: 590px;
         overflow: hidden;
         position: relative;
-        margin-bottom: 25px; /* Добавляем место под подпись */
+        margin-bottom: 25px;
     }
 
     .slick-carousel .slick-slide {
-        width: 760px; /* Ширина слайда */
-        height: 590px; /* Высота слайда */
-        text-align: center; /* Центрируем изображение */
+        width: 760px;
+        height: 590px;
+        text-align: center;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #d6d6d6; /* Цвет фона */
+        background-color: #d6d6d6;
     }
 
     .slick-carousel .slick-slide img {
@@ -36,7 +37,7 @@
         max-height: 100%;
         width: auto;
         height: auto;
-        margin: auto; /* Центрирование изображения */
+        margin: auto;
     }
 
     .slick-prev, .slick-next {
@@ -69,51 +70,51 @@
 
     .slick-carousel-caption {
         position: absolute;
-        bottom: -35px; /* Смещение подписи под слайдом */
+        bottom: -35px;
         left: 50%;
         transform: translateX(-50%);
-        background-color: white; /* Белый фон */
-        padding: 8px; /* Внутренний отступ */
+        background-color: white;
+        padding: 8px;
         box-sizing: border-box;
         margin: 0;
         width: 760px;
         text-align: center;
-        font-family: Telegram Sans, sans-serif; /* Используемый шрифт */
-        font-size: 1.1rem; /* Увеличенный размер шрифта */
-        color: #000000; /* Цвет текста */
-        line-height: 1.2; /* Межстрочный интервал */
-        z-index: 5; /* Обеспечиваем, чтобы подпись была выше других элементов */
+        font-family: Telegram Sans, sans-serif;
+        font-size: 1.1rem;
+        color: #000000;
+        line-height: 1.2;
+        z-index: 5;
     }
     .h4 {
         font-family: Telegram Sans, sans-serif;
         line-height: 1.2;
         color: #000000;
         font-weight: 200;
-        font-size: 1.2rem; /* Увеличенный размер шрифта */
+        font-size: 1.2rem;
     }
 
     @media (max-width: 767px) {
         .slick-carousel {
-            max-width: 100%; /* Для мобильных устройств ширина будет 100% */
-            height: auto; /* Высота будет автоматической */
+            max-width: 100%;
+            height: auto;
         }
 
         .slick-carousel .slick-slide img {
-            height: auto; /* Автоматическая высота */
+            height: auto;
         }
 
         .slick-carousel-caption {
-            width: 100%; /* Ширина подписи 100% */
-            font-size: 0.9rem; /* Уменьшаем размер шрифта для мобильных устройств */
+            width: 100%;
+            font-size: 0.9rem;
         }
 
         .slick-prev, .slick-next {
-            font-size: 12px; /* Уменьшаем размер стрелок */
+            font-size: 12px;
         }
     }
 </style>
 
-<div class="slick-carousel-wrapper">
+<div class="slick-carousel-wrapper" id="{{ $id }}">
     <div class="slick-carousel" data-dots="{{ $dots }}" data-arrows="{{ $arrows }}" data-autoplay="{{ $autoplay }}" data-speed="{{ $speed }}">
         {{ range $index, $image := $images }}
             <div class="slick-slide">
@@ -124,19 +125,21 @@
 
     <button type="button" class="slick-prev">Previous</button>
     <button type="button" class="slick-next">Next</button>
-    <figcaption class="slick-carousel-caption h4">{{ index $captions 0 }}</figcaption> <!-- Подпись -->
+    <figcaption class="slick-carousel-caption h4">{{ index $captions 0 }}</figcaption>
 </div>
 
 <script>
     $(document).ready(function(){
-        var $carousel = $('.slick-carousel');
-        var $caption = $('.slick-carousel-caption');
+        var carouselID = "#{{ $id }}";
+        var $wrapper = $(carouselID);
+        var $carousel = $wrapper.find('.slick-carousel');
+        var $caption = $wrapper.find('.slick-carousel-caption');
 
         $carousel.on('init', function(event, slick){
             var captionText = $(slick.$slides[0]).find('img').attr('alt');
             $caption.text(captionText);
 
-            adjustCarouselHeight(slick);
+            adjustCarouselHeight(slick, $carousel);
         });
 
         $carousel.on('beforeChange', function(event, slick, currentSlide, nextSlide){
@@ -151,23 +154,23 @@
             speed: parseInt($carousel.data('speed')),
             slidesToShow: 1,
             slidesToScroll: 1,
-            prevArrow: '.slick-prev',
-            nextArrow: '.slick-next'
+            prevArrow: $wrapper.find('.slick-prev'),
+            nextArrow: $wrapper.find('.slick-next')
         });
 
-        $('.slick-prev').click(function(){
+        $wrapper.find('.slick-prev').click(function(){
             $carousel.slick('slickPrev');
         });
 
-        $('.slick-next').click(function(){
+        $wrapper.find('.slick-next').click(function(){
             $carousel.slick('slickNext');
         });
 
         $(window).on('resize', function(){
-            adjustCarouselHeight($carousel.slick('getSlick'));
+            adjustCarouselHeight($carousel.slick('getSlick'), $carousel);
         });
 
-        function adjustCarouselHeight(slick) {
+        function adjustCarouselHeight(slick, carousel) {
             if (window.innerWidth <= 767) {
                 var maxHeight = 0;
                 slick.$slides.each(function() {
@@ -176,10 +179,10 @@
                         maxHeight = imgHeight;
                     }
                 });
-                $carousel.css('height', maxHeight);
+                carousel.css('height', maxHeight);
                 slick.$slides.css('height', maxHeight);
             } else {
-                $carousel.css('height', '590px');
+                carousel.css('height', '590px');
                 slick.$slides.css('height', '590px');
             }
         }
