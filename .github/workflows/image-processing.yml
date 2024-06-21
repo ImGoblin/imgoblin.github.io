@@ -23,25 +23,20 @@ jobs:
         python -m pip install --upgrade pip
         pip install Pillow
 
-    - name: Process images
+    - name: Process images and commit changes
       run: |
         python process_images.py
 
-    - name: Check for changes
-      id: git-status
-      run: |
+        # Проверяем, есть ли изменения в репозитории
         git status
-        echo "::set-output name=status::$(git status --porcelain)"
 
-    - name: Commit and push changes
-      if: steps.git-status.outputs.status != ''
-      run: |
-        git config --local user.email "you@example.com"
-        git config --local user.name "Your Name"
-        git add .
-        git commit -m "Processed images"
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ImGoblin/imgoblin.github.io.git
-
-        git push
+        # Если есть изменения, добавляем и коммитим их
+        if [[ $(git status --porcelain) ]]; then
+          git config --local user.email "sergey.murasheff@gmail.com"
+          git config --local user.name "ImGoblin"
+          git add .
+          git commit -m "Processed images"
+          git push
+        fi
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
