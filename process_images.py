@@ -8,7 +8,7 @@ def process_image(file_path):
         if width > height:
             new_width, new_height = 760, 590
         else:
-            new_width, new_height = 442.5, 590
+            new_width, new_height = 442, 590
 
         img = img.resize((int(new_width), int(new_height)), Image.ANTIALIAS)
         img.save(file_path)
@@ -23,4 +23,4 @@ def process_directory(directory):
                 process_image(os.path.join(root, file))
 
 if __name__ == "__main__":
-    process_directory("images")  # Замените на путь к вашему каталогу изображений
+    process_directory("static/images")  # Путь к вашему каталогу изображений
