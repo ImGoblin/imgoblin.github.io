@@ -2,7 +2,7 @@
 {{ $imagesParam := .Get "images" }}
 {{ $captionsParam := .Get "captions" }}
 {{ $images := split $imagesParam "," }}
-{{ $captions := split $captionsParam "," }}
+{{ $captions := split $captionsParam "|" }}
 {{ $dots := .Get "dots" | default "true" }}
 {{ $arrows := .Get "arrows" | default "true" }}
 {{ $autoplay := .Get "autoplay" | default "true" }}
