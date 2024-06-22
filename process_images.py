@@ -1,9 +1,12 @@
 import os
-from PIL import Image
+from PIL import Image, ExifTags
 
 def process_image(image_path, size):
     try:
         with Image.open(image_path) as img:
+            # Применяем метаданные EXIF для правильной ориентации
+            img = ImageOps.exif_transpose(img)
+            
             img = img.resize(size, Image.LANCZOS)
             img.save(image_path)
         print(f"Обработано изображение {image_path}")
