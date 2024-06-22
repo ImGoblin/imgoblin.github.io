@@ -1,5 +1,5 @@
 import os
-from PIL import Image, ExifTags
+from PIL import Image, ImageOps
 
 def process_image(image_path, size):
     try:
