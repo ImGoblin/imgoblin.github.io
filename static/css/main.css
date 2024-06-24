@@ -98,6 +98,12 @@ a:hover {
     text-decoration: none;
 }
 
+/* Заголовок сайта */
+.header .site-title a {
+    color: #000000 !important;
+    text-decoration: none !important;
+}
+
 /* Изображения */
 img {
     margin: 10px auto;
@@ -385,7 +391,7 @@ pre code {
     margin-left: 15px;
 }
 
-.header .site-description.h2 {
+.header .site-description h2 {
     color: #000000;
 }
 
