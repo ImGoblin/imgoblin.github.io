@@ -51,7 +51,7 @@
                         if (minHeight === null || height < minHeight) {
                             minHeight = height;
                         }
-                        $(img).css('height', minHeight);
+                        $items.find('img').css('height', minHeight);
                     });
                 }
             });
@@ -77,8 +77,8 @@
                 index = 0; // Переход на первый слайд
             }
 
-            $items.removeClass('active');
-            $items.eq(index).addClass('active');
+            $items.removeClass('active').css('opacity', '0');
+            $items.eq(index).addClass('active').css('opacity', '1');
             updateCaption(index);
             currentSlide = index;
         }
@@ -123,6 +123,7 @@
         });
     });
 </script>
+
 <style>
     .carousel {
         position: relative;
@@ -180,8 +181,8 @@
         pointer-events: all;
         border-radius: 50%;
         background-color: rgba(200, 200, 200, 0.5);
-        width: 25px;
-        height: 25px;
+        width: 40px;
+        height: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -204,3 +205,4 @@
         right: 10px;
     }
 </style>
+
