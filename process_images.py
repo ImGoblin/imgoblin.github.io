@@ -1,13 +1,18 @@
 import os
 from PIL import Image, ImageOps
 
-def process_image(image_path, size):
+def process_image(image_path):
     try:
         with Image.open(image_path) as img:
             # Применяем метаданные EXIF для правильной ориентации
             img = ImageOps.exif_transpose(img)
             
-            img = img.resize(size, Image.LANCZOS)
+            # Определяем наибольшую сторону и масштабируем изображение
+            max_side = max(img.width, img.height)
+            scale = 1000 / max_side
+            new_size = (int(img.width * scale), int(img.height * scale))
+            
+            img = img.resize(new_size, Image.LANCZOS)
             img.save(image_path)
         print(f"Обработано изображение {image_path}")
     except Exception as e:
@@ -18,19 +23,7 @@ def process_directory(directory):
         for file in files:
             if file.lower().endswith(('png', 'jpg', 'jpeg', 'gif', 'bmp')):
                 image_path = os.path.join(root, file)
-                try:
-                    with Image.open(image_path) as img:
-                        # Определяем размеры для горизонтальных и вертикальных изображений
-                        if img.width > img.height:
-                            size = (760, 590)
-                        else:
-                            size = (442, 590)
-                    
-                    # Обрабатываем изображение
-                    process_image(image_path, size)
-                    
-                except Exception as e:
-                    print(f"Не удалось обработать изображение {image_path}: {e}")
+                process_image(image_path)
 
 if __name__ == "__main__":
     directory = "static/images/"
