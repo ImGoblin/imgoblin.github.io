@@ -38,6 +38,7 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
     color: #000000;
     font-weight: 200;
+    text-decoration: none;
 }
 
 h1 {
@@ -72,17 +73,18 @@ a {
 }
 
 a:hover {
-    color: #777777;
+    color: #000000;
     text-decoration: none;
 }
 
-/* Специфические ссылки в постах и футере */
+/* Ссылки в постах и футере */
 .post a, .footer a {
     color: #427500;
 }
 
 .post a:hover, .footer a:hover {
-    color: #777777;
+    color: #427500;
+    text-decoration: none;
 }
 
 /* Заголовок сайта */
@@ -281,7 +283,7 @@ pre code {
 .list .posts .post .meta,
 .section .post .meta {
     font-size: 0.725rem;
-    color: #616161;
+    color: #000000;
     margin-bottom: 1px;
 }
 
@@ -307,7 +309,7 @@ pre code {
 }
 
 .read-more a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /* Отступы между секциями */
@@ -327,7 +329,7 @@ pre code {
 .recent-posts .post:hover .title,
 .section .post:hover .title {
     text-decoration: none;
-    color: #427500;
+    color: #000000;
 }
 
 /* Заголовок сайта */
@@ -391,7 +393,7 @@ pre code {
 }
 
 nav ul.flat li a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /* Посты */
