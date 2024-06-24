@@ -15,8 +15,12 @@
 
     <!-- Кнопки пролистывания -->
     <div class="carousel-controls">
-        <button type="button" class="carousel-control-prev">&lt;</button>
-        <button type="button" class="carousel-control-next">&gt;</button>
+        <button type="button" class="carousel-control-prev">
+            <span>&lt;</span>
+        </button>
+        <button type="button" class="carousel-control-next">
+            <span>&gt;</span>
+        </button>
     </div>
 </figure>
 
@@ -61,28 +65,25 @@
             goToSlide(currentSlide + 1);
         });
 
-        // Свайп для мобильных устройств (пример)
-        $carousel.swipe({
-            swipeLeft:function(event, direction, distance, duration, fingerCount) {
-                goToSlide(currentSlide + 1);
-            },
-            swipeRight:function(event, direction, distance, duration, fingerCount) {
-                goToSlide(currentSlide - 1);
-            },
-            threshold: 0
+        // Плавный переход между слайдами
+        $carousel.children().css('transition', 'transform 0.5s ease-in-out');
+
+        // Свайп для мобильных устройств (без использования библиотеки swipe)
+        $carousel.on('touchstart', function(event){
+            var xClick = event.originalEvent.touches[0].pageX;
+            $carousel.one('touchmove', function(event){
+                var xMove = event.originalEvent.touches[0].pageX;
+                if (Math.floor(xClick - xMove) > 5){
+                    goToSlide(currentSlide + 1);
+                }
+                else if (Math.floor(xClick - xMove) < -5){
+                    goToSlide(currentSlide - 1);
+                }
+            });
+            $carousel.on('touchend', function(){
+                $carousel.off('touchmove');
+            });
         });
-
-        // Дополнительные функции и настройки карусели
-        $carousel.children().eq(0).addClass('active'); // Показать первый слайд
-
-        // Инициализация карусели (если используется как плагин)
-        // $carousel.slick({
-        //     arrows: false,
-        //     dots: false,
-        //     autoplay: true,
-        //     autoplaySpeed: 2000,
-        //     fade: true
-        // });
     });
 </script>
 
@@ -98,16 +99,19 @@
         position: relative;
         width: 100%;
         overflow: hidden;
+        display: flex;
+        transition: transform 0.5s ease-in-out;
     }
 
     .carousel-item {
-        display: none;
+        min-width: 100%;
+        box-sizing: border-box;
         text-align: center;
+        opacity: 0;
         transition: opacity 0.5s ease-in-out;
     }
 
     .carousel-item.active {
-        display: block;
         opacity: 1;
     }
 
@@ -125,12 +129,11 @@
     .carousel-controls {
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
         width: 100%;
-        text-align: center;
         display: flex;
         justify-content: space-between;
-        padding: 0 10px;
+        transform: translateY(-50%);
+        pointer-events: none;
     }
 
     .carousel-control-prev, .carousel-control-next {
@@ -140,9 +143,15 @@
         cursor: pointer;
         padding: 10px 15px;
         font-size: 1.5rem;
+        pointer-events: all;
     }
 
     .carousel-control-prev:hover, .carousel-control-next:hover {
         color: grey;
+    }
+
+    .carousel-control-prev span, .carousel-control-next span {
+        font-size: 2rem;
+        color: rgba(0, 0, 0, 0.5);
     }
 </style>
