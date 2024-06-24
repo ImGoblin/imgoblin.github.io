@@ -33,33 +33,6 @@
         var totalSlides = $items.length;
         var currentSlide = 0;
 
-        var minHeight = null; // переменная для минимальной высоты изображений
-
-        // Функция для установки минимальной высоты изображений
-        function setMinHeight() {
-            minHeight = null;
-            $items.each(function() {
-                var img = $(this).find('img')[0];
-                if (img.complete) {
-                    var height = $(img).height();
-                    if (minHeight === null || height < minHeight) {
-                        minHeight = height;
-                    }
-                } else {
-                    $(img).on('load', function() {
-                        var height = $(img).height();
-                        if (minHeight === null || height < minHeight) {
-                            minHeight = height;
-                        }
-                        $items.find('img').css('height', minHeight);
-                    });
-                }
-            });
-            if (minHeight !== null) {
-                $items.find('img').css('height', minHeight);
-            }
-        }
-
         // Показать первую подпись
         $captions.eq(0).addClass('active');
 
@@ -82,14 +55,6 @@
             updateCaption(index);
             currentSlide = index;
         }
-
-        // Установить минимальную высоту при загрузке
-        setMinHeight();
-
-        // Пересчитать минимальную высоту при изменении размеров окна
-        $(window).on('resize', function() {
-            setMinHeight();
-        });
 
         // Клик на кнопку "назад"
         $(carouselID + ' .carousel-control-prev').click(function(){
@@ -120,6 +85,29 @@
             $carousel.on('touchend', function(){
                 $carousel.off('touchmove');
             });
+        });
+
+        // Установить размеры изображений при загрузке
+        var imagesLoaded = 0;
+        var minHeight = Number.MAX_VALUE;
+
+        $items.find('img').each(function(){
+            $(this).on('load', function() {
+                imagesLoaded++;
+                var height = $(this).height();
+                if (height < minHeight) {
+                    minHeight = height;
+                }
+
+                if (imagesLoaded === totalSlides) {
+                    $items.find('img').css('height', minHeight + 'px');
+                }
+            });
+
+            // Для случая если изображение уже загружено
+            if (this.complete) {
+                $(this).trigger('load');
+            }
         });
     });
 </script>
@@ -181,8 +169,8 @@
         pointer-events: all;
         border-radius: 50%;
         background-color: rgba(200, 200, 200, 0.5);
-        width: 40px;
-        height: 40px;
+        width: 15px;
+        height: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -205,4 +193,3 @@
         right: 10px;
     }
 </style>
-
