@@ -28,8 +28,9 @@
     $(document).ready(function(){
         var carouselID = "#{{ .Get "id" }}";
         var $carousel = $(carouselID + ' .carousel-inner');
+        var $items = $carousel.children('.carousel-item');
         var $captions = $(carouselID + ' figcaption');
-        var totalSlides = $carousel.children().length;
+        var totalSlides = $items.length;
         var currentSlide = 0;
 
         // Показать первую подпись
@@ -44,8 +45,8 @@
         // Пролистывание карусели
         function goToSlide(index) {
             if (index >= 0 && index < totalSlides) {
-                $carousel.children().removeClass('active');
-                $carousel.children().eq(index).addClass('active');
+                $items.removeClass('active');
+                $items.eq(index).addClass('active');
                 updateCaption(index);
                 currentSlide = index;
             } else if (index < 0) {
@@ -66,7 +67,8 @@
         });
 
         // Плавный переход между слайдами
-        $carousel.children().css('transition', 'transform 0.5s ease-in-out');
+        $items.css('transition', 'opacity 0.5s ease-in-out');
+        $items.not('.active').css('opacity', '0');
 
         // Свайп для мобильных устройств (без использования библиотеки swipe)
         $carousel.on('touchstart', function(event){
@@ -99,19 +101,19 @@
         position: relative;
         width: 100%;
         overflow: hidden;
-        display: flex;
-        transition: transform 0.5s ease-in-out;
     }
 
     .carousel-item {
-        min-width: 100%;
-        box-sizing: border-box;
-        text-align: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
         opacity: 0;
         transition: opacity 0.5s ease-in-out;
     }
 
     .carousel-item.active {
+        position: relative;
         opacity: 1;
     }
 
