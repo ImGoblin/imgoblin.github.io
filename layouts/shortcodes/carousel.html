@@ -138,20 +138,28 @@
 
     .carousel-control-prev, .carousel-control-next {
         background: none;
-        color: black;
         border: none;
         cursor: pointer;
-        padding: 10px 15px;
-        font-size: 1.5rem;
+        padding: 10px;
         pointer-events: all;
+        border-radius: 50%;
+        background-color: rgba(200, 200, 200, 0.5);
     }
 
     .carousel-control-prev:hover, .carousel-control-next:hover {
-        color: grey;
+        background-color: rgba(200, 200, 200, 0.8);
     }
 
     .carousel-control-prev span, .carousel-control-next span {
         font-size: 2rem;
         color: rgba(0, 0, 0, 0.5);
+    }
+
+    .carousel-controls .carousel-control-prev {
+        left: 10px;
+    }
+
+    .carousel-controls .carousel-control-next {
+        right: 10px;
     }
 </style>
