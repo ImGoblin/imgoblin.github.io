@@ -87,10 +87,15 @@ a:hover {
     text-decoration: none;
 }
 
-/* Заголовок сайта */
-.site-title a {
-    color: #000000 !important;
-    text-decoration: none !important;
+/* Меню */
+.header nav ul.flat li a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.header nav ul.flat li a:hover {
+    color: #000000;
+    text-decoration: none;
 }
 
 /* Изображения */
@@ -513,7 +518,8 @@ table th, table td {
 }
 
 .footer a:hover {
-    color: #777777;
+    color: #427500;
+    text-decoration: none;
 }
 
 .tag-cloud {
