@@ -32,18 +32,32 @@
         var $captions = $(carouselID + ' figcaption');
         var totalSlides = $items.length;
         var currentSlide = 0;
+
         var minHeight = null; // переменная для минимальной высоты изображений
 
         // Функция для установки минимальной высоты изображений
         function setMinHeight() {
             minHeight = null;
             $items.each(function() {
-                var height = $(this).find('img').height();
-                if (minHeight === null || height < minHeight) {
-                    minHeight = height;
+                var img = $(this).find('img')[0];
+                if (img.complete) {
+                    var height = $(img).height();
+                    if (minHeight === null || height < minHeight) {
+                        minHeight = height;
+                    }
+                } else {
+                    $(img).on('load', function() {
+                        var height = $(img).height();
+                        if (minHeight === null || height < minHeight) {
+                            minHeight = height;
+                        }
+                        $(img).css('height', minHeight);
+                    });
                 }
             });
-            $items.find('img').css('height', minHeight);
+            if (minHeight !== null) {
+                $items.find('img').css('height', minHeight);
+            }
         }
 
         // Показать первую подпись
@@ -109,7 +123,6 @@
         });
     });
 </script>
-
 <style>
     .carousel {
         position: relative;
