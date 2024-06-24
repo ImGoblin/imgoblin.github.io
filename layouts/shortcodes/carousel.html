@@ -15,27 +15,22 @@
     }
 
     .slick-carousel {
-        width: 760px;
-        height: 590px;
+        width: 100%;
+        height: auto;
         overflow: hidden;
         position: relative;
         margin-bottom: 25px;
     }
 
     .slick-carousel .slick-slide {
-        width: 100%;
-        height: 100%;
         text-align: center;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #d6d6d6;
     }
 
     .slick-carousel .slick-slide img {
         max-width: 100%;
-        max-height: 100%;
-        width: auto;
         height: auto;
         margin: auto;
     }
@@ -96,18 +91,7 @@
     }
 
     @media (max-width: 767px) {
-        .slick-carousel {
-            width: 100%;
-            height: auto;
-        }
-
-        .slick-carousel .slick-slide img {
-            max-width: 100%;
-            height: auto;
-        }
-
         .slick-carousel-caption {
-            width: 100%;
             font-size: 0.9rem;
         }
 
@@ -141,6 +125,8 @@
         $carousel.on('init', function(event, slick){
             var captionText = $(slick.$slides[0]).find('img').attr('alt');
             $caption.text(captionText);
+
+            adjustCarouselHeight(slick, $carousel);
         });
 
         $carousel.on('beforeChange', function(event, slick, currentSlide, nextSlide){
@@ -172,20 +158,28 @@
         });
 
         function adjustCarouselHeight(slick, carousel) {
-            if (window.innerWidth <= 767) {
-                var maxHeight = 0;
-                slick.$slides.each(function() {
-                    var imgHeight = $(this).find('img').height();
-                    if (imgHeight > maxHeight) {
-                        maxHeight = imgHeight;
-                    }
-                });
-                carousel.css('height', maxHeight);
-                slick.$slides.css('height', maxHeight);
-            } else {
-                carousel.css('height', '590px');
-                slick.$slides.css('height', '590px');
-            }
+            var minHeight = Infinity;
+            slick.$slides.each(function() {
+                var img = $(this).find('img');
+                var imgHeight = img.height();
+                var imgWidth = img.width();
+                var aspectRatio = imgWidth / imgHeight;
+
+                if (imgHeight < minHeight) {
+                    minHeight = imgHeight;
+                }
+
+                if (imgHeight > imgWidth) {
+                    img.css('height', minHeight);
+                    img.css('width', minHeight * aspectRatio);
+                } else {
+                    img.css('height', 'auto');
+                    img.css('width', '100%');
+                }
+            });
+
+            carousel.css('height', minHeight);
+            slick.$slides.css('height', minHeight);
         }
     });
 </script>
