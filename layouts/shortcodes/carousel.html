@@ -32,6 +32,19 @@
         var $captions = $(carouselID + ' figcaption');
         var totalSlides = $items.length;
         var currentSlide = 0;
+        var minHeight = null; // переменная для минимальной высоты изображений
+
+        // Функция для установки минимальной высоты изображений
+        function setMinHeight() {
+            minHeight = null;
+            $items.each(function() {
+                var height = $(this).find('img').height();
+                if (minHeight === null || height < minHeight) {
+                    minHeight = height;
+                }
+            });
+            $items.find('img').css('height', minHeight);
+        }
 
         // Показать первую подпись
         $captions.eq(0).addClass('active');
@@ -50,11 +63,19 @@
                 index = 0; // Переход на первый слайд
             }
 
-            $items.removeClass('active').css('opacity', '0');
-            $items.eq(index).addClass('active').css('opacity', '1');
+            $items.removeClass('active');
+            $items.eq(index).addClass('active');
             updateCaption(index);
             currentSlide = index;
         }
+
+        // Установить минимальную высоту при загрузке
+        setMinHeight();
+
+        // Пересчитать минимальную высоту при изменении размеров окна
+        $(window).on('resize', function() {
+            setMinHeight();
+        });
 
         // Клик на кнопку "назад"
         $(carouselID + ' .carousel-control-prev').click(function(){
@@ -119,7 +140,6 @@
 
     .carousel-item img {
         max-width: 100%;
-        max-height: 100%;
         object-fit: contain;
     }
 
