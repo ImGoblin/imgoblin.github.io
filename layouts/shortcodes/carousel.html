@@ -15,8 +15,9 @@
     }
 
     .slick-carousel {
-        width: 100%;
-        height: auto;
+        width: 100%; /* Ширина на всю ширину контейнера */
+        max-width: 760px; /* Максимальная ширина для больших экранов */
+        height: 590px; /* Высота по умолчанию */
         overflow: hidden;
         position: relative;
         margin-bottom: 25px;
@@ -27,10 +28,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: #d6d6d6;
     }
 
     .slick-carousel .slick-slide img {
         max-width: 100%;
+        max-height: 100%;
+        width: auto;
         height: auto;
         margin: auto;
     }
@@ -72,25 +76,25 @@
         padding: 8px;
         box-sizing: border-box;
         margin: 0;
-        width: 100%;
-        max-width: 760px;
+        width: 100%; /* Ширина на всю ширину контейнера */
         text-align: center;
-        font-family: Telegram Sans, sans-serif;
+        font-family: 'Telegram Sans', sans-serif;
         font-size: 1.1rem;
         color: #000000;
         line-height: 1.2;
         z-index: 5;
     }
 
-    .h4 {
-        font-family: Telegram Sans, sans-serif;
-        line-height: 1.2;
-        color: #000000;
-        font-weight: 200;
-        font-size: 1.2rem;
-    }
-
     @media (max-width: 767px) {
+        .slick-carousel {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .slick-carousel .slick-slide img {
+            height: auto;
+        }
+
         .slick-carousel-caption {
             font-size: 0.9rem;
         }
@@ -125,8 +129,6 @@
         $carousel.on('init', function(event, slick){
             var captionText = $(slick.$slides[0]).find('img').attr('alt');
             $caption.text(captionText);
-
-            adjustCarouselHeight(slick, $carousel);
         });
 
         $carousel.on('beforeChange', function(event, slick, currentSlide, nextSlide){
@@ -154,46 +156,7 @@
         });
 
         $(window).on('resize', function(){
-            adjustCarouselHeight($carousel.slick('getSlick'), $carousel);
+            $carousel.slick('setPosition');
         });
-
-        function adjustCarouselHeight(slick, carousel) {
-    var minHeight = Infinity;
-    
-    slick.$slides.each(function() {
-        var slide = $(this);
-        var img = slide.find('img');
-        
-        img.on('load', function() {
-            var imgHeight = img.height();
-            var imgWidth = img.width();
-            var aspectRatio = imgWidth / imgHeight;
-
-            if (imgHeight < minHeight) {
-                minHeight = imgHeight;
-            }
-
-            if (imgHeight > imgWidth) {
-                img.css('height', minHeight);
-                img.css('width', minHeight * aspectRatio);
-            } else {
-                img.css('height', 'auto');
-                img.css('width', '100%');
-            }
-
-            carousel.css('height', minHeight);
-            slick.$slides.css('height', minHeight);
-        });
-        
-        if (img.complete) {
-            img.trigger('load');
-        }
-    });
-}
-
-
-            carousel.css('height', minHeight);
-            slick.$slides.css('height', minHeight);
-        }
     });
 </script>
