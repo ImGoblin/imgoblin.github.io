@@ -158,25 +158,39 @@
         });
 
         function adjustCarouselHeight(slick, carousel) {
-            var minHeight = Infinity;
-            slick.$slides.each(function() {
-                var img = $(this).find('img');
-                var imgHeight = img.height();
-                var imgWidth = img.width();
-                var aspectRatio = imgWidth / imgHeight;
+    var minHeight = Infinity;
+    
+    slick.$slides.each(function() {
+        var slide = $(this);
+        var img = slide.find('img');
+        
+        img.on('load', function() {
+            var imgHeight = img.height();
+            var imgWidth = img.width();
+            var aspectRatio = imgWidth / imgHeight;
 
-                if (imgHeight < minHeight) {
-                    minHeight = imgHeight;
-                }
+            if (imgHeight < minHeight) {
+                minHeight = imgHeight;
+            }
 
-                if (imgHeight > imgWidth) {
-                    img.css('height', minHeight);
-                    img.css('width', minHeight * aspectRatio);
-                } else {
-                    img.css('height', 'auto');
-                    img.css('width', '100%');
-                }
-            });
+            if (imgHeight > imgWidth) {
+                img.css('height', minHeight);
+                img.css('width', minHeight * aspectRatio);
+            } else {
+                img.css('height', 'auto');
+                img.css('width', '100%');
+            }
+
+            carousel.css('height', minHeight);
+            slick.$slides.css('height', minHeight);
+        });
+        
+        if (img.complete) {
+            img.trigger('load');
+        }
+    });
+}
+
 
             carousel.css('height', minHeight);
             slick.$slides.css('height', minHeight);
