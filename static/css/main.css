@@ -322,8 +322,8 @@ pre code {
     margin-bottom: 10px;
 }
 
-/* Отображение заголовков при наведении */
-.post:hover .title {
+/* Отображение заголовков при наведении на главной и в разделах */
+.recent-posts .post:hover .title {
     text-decoration: none;
     color: #427500;
 }
