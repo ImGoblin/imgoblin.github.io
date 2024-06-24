@@ -1,162 +1,141 @@
-{{ $id := .Get "id" }}
-{{ $imagesParam := .Get "images" }}
-{{ $captionsParam := .Get "captions" }}
-{{ $images := split $imagesParam "," }}
-{{ $captions := split $captionsParam "|" }}
-{{ $dots := .Get "dots" | default "true" }}
-{{ $arrows := .Get "arrows" | default "true" }}
-{{ $autoplay := .Get "autoplay" | default "true" }}
-{{ $speed := .Get "speed" | default "500" }}
+<figure class="carousel" id="{{ .Get "id" }}">
+    {{ $imagesParam := .Get "images" }}
+    {{ $captionsParam := .Get "captions" }}
+    {{ $images := split $imagesParam "," }}
+    {{ $captions := split $captionsParam "|" }}
 
-<style>
-    .slick-carousel-wrapper {
-        position: relative;
-        margin-bottom: 60px;
-    }
-
-    .slick-carousel {
-        width: 100%; /* Ширина на всю ширину контейнера */
-        max-width: 760px; /* Максимальная ширина для больших экранов */
-        height: 590px; /* Высота по умолчанию */
-        overflow: hidden;
-        position: relative;
-        margin-bottom: 25px;
-    }
-
-    .slick-carousel .slick-slide {
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #d6d6d6;
-    }
-
-    .slick-carousel .slick-slide img {
-        max-width: 100%;
-        max-height: 100%;
-        width: auto;
-        height: auto;
-        margin: auto;
-    }
-
-    .slick-prev, .slick-next {
-        background: none;
-        border: none;
-        cursor: pointer;
-        border-radius: 60%;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        line-height: 1;
-        z-index: 10;
-    }
-
-    .slick-prev {
-        left: 10px;
-    }
-
-    .slick-next {
-        right: 10px;
-    }
-
-    .slick-prev:before, .slick-next:before {
-        font-family: 'slick';
-        opacity: .7;
-        color: white;
-        line-height: 1;
-        z-index: 1;
-    }
-
-    .slick-carousel-caption {
-        position: absolute;
-        bottom: -35px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: white;
-        padding: 8px;
-        box-sizing: border-box;
-        margin: 0;
-        width: 100%; /* Ширина на всю ширину контейнера */
-        text-align: center;
-        font-family: 'Telegram Sans', sans-serif;
-        font-size: 1.1rem;
-        color: #000000;
-        line-height: 1.2;
-        z-index: 5;
-    }
-
-    @media (max-width: 767px) {
-        .slick-carousel {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .slick-carousel .slick-slide img {
-            height: auto;
-        }
-
-        .slick-carousel-caption {
-            font-size: 0.9rem;
-        }
-
-        .slick-prev, .slick-next {
-            font-size: 12px;
-        }
-    }
-</style>
-
-<div class="slick-carousel-wrapper" id="{{ $id }}">
-    <div class="slick-carousel" data-dots="{{ $dots }}" data-arrows="{{ $arrows }}" data-autoplay="{{ $autoplay }}" data-speed="{{ $speed }}">
+    <div class="carousel-inner">
         {{ range $index, $image := $images }}
-            <div class="slick-slide">
-                <img src="{{ $image }}" alt="{{ index $captions $index }}">
-            </div>
+        <div class="carousel-item{{ if eq $index 0 }} active{{ end }}">
+            <img src="{{ $image }}" alt="{{ index $captions $index }}">
+            <figcaption>{{ index $captions $index }}</figcaption>
+        </div>
         {{ end }}
     </div>
 
-    <button type="button" class="slick-prev">Previous</button>
-    <button type="button" class="slick-next">Next</button>
-    <figcaption class="slick-carousel-caption h4">{{ index $captions 0 }}</figcaption>
-</div>
+    <!-- Кнопки пролистывания -->
+    <div class="carousel-controls">
+        <button type="button" class="carousel-control-prev">&lt;</button>
+        <button type="button" class="carousel-control-next">&gt;</button>
+    </div>
+</figure>
 
 <script>
     $(document).ready(function(){
-        var carouselID = "#{{ $id }}";
-        var $wrapper = $(carouselID);
-        var $carousel = $wrapper.find('.slick-carousel');
-        var $caption = $wrapper.find('.slick-carousel-caption');
+        var carouselID = "#{{ .Get "id" }}";
+        var $carousel = $(carouselID + ' .carousel-inner');
+        var $captions = $(carouselID + ' figcaption');
+        var totalSlides = $carousel.children().length;
+        var currentSlide = 0;
 
-        $carousel.on('init', function(event, slick){
-            var captionText = $(slick.$slides[0]).find('img').attr('alt');
-            $caption.text(captionText);
+        // Показать первую подпись
+        $captions.eq(0).addClass('active');
+
+        // Функция для обновления подписи
+        function updateCaption(index) {
+            $captions.removeClass('active');
+            $captions.eq(index).addClass('active');
+        }
+
+        // Пролистывание карусели
+        function goToSlide(index) {
+            if (index >= 0 && index < totalSlides) {
+                $carousel.children().removeClass('active');
+                $carousel.children().eq(index).addClass('active');
+                updateCaption(index);
+                currentSlide = index;
+            }
+        }
+
+        // Клик на кнопку "назад"
+        $(carouselID + ' .carousel-control-prev').click(function(){
+            goToSlide(currentSlide - 1);
         });
 
-        $carousel.on('beforeChange', function(event, slick, currentSlide, nextSlide){
-            var nextCaption = $(slick.$slides[nextSlide]).find('img').attr('alt');
-            $caption.text(nextCaption);
+        // Клик на кнопку "вперед"
+        $(carouselID + ' .carousel-control-next').click(function(){
+            goToSlide(currentSlide + 1);
         });
 
-        $carousel.slick({
-            dots: $carousel.data('dots') === "true",
-            arrows: $carousel.data('arrows') === "true",
-            autoplay: $carousel.data('autoplay') === "true",
-            speed: parseInt($carousel.data('speed')),
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            prevArrow: $wrapper.find('.slick-prev'),
-            nextArrow: $wrapper.find('.slick-next')
+        // Свайп для мобильных устройств (пример)
+        $carousel.swipe({
+            swipeLeft:function(event, direction, distance, duration, fingerCount) {
+                goToSlide(currentSlide + 1);
+            },
+            swipeRight:function(event, direction, distance, duration, fingerCount) {
+                goToSlide(currentSlide - 1);
+            },
+            threshold: 0
         });
 
-        $wrapper.find('.slick-prev').click(function(){
-            $carousel.slick('slickPrev');
-        });
+        // Дополнительные функции и настройки карусели
+        $carousel.children().eq(0).addClass('active'); // Показать первый слайд
 
-        $wrapper.find('.slick-next').click(function(){
-            $carousel.slick('slickNext');
-        });
-
-        $(window).on('resize', function(){
-            $carousel.slick('setPosition');
-        });
+        // Инициализация карусели (если используется как плагин)
+        // $carousel.slick({
+        //     arrows: false,
+        //     dots: false,
+        //     autoplay: true,
+        //     autoplaySpeed: 2000,
+        //     fade: true
+        // });
     });
 </script>
+
+<style>
+    .carousel {
+        position: relative;
+        width: 100%;
+        max-width: 760px;
+        margin: 0 auto;
+    }
+
+    .carousel-inner {
+        position: relative;
+        width: 100%;
+    }
+
+    .carousel-item {
+        display: none;
+        text-align: center;
+    }
+
+    .carousel-item.active {
+        display: block;
+    }
+
+    .carousel-item img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    figcaption {
+        display: none;
+        padding: 8px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        text-align: center;
+    }
+
+    figcaption.active {
+        display: block;
+    }
+
+    .carousel-controls {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        text-align: center;
+    }
+
+    .carousel-control-prev, .carousel-control-next {
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 10px 15px;
+        font-size: 1.5rem;
+        margin: 0 10px;
+    }
+</style>
