@@ -1,3 +1,4 @@
+/* Основные стили */
 body {
     font-family: Telegram Sans, sans-serif;
     font-weight: 400;
@@ -267,57 +268,25 @@ pre code {
 }
 
 .post .post-header .meta {
-    padding-left: 5px;
-    margin-top: 1px;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 5px;
 }
 
-/* Стили для заголовков и описаний постов */
-.title-description {
-    display: flex;
-    align-items: center;
+.post .post-header .description {
+    font-size: 1rem; /* такой же размер, как и внутри постов */
+    margin: 5px 0 0 0;
 }
 
-.title-description .title,
-.title-description .description {
-    margin: 0;
-    font-size: 22px;
-}
-
-.title-description .separator {
-    margin: 0 5px;
-    font-size: 22px;
-}
-
-/* Стили для мета информации */
-.post .post-header .meta,
-.list .posts .post .meta,
-.section .post .meta {
-    font-size: 0.725rem;
-    color: #000000;
-    margin-bottom: 1px;
-}
-
-/* Стили для метки черновика */
-.post .draft-label {
-    color: #000000 !important;
-    text-decoration: none;
-    padding: 2px 4px;
-    border-radius: 4px;
-    margin-left: 6px;
-    background-color: #f9f2f4;
-}
-
-/* Стили для ссылок "Читать больше" */
+/* Ссылки для раздела "Читать больше" */
 .read-more {
-    margin-top: 20px;
+    text-align: right;
+    margin-top: 10px;
 }
 
 .read-more a {
-    font-weight: bold;
-    color: #000000;
-    text-decoration: none;
+    font-weight: 600;
 }
-
 .read-more a:hover {
     text-decoration: none;
 }
