@@ -22,20 +22,22 @@
                         <div class="post">
                             <a href="{{ .RelPermalink }}" class="post-link">
                                 <div class="post-content">
-                                    <div class="title-description">
+                                    <div class="post-header">
                                         <h3 class="title">{{ .Title }}</h3>
                                         <p class="description">
-                                            {{ if isset .Params "description" }}
+                                            {{ if .Params.description }}
                                                 {{ .Params.description }}
+                                            {{ else if $firstTravelPost }}
+                                                {{ .Summary }}&hellip; <!-- Используем Summary из первого поста -->
                                             {{ else }}
                                                 {{ .Summary }}&hellip;
                                             {{ end }}
                                         </p>
-                                    </div>
                                         <div class="meta">
                                             Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
                                             {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
                                         </div>
+                                    </div>
                                 </div>
                                 {{ with .Params.image }}
                                     <img src="{{ . }}" alt="Thumbnail" class="post-thumbnail">
