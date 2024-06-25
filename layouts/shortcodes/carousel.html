@@ -161,6 +161,18 @@
         pointer-events: none;
     }
 
+    .carousel-control-prev, .carousel-control-next {
+        background: none;
+        border: none;
+        cursor: pointer;
+        border-radius: 60%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        line-height: 1;
+        z-index: 10;
+    }
+
     .carousel-control-prev {
         left: 10px;
     }
@@ -169,12 +181,19 @@
         right: 10px;
     }
 
-    .carousel-control-prev, .carousel-control-next {
+    .carousel-control-prev:before, .carousel-control-next:before {
         font-family: 'slick';
         opacity: .7;
         color: white;
         line-height: 1;
         z-index: 1;
     }
-</style>
 
+    .carousel-control-prev:before {
+        content: '‹';
+    }
+
+    .carousel-control-next:before {
+        content: '›';
+    }
+</style>
