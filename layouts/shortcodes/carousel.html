@@ -16,10 +16,10 @@
     <!-- Кнопки пролистывания -->
     <div class="carousel-controls">
         <button type="button" class="carousel-control-prev">
-            <span class="visually-hidden"></span>
+            <span>&lsaquo;</span>
         </button>
         <button type="button" class="carousel-control-next">
-            <span class="visually-hidden"></span>
+            <span>&rsaquo;</span>
         </button>
     </div>
 </figure>
@@ -192,19 +192,12 @@
     right: 10px;
 }
 
+.carousel-control-prev span, .carousel-control-next span {
+    font-size: 1.5rem;
+    color: white;
+}
+
 .carousel-control-prev:before, .carousel-control-next:before {
     display: none;
-}
-
-.carousel-control-prev span {
-    content: '‹';
-    font-size: 1.5rem;
-    color: white;
-}
-
-.carousel-control-next span {
-    content: '›';
-    font-size: 1.5rem;
-    color: white;
 }
 </style>
