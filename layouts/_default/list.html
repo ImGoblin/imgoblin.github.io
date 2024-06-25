@@ -27,11 +27,6 @@
                                         <p class="description">
                                             {{ if .Params.description }}
                                                 {{ .Params.description }}
-                                            {{ else if $firstTravelPost }}
-                                                {{ .Summary }}&hellip; <!-- Используем Summary из первого поста -->
-                                            {{ else }}
-                                                {{ .Summary }}&hellip;
-                                            {{ end }}
                                         </p>
                                         <div class="meta">
                                             Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
