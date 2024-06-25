@@ -160,26 +160,6 @@
         transform: translateY(-50%);
         pointer-events: none;
     }
-
-    .carousel-control-prev, .carousel-control-next {
-        background: none;
-        border: none;
-        cursor: pointer;
-        border-radius: 50%;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        line-height: 1;
-        z-index: 10;
-        pointer-events: all;
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: rgba(200, 200, 200, 0.5);
-    }
-
     .carousel-control-prev:hover, .carousel-control-next:hover {
         background-color: rgba(200, 200, 200, 0.8);
     }
@@ -199,5 +179,12 @@
         line-height: 1;
         z-index: 1;
         font-size: 1.5rem;
+    }
+        .carousel-control-prev:before {
+        content: '‹';
+    }
+
+    .carousel-control-next:before {
+        content: '›';
     }
 </style>
