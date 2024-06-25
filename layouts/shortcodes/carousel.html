@@ -171,6 +171,7 @@
         transform: translateY(-50%);
         line-height: 1;
         z-index: 10;
+        pointer-events: all;
     }
 
     .carousel-control-prev {
@@ -187,6 +188,7 @@
         color: white;
         line-height: 1;
         z-index: 1;
+        font-size: 1.5rem;
     }
 
     .carousel-control-prev:before {
@@ -195,5 +197,18 @@
 
     .carousel-control-next:before {
         content: '›';
+    }
+
+    .carousel-control-prev, .carousel-control-next {
+        background-color: rgba(200, 200, 200, 0.5);
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel-control-prev:hover, .carousel-control-next:hover {
+        background-color: rgba(200, 200, 200, 0.8);
     }
 </style>
