@@ -33,7 +33,7 @@
                                         </p>
                                     </div>
                                     <div class="meta">
-                                        <span class="publish-date">Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}</span>
+                                        <span class="publish-date">Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}</span>
                                         {{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}
                                     </div>
                                 </div>
