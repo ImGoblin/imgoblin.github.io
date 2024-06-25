@@ -151,29 +151,27 @@
         text-align: center;
     }
 
-    .carousel-controls {
-        position: absolute;
-        top: 50%;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        transform: translateY(-50%);
-        pointer-events: none;
-    }
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
 
 .carousel-control-prev, .carousel-control-next {
     background: none;
     border: none;
     cursor: pointer;
     border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative; /* Изменение позиции на relative */
     line-height: 1;
     z-index: 10;
     pointer-events: all;
-    width: 15px;
-    height: 15px;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
