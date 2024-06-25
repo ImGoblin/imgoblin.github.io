@@ -21,9 +21,9 @@
                                 <div class="post-content">
                                     <div class="post-header">
                                         <div class="title-description">
-										<h3 class="title">{{ .Title }}</h3>
-										<span class="separator">—</span>
-                                        <p class="description">
+                                            <h3 class="title">{{ .Title }}</h3>
+                                            <span class="separator">—</span>
+                                            <p class="description">
                                                 {{ if .Params.description }}
                                                     {{ .Params.description }}
                                                 {{ else if $firstTravelPost }}
@@ -31,11 +31,12 @@
                                                 {{ else }}
                                                     {{ .Summary }}&hellip;
                                                 {{ end }}
-                                        </p>
+                                            </p>
                                         </div>
                                         <div class="meta">
                                             Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
                                             {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
+                                            {{ if .Params.tripDate }} <br> Поездка &mdash; {{ dateFormat "2 January 2006" .Params.tripDate }} {{ end }}
                                         </div>
                                     </div>
                                 </div>
