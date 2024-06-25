@@ -165,22 +165,26 @@
         background: none;
         border: none;
         cursor: pointer;
-        padding: 0;
         pointer-events: all;
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
+        border-radius: 50%;
+        background-color: rgba(200, 200, 200, 0.7);
+    }
+
+    .carousel-control-prev:hover, .carousel-control-next:hover {
+        background-color: rgba(200, 200, 200, 0.9);
     }
 
     .carousel-control-prev:before, .carousel-control-next:before {
         font-family: 'slick';
-        opacity: 0.7;
+        font-size: 1.5rem;
         color: white;
         line-height: 1;
         z-index: 1;
-        font-size: 30px;
     }
 
     .carousel-control-prev:before {
@@ -198,8 +202,5 @@
     .carousel-controls .carousel-control-next {
         right: 10px;
     }
-
-    .carousel-control-prev:hover:before, .carousel-control-next:hover:before {
-        opacity: 1;
-    }
 </style>
+
