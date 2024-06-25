@@ -20,17 +20,14 @@
                                 <div class="post-content">
                                     <div class="post-header">
                                         <div class="title-description">
-										<h3 class="title">{{ .Title }}</h3>
-										<span class="separator">—</span>
-                                        <p class="description">
-                                                {{ if .Params.description }}
-                                                    {{ .Params.description }}
-                                                {{ else if $firstTravelPost }}
-                                                    {{ .Summary }}&hellip; <!-- Используем Summary из первого поста -->
-                                                {{ else }}
-                                                    {{ .Summary }}&hellip;
-                                                {{ end }}
-                                        </p>
+                                            <h3 class="title">{{ .Title }}</h3>
+                                            {{ if .Params.description }}
+                                                <p class="description">{{ .Params.description }}</p>
+                                            {{ else if $firstTravelPost }}
+                                                <p class="description">{{ .Summary }}&hellip;</p>
+                                            {{ else }}
+                                                <p class="description">{{ .Summary }}&hellip;</p>
+                                            {{ end }}
                                         </div>
                                         <div class="meta">
                                             Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
@@ -71,18 +68,14 @@
                                 <div class="post-content">
                                     <div class="post-header">
                                         <div class="title-description">
-										<h3 class="title">{{ .Title }}</h3>
-                                            <span class="separator">—</span>
-											<p class="description">
-                                                {{ if .Params.description }}
-                                                    {{ .Params.description }}
-                                                {{ else if $firstProgrammingPost }}
-                                                    {{ .Summary }}&hellip; <!-- Используем Summary из первого поста -->
-                                                {{ else }}
-                                                    {{ .Summary }}&hellip;
-                                                {{ end }}
-                                            </p>
-                                            
+                                            <h3 class="title">{{ .Title }}</h3>
+                                            {{ if .Params.description }}
+                                                <p class="description">{{ .Params.description }}</p>
+                                            {{ else if $firstProgrammingPost }}
+                                                <p class="description">{{ .Summary }}&hellip;</p>
+                                            {{ else }}
+                                                <p class="description">{{ .Summary }}&hellip;</p>
+                                            {{ end }}
                                         </div>
                                         <div class="meta">
                                             Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
