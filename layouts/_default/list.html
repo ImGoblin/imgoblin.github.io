@@ -4,9 +4,7 @@
 <body>
     <div class="container wrapper">
         {{ partial "head.html" . }}
-
         {{ with .Content }}{{ . }}{{ end }}
-
         <div class="recent-posts section">
             <h2 class="section-header">
                 {{ if in .Permalink "/travel/" }}
@@ -36,9 +34,8 @@
                                         </p>
                                     </div>
                                     <div class="meta">
-                                            Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
-                                            {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
-                                            {{ if .Params.tripDate }} <br> Поездка &mdash; {{ dateFormat "2 January 2006" .Params.tripDate }} {{ end }}
+                                        <span class="publish-date">Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}</span>
+                                        {{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}
                                     </div>
                                 </div>
                                 {{ with .Params.image }}
