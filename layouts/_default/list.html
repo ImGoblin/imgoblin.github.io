@@ -32,14 +32,10 @@
                                             {{ end }}
                                         </p>
                                     </div>
-                                    <div class="meta">
-                                        {{ if .Params.date }}
-                                            <span class="publish-date">Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}</span>
-                                        {{ else }}
-                                            <span class="publish-date">Дата публикации неизвестна</span>
-                                        {{ end }}
-                                        {{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}
-                                    </div>
+                                        <div class="meta">
+                                            Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
+                                            {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
+                                        </div>
                                 </div>
                                 {{ with .Params.image }}
                                     <img src="{{ . }}" alt="Thumbnail" class="post-thumbnail">
