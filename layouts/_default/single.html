@@ -15,8 +15,6 @@
 			{{ end }}
 			{{ if not (in .Permalink "/about/") }}
 				<div class="meta">Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}</div>
-                {{ if .Params.tripDate }}
-				    <div class="meta">Проехато &mdash; {{ dateFormat "2 January 2006" .Params.tripDate }}</div>
                 {{ end }}
 			{{ end }}
 		</div>
