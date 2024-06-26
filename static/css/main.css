@@ -483,7 +483,8 @@ table th, table td {
 }
 
 .footer {
-    text-align: right;
+    display: flex;
+    justify-content: flex-end; /* Выравнивание содержимого по правому краю */
     font-size: 0.75em;
     color: #1c1c1c;
     border-top: 1px solid #f4f4f4;
