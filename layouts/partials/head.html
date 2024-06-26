@@ -15,13 +15,14 @@
     </div>
 
     <nav class="nav">
+        {{- $baseURL := .Site.BaseURL -}}  <!-- Сохраняем baseURL в переменную -->
         <ul class="flat">
             {{ range .Site.Menus.main }}
             <li>
                 <a href="{{ .URL }}">
                     {{ .Name }}
                     {{ if eq .Name "Отчёты из приюта" }}
-                    <img src="{{ .Site.BaseURL }}/icons/dog-icon.svg" alt="Dog Icon" height="16" width="16">
+                    <img src="{{ $baseURL }}/icons/dog-icon.svg" alt="Dog Icon" height="16" width="16">
                     {{ end }}
                 </a>
             </li>
