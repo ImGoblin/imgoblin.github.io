@@ -434,7 +434,8 @@ table th, table td {
     }
 
     h4 {
-        font-size: 1
+        font-size: 1rem;
+    }
 
     .container {
         margin-top: 10px;
