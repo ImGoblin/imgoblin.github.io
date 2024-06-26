@@ -483,21 +483,12 @@ table th, table td {
 }
 
 .footer {
-    text-align: left;
+    text-align: right;
     font-size: 0.75em;
     color: #1c1c1c;
     border-top: 1px solid #f4f4f4;
     padding: 20px 0;
     margin-top: 40px;
-}
-
-.footer a {
-    color: #427500;
-}
-
-.footer a:hover {
-    color: #427500;
-    text-decoration: none;
 }
 
 .tag-cloud {
