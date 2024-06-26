@@ -91,6 +91,12 @@ a:hover {
 .header nav ul.flat li a {
     color: #000000;
     text-decoration: none;
+    display: flex;
+    align-items: center; /* Выравнивание элементов по вертикали */
+}
+
+.header nav ul.flat li a img.menu-icon {
+    margin-left: 8px; /* Отступ между текстом и иконкой */
 }
 
 .header nav ul.flat li a:hover {
@@ -428,8 +434,7 @@ table th, table td {
     }
 
     h4 {
-        font-size: 1rem;
-    }
+        font-size: 1
 
     .container {
         margin-top: 10px;
