@@ -46,12 +46,12 @@ weight = 4
 [[menu.main]]
 name = "Обо мне"
 url = "/about"
-weight = 5
+weight = 4
 
 [[menu.main]]
 name = "Поиск по тегам"
 url = "/tags"
-weight = 6
+weight = 5
 
 [[params.social]]
 name = "Github"
@@ -61,6 +61,10 @@ url = "https://github.com/ImGoblin"
 name = "Telegram"
 icon = "send"
 url = "https://t.me/itisgoblin"
+[[params.social]]
+name = "Отчёты из приюта"
+icon = "/static/icons/dog-icon.svg"
+url = "/posts/dogshelter"
 
 [taxonomies]
    tag = "tags"
