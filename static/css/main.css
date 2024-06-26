@@ -491,7 +491,9 @@ table th, table td {
     padding: 20px 0;
     margin-top: 40px;
 }
-
+.footer-content {
+    text-align: right; /* Текст внутри div будет выравниваться по правому краю */
+}
 .footer a {
     color: #427500;
 }
