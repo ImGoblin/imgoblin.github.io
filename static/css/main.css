@@ -371,6 +371,8 @@ pre code {
     display: flex; /* Устанавливаем флекс-контейнер для социальных иконок */
     align-items: center; /* Выравнивание иконок по вертикали */
     height: 100%; /* Задаем высоту контейнера равной высоте родительского блока */
+    margin: 0;
+    align-self: center;
 }
 
 .header .site-description .nav.social ul.flat {
