@@ -354,13 +354,17 @@ pre code {
 
 .header .site-description {
     display: flex;
-    align-items: center;
-    justify-content: space-between; /* Добавляем выравнивание по горизонтали между элементами */
+    align-items: center; /* Выравнивание элементов по вертикали */
+    justify-content: space-between; /* Распределение элементов по горизонтали */
 }
 
 .header .site-description h2 {
-    margin: 0;
-    font-size: 1.6rem;
+    margin: 0; /* Убираем внешние отступы у заголовка */
+    font-size: 1.6rem; /* Примерный размер шрифта, можете настроить под свои нужды */
+}
+
+.header .site-description nav {
+    margin-left: 15px; /* Отступ слева для навигации */
 }
 
 .header .site-description .nav.social {
@@ -368,30 +372,24 @@ pre code {
 }
 
 .header .site-description .nav.social ul.flat {
-    display: flex;
-    list-style: none;
-    padding: 0;
+    display: flex; /* Устанавливаем флекс-контейнер для списка иконок */
+    list-style: none; /* Убираем маркеры списка */
+    padding: 0; /* Убираем внутренний отступ у списка */
 }
 
 .header .site-description .nav.social ul.flat li {
-    margin: 0 10px;
+    margin: 0; /* Убираем внешние отступы у элементов списка */
 }
 
 .header .site-description .nav.social ul.flat a {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    color: #000000;
-}
-.header .site-description .nav.social ul.flat li a {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    color: #000000;
+    display: flex; /* Устанавливаем флекс-контейнер для элементов списка */
+    align-items: center; /* Выравнивание иконок по вертикали */
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+    color: #000000; /* Цвет текста */
 }
 
 .header .site-description .nav.social ul.flat a:hover {
-    text-decoration: none;
+    text-decoration: none; /* Убираем подчеркивание при наведении */
 }
 
 .header .site-description .nav.social .flat a svg.feather.feather-github {
@@ -405,6 +403,7 @@ pre code {
 nav ul.flat li a:hover {
     text-decoration: none;
 }
+
 
 /* Посты */
 .post-content {
