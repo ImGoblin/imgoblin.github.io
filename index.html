@@ -4,7 +4,6 @@
 <body>
     <div class="container wrapper">
         {{ partial "head.html" . }}
-
         <!-- Секция Travel -->
         <div class="recent-posts section travel">
             <h2 class="section-header">
@@ -20,21 +19,25 @@
                             <a href="{{ .RelPermalink }}" class="post">
                                 <div class="post-content">
                                     <div class="post-header">
-                                        <div class="title-description">
-										<h3 class="title">{{ .Title }}</h3>
-										<span class="separator">—</span>
+                                        <h3 class="title">{{ .Title }}</h3>
                                         <p class="description">
-                                                {{ if .Params.description }}
-                                                    {{ .Params.description }}
-                                                {{ else if $firstTravelPost }}
-                                                    {{ .Summary }}&hellip; <!-- Используем Summary из первого поста -->
-                                                {{ else }}
-                                                    {{ .Summary }}&hellip;
-                                                {{ end }}
+                                            {{ if .Params.description }}
+                                                {{ .Params.description }}
+                                            {{ else if $firstTravelPost }}
+                                                {{ .Summary }}&hellip; <!-- Используем Summary из первого поста -->
+                                            {{ else }}
+                                                {{ .Summary }}&hellip;
+                                            {{ end }}
                                         </p>
-                                        </div>
                                         <div class="meta">
-                                            Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
+                                            {{ if .Date }}
+                                                Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}
+                                            {{ else }}
+                                                Публикации еще нет
+                                            {{ end }}
+                                            {{ if .Params.travelDate }}
+                                                <br>Дата поездки &mdash; {{ dateFormat "2 January 2006" .Params.travelDate }}
+                                            {{ end }}
                                             {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
                                         </div>
                                     </div>
@@ -56,7 +59,6 @@
                 {{ end }}
             </div>
         </div>
-
         <!-- Секция Programming -->
         <div class="recent-posts section programming">
             <h2 class="section-header">
@@ -72,22 +74,20 @@
                             <a href="{{ .RelPermalink }}" class="post">
                                 <div class="post-content">
                                     <div class="post-header">
-                                        <div class="title-description">
-										<h3 class="title">{{ .Title }}</h3>
-                                            <span class="separator">—</span>
-											<p class="description">
-                                                {{ if .Params.description }}
-                                                    {{ .Params.description }}
-                                                {{ else if $firstProgrammingPost }}
-                                                    {{ .Summary }}&hellip; <!-- Используем Summary из первого поста -->
-                                                {{ else }}
-                                                    {{ .Summary }}&hellip;
-                                                {{ end }}
-                                            </p>
-                                            
-                                        </div>
+                                        <h3 class="title">{{ .Title }}</h3>
+                                        <p class="description">
+                                            {{ if .Params.description }}
+                                                {{ .Params.description }}
+                                            {{ else if $firstProgrammingPost }}
+                                                {{ .Summary }}&hellip; <!-- Используем Summary из первого поста -->
+                                            {{ else }}
+                                                {{ .Summary }}&hellip;
+                                            {{ end }}
+                                        </p>
                                         <div class="meta">
-                                            Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
+                                            {{ if .Date }}
+                                                Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}
+                                            {{ end }}
                                             {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
                                         </div>
                                     </div>
