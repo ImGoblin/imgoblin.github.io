@@ -356,11 +356,13 @@ pre code {
     display: flex;
     align-items: center; /* Выравнивание элементов по вертикали */
     justify-content: space-between; /* Распределение элементов по горизонтали */
+    align-self: center;
 }
 
 .header .site-description h2 {
     margin: 0; /* Убираем внешние отступы у заголовка */
     font-size: 1.2rem; /* Примерный размер шрифта, можете настроить под свои нужды */
+    align-self: center;
 }
 
 .header .site-description nav {
@@ -400,6 +402,7 @@ pre code {
     align-items: center; /* Выравнивание иконок по вертикали */
     text-decoration: none; /* Убираем подчеркивание у ссылок */
     color: #000000; /* Цвет текста */
+    align-self: center;
 }
 
 .header .site-description .nav.social ul.flat a:hover {
