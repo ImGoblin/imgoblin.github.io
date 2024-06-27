@@ -12,6 +12,7 @@ pygmentscodefencesguesssyntax = true
 defaultContentLanguage = "ru"
 
 [params]
+    favicon = "/static/icons/favicon.ico"
     disableDisqusTypes = ["page"]
     featherIconsCDN = true
     mode = "light"  # "dark", "auto", "light"
