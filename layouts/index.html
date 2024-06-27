@@ -30,12 +30,12 @@
                                             {{ end }}
                                         </p>
                                         <div class="meta">
-                                            {{ if isset .Params.date }}
-                                                Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
+                                            {{ if .Date }}
+                                                Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}
                                             {{ else }}
-                                                Не опубликован
+                                                Опубликован
                                             {{ end }}
-                                            {{ if isset .Params.travelDate }}
+                                            {{ if .Params.travelDate }}
                                                 <br>Дата поездки &mdash; {{ dateFormat "2 January 2006" .Params.travelDate }}
                                             {{ end }}
                                             {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
@@ -85,10 +85,10 @@
                                             {{ end }}
                                         </p>
                                         <div class="meta">
-                                            {{ if isset .Params.date }}
-                                                Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
+                                            {{ if .Date }}
+                                                Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}
                                             {{ else }}
-                                                Не опубликован
+                                                Опубликован
                                             {{ end }}
                                             {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
                                         </div>
