@@ -354,7 +354,7 @@ pre code {
 
 .header .site-description {
     display: flex;
-    align-items: flex-start; /* Выравнивание элементов по верхней границе */
+    align-items: center; /* Выравнивание элементов по верхней границе */
 }
 
 .header .site-description h2 {
@@ -377,6 +377,7 @@ pre code {
     list-style: none; /* Убираем маркеры списка */
     padding: 0; /* Убираем внутренний отступ у списка */
     margin-top: -5px; /* Отрицательный отступ для подтягивания вверх */
+    align-items: flex-start;
 }
 
 .header .site-description .nav.social ul.flat li {
@@ -391,7 +392,7 @@ pre code {
 
 .header .site-description .nav.social ul.flat a {
     display: flex; /* Устанавливаем флекс-контейнер для элементов списка */
-    align-items: center; /* Выравнивание иконок по вертикали */
+    align-items: flex-start; /* Выравнивание иконок по вертикали */
     text-decoration: none; /* Убираем подчеркивание у ссылок */
     color: #000000; /* Цвет текста */
 }
