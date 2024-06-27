@@ -355,12 +355,11 @@ pre code {
 .header .site-description {
     display: flex;
     align-items: center; /* Выравнивание элементов по вертикали */
-    justify-content: space-between; /* Распределение элементов по горизонтали */
 }
 
 .header .site-description h2 {
     margin: 0; /* Убираем внешние отступы у заголовка */
-    font-size: 1.2rem; /* Примерный размер шрифта, можете настроить под свои нужды */
+    font-size: 1.2rem; /* Размер шрифта для подзаголовка */
 }
 
 .header .site-description nav {
@@ -368,20 +367,19 @@ pre code {
 }
 
 .header .site-description .nav.social {
-    display: flex; /* Устанавливаем флекс-контейнер для социальных иконок */
-    align-items: center; /* Выравнивание иконок по вертикали */
+    display: flex; /* Флекс-контейнер для социальных иконок */
+    align-items: center; /* Выравнивание по вертикали */
+    margin-left: auto; /* Перемещаем социальные иконки в конец */
 }
 
 .header .site-description .nav.social ul.flat {
-    display: flex; /* Устанавливаем флекс-контейнер для списка иконок */
+    display: flex; /* Флекс-контейнер для списка иконок */
     list-style: none; /* Убираем маркеры списка */
-    align-items: center; /* Выравнивание элементов списка по вертикали */
-    margin: 0; /* Убираем внешние отступы */
     padding: 0; /* Убираем внутренний отступ у списка */
 }
 
 .header .site-description .nav.social ul.flat li {
-    margin-left: 10px; /* Отступ между иконками */
+    margin: 0 10px; /* Внешние отступы между иконками */
 }
 
 .header .site-description .nav.social ul.flat .report-icon img {
@@ -391,7 +389,7 @@ pre code {
 }
 
 .header .site-description .nav.social ul.flat a {
-    display: flex; /* Устанавливаем флекс-контейнер для элементов списка */
+    display: flex; /* Флекс-контейнер для элементов списка */
     align-items: center; /* Выравнивание иконок по вертикали */
     text-decoration: none; /* Убираем подчеркивание у ссылок */
     color: #000000; /* Цвет текста */
