@@ -58,7 +58,7 @@ icon = "send"
 url = "https://t.me/itisgoblin"
 [[params.social]]
 name = "Отчёты из приюта"
-icon = "/static/icons/dog-icon.svg"
+icon = "/icons/dog-icon.svg"
 url = "/posts/dogshelter"
 
 [taxonomies]
