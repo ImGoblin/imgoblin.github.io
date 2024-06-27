@@ -370,6 +370,7 @@ pre code {
     display: flex; /* Флекс-контейнер для социальных иконок */
     align-items: center; /* Выравнивание по вертикали */
     margin-left: auto; /* Перемещаем социальные иконки в конец */
+    align-self: flex-start;
 }
 
 .header .site-description .nav.social ul.flat {
