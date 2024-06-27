@@ -354,7 +354,7 @@ pre code {
 
 .header .site-description {
     display: flex;
-    align-items: center; /* Выравнивание элементов по верхней границе */
+    align-items: center; /* Выравнивание элементов по центру по вертикали */
 }
 
 .header .site-description h2 {
@@ -368,7 +368,7 @@ pre code {
 
 .header .site-description .nav.social {
     display: flex; /* Флекс-контейнер для социальных иконок */
-    align-items: flex-start; /* Выравнивание по верхней границе */
+    align-items: center; /* Выравнивание по центру по вертикали */
     margin-left: auto; /* Перемещаем социальные иконки в конец контейнера */
 }
 
@@ -376,8 +376,7 @@ pre code {
     display: flex; /* Устанавливаем флекс-контейнер для списка иконок */
     list-style: none; /* Убираем маркеры списка */
     padding: 0; /* Убираем внутренний отступ у списка */
-    margin-top: -5px; /* Отрицательный отступ для подтягивания вверх */
-    align-items: flex-start;
+    margin: 0; /* Убираем внешние отступы */
 }
 
 .header .site-description .nav.social ul.flat li {
@@ -392,7 +391,7 @@ pre code {
 
 .header .site-description .nav.social ul.flat a {
     display: flex; /* Устанавливаем флекс-контейнер для элементов списка */
-    align-items: flex-start; /* Выравнивание иконок по вертикали */
+    align-items: center; /* Выравнивание иконок по вертикали */
     text-decoration: none; /* Убираем подчеркивание у ссылок */
     color: #000000; /* Цвет текста */
 }
