@@ -368,27 +368,22 @@ pre code {
 }
 
 .header .site-description .nav.social {
-    display: flex;
-    align-items: center;
-    margin-left: auto; /* Перемещаем социальные иконки в конец контейнера */
+    display: flex; /* Устанавливаем флекс-контейнер для социальных иконок */
+    align-items: center; /* Выравнивание иконок по вертикали */
+    height: 100%; /* Задаем высоту контейнера равной высоте родительского блока */
 }
 
 .header .site-description .nav.social ul.flat {
     display: flex; /* Устанавливаем флекс-контейнер для списка иконок */
     list-style: none; /* Убираем маркеры списка */
-    align-items: center;
+    align-items: center; /* Выравнивание элементов списка по вертикали */
+    margin: 0; /* Убираем внешние отступы */
     padding: 0; /* Убираем внутренний отступ у списка */
+    height: 100%; /* Задаем высоту списка равной высоте родительского контейнера */
 }
 
 .header .site-description .nav.social ul.flat li {
-    margin: 0; /* Убираем внешние отступы у элементов списка */
-}
-
-.header .site-description .nav.social ul.flat .report-icon {
-    display: flex; /* Устанавливаем флекс-контейнер для элемента "Отчёты из приюта" */
-    align-items: center; /* Выравнивание по вертикали */
-    margin: 0;
-    padding: 0;
+    margin-left: 10px; /* Отступ между иконками */
 }
 
 .header .site-description .nav.social ul.flat .report-icon img {
