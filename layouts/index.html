@@ -30,7 +30,14 @@
                                             {{ end }}
                                         </p>
                                         <div class="meta">
-                                            Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
+                                            {{ if isset .Params.date }}
+                                                Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
+                                            {{ else }}
+                                                Не опубликован
+                                            {{ end }}
+                                            {{ if isset .Params.travelDate }}
+                                                <br>Дата поездки &mdash; {{ dateFormat "2 January 2006" .Params.travelDate }}
+                                            {{ end }}
                                             {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
                                         </div>
                                     </div>
@@ -78,7 +85,11 @@
                                             {{ end }}
                                         </p>
                                         <div class="meta">
-                                            Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
+                                            {{ if isset .Params.date }}
+                                                Опубликован &mdash; {{ dateFormat "2 January 2006" .Params.date }}
+                                            {{ else }}
+                                                Не опубликован
+                                            {{ end }}
                                             {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
                                         </div>
                                     </div>
