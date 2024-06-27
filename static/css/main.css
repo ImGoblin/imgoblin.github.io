@@ -376,6 +376,7 @@ pre code {
 .header .site-description .nav.social ul.flat {
     display: flex; /* Устанавливаем флекс-контейнер для списка иконок */
     list-style: none; /* Убираем маркеры списка */
+    align-items: center;
     padding: 0; /* Убираем внутренний отступ у списка */
 }
 
