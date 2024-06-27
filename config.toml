@@ -39,11 +39,6 @@ url = "/posts/programming"
 weight = 3
 
 [[menu.main]]
-name = "Отчёты из приюта"
-url = "/posts/dogshelter"
-weight = 4
-
-[[menu.main]]
 name = "Обо мне"
 url = "/about"
 weight = 4
