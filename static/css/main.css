@@ -381,6 +381,11 @@ pre code {
     margin: 0; /* Убираем внешние отступы у элементов списка */
 }
 
+.header .site-description .nav.social ul.flat .report-icon {
+    display: flex; /* Устанавливаем флекс-контейнер для элемента "Отчёты из приюта" */
+    align-items: center; /* Выравнивание по вертикали */
+}
+
 .header .site-description .nav.social ul.flat a {
     display: flex; /* Устанавливаем флекс-контейнер для элементов списка */
     align-items: center; /* Выравнивание иконок по вертикали */
@@ -403,6 +408,7 @@ pre code {
 nav ul.flat li a:hover {
     text-decoration: none;
 }
+
 /* Посты */
 .post-content {
     margin-bottom: 1px;
