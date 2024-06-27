@@ -376,6 +376,7 @@ pre code {
     display: flex; /* Флекс-контейнер для списка иконок */
     list-style: none; /* Убираем маркеры списка */
     padding: 0; /* Убираем внутренний отступ у списка */
+    align-self: flex-start; /* Выравнивание списка по верхней границе родителя */
 }
 
 .header .site-description .nav.social ul.flat li {
