@@ -18,7 +18,7 @@
                     {{ if .Date }}
                         Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}
                     {{ else }}
-                        Дата публикации неизвестна
+                        Публикации ещё нет
                     {{ end }}
                     {{ if .Params.travelDate }}
                         <br>Дата поездки &mdash; {{ dateFormat "2 January 2006" .Params.travelDate }}
@@ -30,7 +30,11 @@
             {{ end }}
         </div>
 
-        div class="post-tags">
+        <div class="markdown">
+            {{ .Content }}
+        </div>
+
+        <div class="post-tags">
             {{ if ne .Type "page" }}
                 {{ $tags := slice }}
                 {{ if .Params.tags }}
