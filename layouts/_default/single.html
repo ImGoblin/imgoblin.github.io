@@ -5,42 +5,54 @@
     <link rel="canonical" href="{{ .Permalink }}">
 </head>
 <body>
-	<div class="container wrapper post">
-		{{ partial "head.html" . }}
+    <div class="container wrapper post">
+        {{ partial "head.html" . }}
 
-		<div class="post-header">
-			<h1 class="title">{{ .Title }}</h1>
-			{{ if .Description }}
-				<div class="description">{{ .Description }}</div>
-			{{ end }}
-			{{ if not (in .Permalink "/about/") }}
-				<div class="meta">Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}</div>
+        <div class="post-header">
+            <h1 class="title">{{ .Title }}</h1>
+            {{ if .Description }}
+                <div class="description">{{ .Description }}</div>
+            {{ end }}
+            {{ if not (in .Permalink "/about/") }}
+                <div class="meta">
+                    {{ if .Date }}
+                        Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}
+                    {{ else }}
+                        Дата публикации неизвестна
+                    {{ end }}
+                    {{ if .Params.travelDate }}
+                        <br>Дата поездки &mdash; {{ dateFormat "2 January 2006" .Params.travelDate }}
+                    {{ end }}
+                    {{ if .Draft }}
+                        <span class="draft-label">DRAFT</span>
+                    {{ end }}
+                </div>
+            {{ end }}
+        </div>
+
+        <div class="markdown">
+            {{ .Content }}
+        </div>
+
+        <div class="post-tags">
+            {{ if ne .Type "page" }}
+                {{ if .Params.tags }}
+                    <nav class="nav tags">
+                        <ul class="flat">
+                            {{ range .Params.tags }}
+                                <li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></li>
+                            {{ end }}
+                        </ul>
+                    </nav>
                 {{ end }}
-		</div>
+            {{ end }}
+        </div>
 
-		<div class="markdown">
-			{{ .Content }}
-		</div>
+        {{ if not (in .Permalink "/about/") }}
+            {{- partial "telegram_comments.html" . -}}
+        {{ end }}
 
-		<div class="post-tags">
-			{{ if ne .Type "page" }}
-				{{ if gt .Params.tags 0 }}
-					<nav class="nav tags">
-						<ul class="flat">
-							{{ range .Params.tags }}
-								<li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></li>
-							{{ end }}
-						</ul>
-					</nav>
-				{{ end }}
-			{{ end }}
-		</div>
-
-		{{ if not (in .Permalink "/about/") }}
-			{{- partial "telegram_comments.html" . -}}
-		{{ end }}
-
-	</div>
-	{{ partial "footer.html" . }}
+    </div>
+    {{ partial "footer.html" . }}
 </body>
 </html>
