@@ -2,6 +2,6 @@
 title: "Кенигсберг"
 date: 
 description: "более известный как Калининград"
-draft: false
+draft: true
 section: travel
 ---
