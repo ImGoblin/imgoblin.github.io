@@ -1,7 +1,7 @@
 baseURL = "https://imgoblin.github.io/"
 languageCode = "ru-ru"
 title = "Gøblin"
-theme = "gbln"
+theme = "ezhil"
 
 copyright = " © "
 
