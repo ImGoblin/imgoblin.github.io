@@ -356,13 +356,11 @@ pre code {
     display: flex;
     align-items: center; /* Выравнивание элементов по вертикали */
     justify-content: space-between; /* Распределение элементов по горизонтали */
-    align-self: center;
 }
 
 .header .site-description h2 {
     margin: 0; /* Убираем внешние отступы у заголовка */
     font-size: 1.2rem; /* Примерный размер шрифта, можете настроить под свои нужды */
-    align-self: center;
 }
 
 .header .site-description nav {
@@ -372,9 +370,6 @@ pre code {
 .header .site-description .nav.social {
     display: flex; /* Устанавливаем флекс-контейнер для социальных иконок */
     align-items: center; /* Выравнивание иконок по вертикали */
-    height: 100%; /* Задаем высоту контейнера равной высоте родительского блока */
-    margin: 0;
-    align-self: center;
 }
 
 .header .site-description .nav.social ul.flat {
@@ -383,8 +378,6 @@ pre code {
     align-items: center; /* Выравнивание элементов списка по вертикали */
     margin: 0; /* Убираем внешние отступы */
     padding: 0; /* Убираем внутренний отступ у списка */
-    height: 100%; /* Задаем высоту списка равной высоте родительского контейнера */
-    align-self: center; /* Выравниваем элемент по центру по вертикали */
 }
 
 .header .site-description .nav.social ul.flat li {
@@ -402,7 +395,6 @@ pre code {
     align-items: center; /* Выравнивание иконок по вертикали */
     text-decoration: none; /* Убираем подчеркивание у ссылок */
     color: #000000; /* Цвет текста */
-    align-self: center;
 }
 
 .header .site-description .nav.social ul.flat a:hover {
