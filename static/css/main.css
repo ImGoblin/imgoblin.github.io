@@ -368,6 +368,7 @@ pre code {
 
 .header .site-description h2 {
     color: #000000;
+    align-items: center;
 }
 
 .header .site-description .nav.social .flat a svg.feather.feather-github {
