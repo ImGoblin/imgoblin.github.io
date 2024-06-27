@@ -360,7 +360,7 @@ pre code {
 
 .header .site-description h2 {
     margin: 0; /* Убираем внешние отступы у заголовка */
-    font-size: 1.6rem; /* Примерный размер шрифта, можете настроить под свои нужды */
+    font-size: 1.2rem; /* Примерный размер шрифта, можете настроить под свои нужды */
 }
 
 .header .site-description nav {
@@ -368,6 +368,8 @@ pre code {
 }
 
 .header .site-description .nav.social {
+    display: flex;
+    align-items: center;
     margin-left: auto; /* Перемещаем социальные иконки в конец контейнера */
 }
 
