@@ -30,16 +30,20 @@
             {{ end }}
         </div>
 
-        <div class="markdown">
-            {{ .Content }}
-        </div>
-
-        <div class="post-tags">
+        div class="post-tags">
             {{ if ne .Type "page" }}
+                {{ $tags := slice }}
                 {{ if .Params.tags }}
+                    {{ if reflect.IsSlice .Params.tags }}
+                        {{ $tags = .Params.tags }}
+                    {{ else }}
+                        {{ $tags = split .Params.tags ", " }}
+                    {{ end }}
+                {{ end }}
+                {{ if gt (len $tags) 0 }}
                     <nav class="nav tags">
                         <ul class="flat">
-                            {{ range .Params.tags }}
+                            {{ range $tags }}
                                 <li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></li>
                             {{ end }}
                         </ul>
