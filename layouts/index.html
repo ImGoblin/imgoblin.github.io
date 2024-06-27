@@ -33,7 +33,7 @@
                                             {{ if .Date }}
                                                 Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}
                                             {{ else }}
-                                                Опубликован
+                                                Публикации еще нет
                                             {{ end }}
                                             {{ if .Params.travelDate }}
                                                 <br>Дата поездки &mdash; {{ dateFormat "2 January 2006" .Params.travelDate }}
@@ -87,8 +87,6 @@
                                         <div class="meta">
                                             {{ if .Date }}
                                                 Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}
-                                            {{ else }}
-                                                Опубликован
                                             {{ end }}
                                             {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
                                         </div>
