@@ -355,28 +355,19 @@ pre code {
 .header .site-description {
     display: flex;
     justify-content: space-between;
-}
-
-/* Стили для выравнивания внутри site-description */
-.header .site-description h2 {
-    margin: 0;
+    align-items: center;
 }
 
 .header .site-description nav {
-    display: flex;
-    align-items: center;
+    margin: 0;
+    padding: 0;
+    border: none;
+    min-width: 50px;
     margin-left: 15px;
 }
 
-.header .site-description .nav.social ul.flat {
-    display: flex;
-    justify-content: center;
-    padding: 0;
-    list-style: none;
-}
-
-.header .site-description .nav.social ul.flat li {
-    margin: 0 10px;
+.header .site-description h2 {
+    color: #000000;
 }
 
 .header .site-description .nav.social .flat a svg.feather.feather-github {
