@@ -383,6 +383,12 @@ pre code {
     text-decoration: none;
     color: #000000;
 }
+.header .site-description .nav.social ul.flat li a {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000000;
+}
 
 .header .site-description .nav.social ul.flat a:hover {
     text-decoration: none;
