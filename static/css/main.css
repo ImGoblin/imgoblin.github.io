@@ -387,11 +387,11 @@ pre code {
     margin: 0;
     padding: 0;
 }
-.header .site-description .nav.social ul.flat .report-icon .img {
-    display: flex; /* Устанавливаем флекс-контейнер для элемента "Отчёты из приюта" */
-    align-items: center; /* Выравнивание по вертикали */
-    margin: 0;
-    padding: 0;
+
+.header .site-description .nav.social ul.flat .report-icon img {
+    height: 22px;
+    width: 22px;
+    margin: 0; /* Убираем внешние отступы */
 }
 
 .header .site-description .nav.social ul.flat a {
