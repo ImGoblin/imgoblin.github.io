@@ -9,7 +9,7 @@
             <ul class="flat">
                 {{- range .Site.Params.Social }}
                     {{- if eq .name "Отчёты из приюта" }}
-                    <li>
+                    <li class="report-icon">
                         <a href="{{ .url }}" title="{{ .name }}">
                             <img src="{{ .icon | absURL }}" alt="{{ .name }}" height="22" width="22">
                         </a>
