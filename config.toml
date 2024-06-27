@@ -49,6 +49,10 @@ url = "/tags"
 weight = 5
 
 [[params.social]]
+name = "Отчёты из приюта"
+icon = "/icons/dog-icon.svg"
+url = "/posts/dogshelter"
+[[params.social]]
 name = "Github"
 icon = "github"
 url = "https://github.com/ImGoblin"
@@ -56,10 +60,7 @@ url = "https://github.com/ImGoblin"
 name = "Telegram"
 icon = "send"
 url = "https://t.me/itisgoblin"
-[[params.social]]
-name = "Отчёты из приюта"
-icon = "/icons/dog-icon.svg"
-url = "/posts/dogshelter"
+
 
 [taxonomies]
    tag = "tags"
