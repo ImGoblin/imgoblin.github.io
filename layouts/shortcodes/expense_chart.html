@@ -1,0 +1,42 @@
+<div>
+    <canvas id="expenseChart-{{ .Get 1 }}"></canvas>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('{{ .Get 0 }}')
+            .then(response => response.text())
+            .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+            .then(data => {
+                const month = '{{ .Get 1 }}';
+                const items = Array.from(data.querySelectorAll(`month[name="${month}"] item`));
+                const labels = items.map(el => el.getAttribute('class'));
+                const amounts = items.map(el => parseFloat(el.textContent));
+
+                const ctx = document.getElementById(`expenseChart-${month}`).getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Затраты',
+                            data: amounts,
+                            backgroundColor: ['#ff9999', '#66b3ff', '#99ff99'],
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: `Распределение затрат за ${month}`
+                            }
+                        }
+                    }
+                });
+            });
+    });
+</script>
