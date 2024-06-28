@@ -1,0 +1,57 @@
+<div>
+    <canvas id="fundraisingChart"></canvas>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('{{ .Get 0 }}')
+            .then(response => response.text())
+            .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+            .then(data => {
+                const months = Array.from(data.querySelectorAll('month')).map(el => el.getAttribute('name'));
+                const amounts = Array.from(data.querySelectorAll('month')).map(el => parseFloat(el.textContent));
+
+                const ctx = document.getElementById('fundraisingChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: months,
+                        datasets: [{
+                            label: 'Сумма (руб)',
+                            data: amounts,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            fill: true,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Сбор средств по месяцам'
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Месяц'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Сумма (руб)'
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+    });
+</script>
