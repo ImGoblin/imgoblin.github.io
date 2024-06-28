@@ -6,10 +6,15 @@
     document.addEventListener("DOMContentLoaded", function() {
         fetch('{{ .Get 0 }}')
             .then(response => response.text())
-            .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
-            .then(data => {
-                const months = Array.from(data.querySelectorAll('month')).map(el => el.getAttribute('name'));
-                const amounts = Array.from(data.querySelectorAll('month')).map(el => parseFloat(el.textContent));
+            .then(csv => {
+                const rows = csv.split("\n").slice(1);
+                const months = [];
+                const amounts = [];
+                rows.forEach(row => {
+                    const cols = row.split(",");
+                    months.push(cols[0]);
+                    amounts.push(parseFloat(cols[1]));
+                });
 
                 const ctx = document.getElementById('fundraisingChart').getContext('2d');
                 new Chart(ctx, {
