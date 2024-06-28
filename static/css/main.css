@@ -79,11 +79,11 @@ a:hover {
 
 /* Ссылки в постах и футере */
 .post a, .footer a {
-    color: #427500;
+    color: 5fa800;
 }
 
 .post a:hover, .footer a:hover {
-    color: #427500;
+    color: 5fa800;
     text-decoration: none;
 }
 
@@ -489,7 +489,7 @@ table th, table td {
 
 .post-tags .tags a {
     display: inline-block;
-    border: 1px solid #427500;
+    border: 1px solid 5fa800;
     border-radius: 4px;
     padding: 0px 6px;
     color: #1c1c1c;
@@ -501,7 +501,7 @@ table th, table td {
 
 .tag-cloud a {
     display: inline-block;
-    border: 1px solid #427500;
+    border: 1px solid 5fa800;
     border-radius: 4px;
     padding: 0px 6px;
     color: #1c1c1c;
