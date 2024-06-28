@@ -499,6 +499,18 @@ table th, table td {
     margin: 0 1px;
 }
 
+.tag-cloud a {
+    display: inline-block;
+    border: 1px solid #a00;
+    border-radius: 4px;
+    padding: 0px 6px;
+    color: #1c1c1c;
+    line-height: 20px;
+    font-size: 12px;
+    text-decoration: none;
+    margin: 0 1px;
+}
+
 .list .posts .post .meta {
     margin-bottom: 0;
     margin-left: 5px;
