@@ -1,16 +1,18 @@
-<canvas id="fundraisingChart" width="400" height="200"></canvas>
+<div>
+    <canvas id="fundraisingChart"></canvas>
+</div>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function() {
     fetch('{{ .Get 0 }}')
         .then(response => response.text())
-        .then(csv => {
+        .then(csvText => {
+            const rows = csvText.trim().split('\n').slice(1);
             const labels = [];
-            const values = [];
-            const lines = csv.split('\n');
-            lines.forEach(line => {
-                const [month, value] = line.split(',');
-                labels.push(month.trim());
-                values.push(parseFloat(value.trim()));
+            const data = [];
+            rows.forEach(row => {
+                const cols = row.split(',');
+                labels.push(cols[0].trim());
+                data.push(parseFloat(cols[1].trim()));
             });
             const ctx = document.getElementById('fundraisingChart').getContext('2d');
             new Chart(ctx, {
@@ -18,28 +20,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Собранные средства',
-                        data: values,
-                        fill: false,
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
+                        label: 'Сборы по месяцам',
+                        data: data,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true
                     }]
                 },
                 options: {
                     responsive: true,
                     scales: {
                         x: {
-                            display: true,
                             title: {
                                 display: true,
                                 text: 'Месяц'
                             }
                         },
                         y: {
-                            display: true,
                             title: {
                                 display: true,
-                                text: 'Сумма'
+                                text: 'Собранная сумма'
                             }
                         }
                     }
