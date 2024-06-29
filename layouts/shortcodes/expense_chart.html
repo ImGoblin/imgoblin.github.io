@@ -20,6 +20,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     categories[category] += amount;
                 }
             });
+            
+            const icons = {
+                'Корма': 'path/to/icon1.png',
+                'Медикаменты': 'path/to/icon2.png',
+                'Обработка от паразитов': 'path/to/icon3.png'
+                // Добавьте пути к иконкам для других категорий
+            };
+
             const ctx = document.getElementById('expenseChart-{{ .Get 1 }}').getContext('2d');
             new Chart(ctx, {
                 type: 'pie',
@@ -34,7 +42,26 @@ document.addEventListener("DOMContentLoaded", function() {
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false
+                    maintainAspectRatio: false,
+                    plugins: {
+                        outlabels: {
+                            text: '%l',
+                            color: 'white',
+                            backgroundColor: 'black',
+                            borderRadius: 10,
+                            borderColor: 'white',
+                            borderWidth: 2,
+                            stretch: 45,
+                            padding: 15,
+                            display: function(ctx) {
+                                let index = ctx.dataIndex;
+                                let icon = new Image();
+                                icon.src = icons[ctx.chart.data.labels[index]];
+                                ctx.ctx.drawImage(icon, ctx.x - 12, ctx.y - 12, 24, 24);
+                                return true;
+                            }
+                        }
+                    }
                 }
             });
         });
