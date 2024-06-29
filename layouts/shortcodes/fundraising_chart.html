@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
             rows.forEach(row => {
                 const cols = row.split(',');
                 labels.push(cols[0].trim());
-                data.push(parseFloat(cols[1].trim()));
+                data.push(cols[1].trim() === "сбора не было" ? 0 : parseFloat(cols[1].trim()));
             });
             const ctx = document.getElementById('fundraisingChart').getContext('2d');
             new Chart(ctx, {
