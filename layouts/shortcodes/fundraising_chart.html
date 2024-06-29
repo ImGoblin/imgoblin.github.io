@@ -1,62 +1,50 @@
-<div>
-    <canvas id="fundraisingChart"></canvas>
-</div>
-
+<canvas id="fundraisingChart" width="400" height="200"></canvas>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        fetch('{{ .Get 0 }}')
-            .then(response => response.text())
-            .then(csv => {
-                const rows = csv.split("\n").slice(1);
-                const months = [];
-                const amounts = [];
-                rows.forEach(row => {
-                    const cols = row.split(",");
-                    months.push(cols[0]);
-                    amounts.push(parseFloat(cols[1]));
-                });
-
-                const ctx = document.getElementById('fundraisingChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: months,
-                        datasets: [{
-                            label: 'Сумма (руб)',
-                            data: amounts,
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            fill: true,
-                            tension: 0.1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'top',
-                            },
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('{{ .Get 0 }}')
+        .then(response => response.text())
+        .then(csv => {
+            const labels = [];
+            const values = [];
+            const lines = csv.split('\n');
+            lines.forEach(line => {
+                const [month, value] = line.split(',');
+                labels.push(month.trim());
+                values.push(parseFloat(value.trim()));
+            });
+            const ctx = document.getElementById('fundraisingChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Собранные средства',
+                        data: values,
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            display: true,
                             title: {
                                 display: true,
-                                text: 'Сбор средств по месяцам'
+                                text: 'Месяц'
                             }
                         },
-                        scales: {
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Месяц'
-                                }
-                            },
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: 'Сумма (руб)'
-                                }
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Сумма'
                             }
                         }
                     }
-                });
+                }
             });
-    });
+        });
+});
 </script>
