@@ -11,8 +11,11 @@ document.addEventListener("DOMContentLoaded", function() {
             const data = [];
             rows.forEach(row => {
                 const cols = row.split(',');
-                labels.push(cols[0].trim());
-                data.push(cols[1].trim() === "сбора не было" ? 0 : parseFloat(cols[1].trim()));
+                const year = cols[0].trim();
+                const month = cols[1].trim();
+                const amount = parseFloat(cols[2].trim());
+                labels.push(`${year} ${month}`);
+                data.push(amount);
             });
             const ctx = document.getElementById('fundraisingChart').getContext('2d');
             new Chart(ctx, {
@@ -29,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     scales: {
                         x: {
                             title: {
