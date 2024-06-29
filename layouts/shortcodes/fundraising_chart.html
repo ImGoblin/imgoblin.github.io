@@ -1,5 +1,5 @@
-<div style="max-height: 300px;">
-    <canvas id="fundraisingChart"></canvas>
+<div style="width: 300px; height: 300px; margin: 0 auto;">
+    <canvas id="expenseChart-{{ .Get 1 }}"></canvas>
 </div>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -7,43 +7,58 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.text())
         .then(csvText => {
             const rows = csvText.trim().split('\n').slice(1);
-            const labels = [];
-            const data = [];
+            const categories = {};
             rows.forEach(row => {
                 const cols = row.split(',');
-                const year = cols[0].trim();
-                const month = cols[1].trim();
-                const amount = parseFloat(cols[2].trim());
-                labels.push(`${year} ${month}`);
-                data.push(amount);
+                const month = cols[0].trim();
+                const category = cols[1].trim();
+                const amount = parseFloat(cols[4].trim());
+                if (month === '{{ .Get 1 }}') {
+                    if (!categories[category]) {
+                        categories[category] = 0;
+                    }
+                    categories[category] += amount;
+                }
             });
-            const ctx = document.getElementById('fundraisingChart').getContext('2d');
+            
+            const icons = {
+                'Корма': 'path/to/icon1.png',
+                'Медикаменты': 'path/to/icon2.png',
+                'Обработка от паразитов': 'path/to/icon3.png'
+                // Добавьте пути к иконкам для других категорий
+            };
+
+            const ctx = document.getElementById('expenseChart-{{ .Get 1 }}').getContext('2d');
             new Chart(ctx, {
-                type: 'line',
+                type: 'pie',
                 data: {
-                    labels: labels,
+                    labels: Object.keys(categories),
                     datasets: [{
-                        label: 'Сборы по месяцам',
-                        data: data,
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        fill: true
+                        data: Object.values(categories),
+                        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+                        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+                        borderWidth: 1
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Месяц'
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Собранная сумма'
+                    plugins: {
+                        outlabels: {
+                            text: '%l',
+                            color: 'white',
+                            backgroundColor: 'black',
+                            borderRadius: 10,
+                            borderColor: 'white',
+                            borderWidth: 2,
+                            stretch: 45,
+                            padding: 15,
+                            display: function(ctx) {
+                                let index = ctx.dataIndex;
+                                let icon = new Image();
+                                icon.src = icons[ctx.chart.data.labels[index]];
+                                ctx.ctx.drawImage(icon, ctx.x - 12, ctx.y - 12, 24, 24);
+                                return true;
                             }
                         }
                     }
