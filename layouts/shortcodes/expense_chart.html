@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const cols = row.split(',');
                 const month = cols[0].trim();
                 const category = cols[1].trim();
-                const amount = parseFloat(cols[2].trim());
+                const amount = parseFloat(cols[4].trim());
                 if (month === '{{ .Get 1 }}') {
                     if (!categories[category]) {
                         categories[category] = 0;
