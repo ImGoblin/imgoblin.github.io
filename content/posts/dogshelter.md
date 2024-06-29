@@ -13,3 +13,4 @@ type: "page"
 {{< expense_chart "/csv/expenses_data.csv" "Февраль" >}}
 
 ### Март
+{{< expense_chart "/csv/expenses_data.csv" "Март" >}}
