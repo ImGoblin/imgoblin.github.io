@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                                 const iconSize = 20; // размер иконки
                                 const iconPadding = iconSize / 2; // отступ между иконками
+                                const gridSpacing = iconSize * Math.sqrt(2); // расстояние между иконками в сетке
 
                                 ctx.save();
                                 ctx.beginPath();
@@ -80,23 +81,21 @@ document.addEventListener("DOMContentLoaded", function() {
                                 ctx.closePath();
                                 ctx.clip();
 
-                                // Рассчитываем расстояние между иконками в сетке
-                                const gridSpacing = iconSize * Math.sqrt(2);
-
                                 // Рисуем иконки в квадратной сетке под углом 45 градусов
-                                for (let y = centerY - outerRadius; y < centerY + outerRadius; y += gridSpacing) {
-                                    for (let x = centerX - outerRadius; x < centerX + outerRadius; x += gridSpacing) {
-                                        const rotatedX = (x - centerX) * Math.cos(Math.PI / 4) - (y - centerY) * Math.sin(Math.PI / 4) + centerX;
-                                        const rotatedY = (x - centerX) * Math.sin(Math.PI / 4) + (y - centerY) * Math.cos(Math.PI / 4) + centerY;
+                                for (let y = -outerRadius; y < outerRadius; y += gridSpacing) {
+                                    for (let x = -outerRadius; x < outerRadius; x += gridSpacing) {
+                                        const rotatedX = (x * Math.cos(Math.PI / 4)) - (y * Math.sin(Math.PI / 4));
+                                        const rotatedY = (x * Math.sin(Math.PI / 4)) + (y * Math.cos(Math.PI / 4));
 
-                                        if (ctx.isPointInPath(rotatedX, rotatedY)) {
-                                            console.log(`Drawing icon at (${rotatedX}, ${rotatedY}) in sector ${category}`);
+                                        const drawX = centerX + rotatedX;
+                                        const drawY = centerY + rotatedY;
+
+                                        if (ctx.isPointInPath(drawX, drawY)) {
+                                            console.log(`Drawing icon at (${drawX}, ${drawY}) in sector ${category}`);
                                             ctx.save();
-                                            ctx.translate(rotatedX, rotatedY);
+                                            ctx.translate(drawX, drawY);
                                             ctx.drawImage(iconImg, -iconSize / 2, -iconSize / 2, iconSize, iconSize);
                                             ctx.restore();
-                                        } else {
-                                            console.log(`Skipping icon at (${rotatedX}, ${rotatedY}) - not in path`);
                                         }
                                     }
                                 }
