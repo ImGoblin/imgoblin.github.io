@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     categories[category] += amount;
                 }
             });
-            
+
             const icons = {
                 'Корма': 'static/icons/dog_food.svg',
                 'Медикаменты': 'static/icons/veterinary.svg',
@@ -29,7 +29,8 @@ document.addEventListener("DOMContentLoaded", function() {
             };
 
             const ctx = document.getElementById('expenseChart-{{ .Get 1 }}').getContext('2d');
-            new Chart(ctx, {
+
+            const chart = new Chart(ctx, {
                 type: 'pie',
                 data: {
                     labels: Object.keys(categories),
@@ -44,25 +45,27 @@ document.addEventListener("DOMContentLoaded", function() {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        outlabels: {
-                            text: '%l',
-                            color: 'white',
-                            backgroundColor: 'black',
-                            borderRadius: 10,
-                            borderColor: 'white',
-                            borderWidth: 2,
-                            stretch: 45,
-                            padding: 15,
-                            display: function(ctx) {
-                                let index = ctx.dataIndex;
-                                let icon = new Image();
-                                icon.src = icons[ctx.chart.data.labels[index]];
-                                ctx.ctx.drawImage(icon, ctx.x - 12, ctx.y - 12, 24, 24);
-                                return true;
-                            }
+                        legend: {
+                            display: true,
+                        },
+                        tooltip: {
+                            enabled: true,
                         }
                     }
                 }
+            });
+
+            chart.ctx = ctx;
+            chart.config.data.labels.forEach((label, i) => {
+                const meta = chart.getDatasetMeta(0);
+                const arc = meta.data[i];
+                const centerPoint = arc.tooltipPosition();
+                const img = new Image();
+                img.src = icons[label];
+
+                img.onload = function() {
+                    chart.ctx.drawImage(img, centerPoint.x - 12, centerPoint.y - 12, 24, 24);
+                };
             });
         });
 });
