@@ -22,29 +22,55 @@ document.addEventListener("DOMContentLoaded", function() {
             });
 
             const icons = {
-                'Корма': '/icons/dog_food.svg',
-                'Медикаменты': '/icons/veterinary.svg',
-                'Обработка от паразитов': '/icons/ticks.svg'
+                'Корма': '/static/icons/dog_food.svg',
+                'Медикаменты': '/static/icons/veterinary.svg',
+                'Обработка от паразитов': '/static/icons/ticks.svg'
                 // Добавьте пути к иконкам для других категорий
             };
 
             const ctx = document.getElementById('expenseChart-{{ .Get 1 }}').getContext('2d');
 
-            // Создаем кастомный плагин для добавления иконок
+            // Загружаем иконки в Image объекты
+            const iconImages = {};
+            for (const [category, url] of Object.entries(icons)) {
+                const img = new Image();
+                img.src = url;
+                iconImages[category] = img;
+            }
+
+            // Создаем кастомный плагин для заполнения иконками
             const iconPlugin = {
                 id: 'iconPlugin',
-                afterDatasetDraw(chart, args, options) {
-                    const { ctx, data } = chart;
-                    const dataset = data.datasets[0];
-                    dataset.data.forEach((value, index) => {
-                        const arc = chart.getDatasetMeta(0).data[index];
-                        const centerPoint = arc.tooltipPosition();
-                        const img = new Image();
-                        img.src = icons[data.labels[index]];
+                beforeDraw(chart) {
+                    const ctx = chart.ctx;
+                    const dataset = chart.data.datasets[0];
+                    const meta = chart.getDatasetMeta(0);
 
-                        img.onload = function() {
-                            ctx.drawImage(img, centerPoint.x - 12, centerPoint.y - 12, 24, 24);
-                        };
+                    meta.data.forEach((arc, index) => {
+                        const category = chart.data.labels[index];
+                        const iconImg = iconImages[category];
+                        if (iconImg) {
+                            // Вычисляем координаты центра и радиус арки
+                            const centerX = (arc._model.x + arc._model.x) / 2;
+                            const centerY = (arc._model.y + arc._model.y) / 2;
+                            const radius = (arc._model.outerRadius + arc._model.innerRadius) / 2;
+
+                            // Создаем паттерн из иконки
+                            const patternCanvas = document.createElement('canvas');
+                            const patternCtx = patternCanvas.getContext('2d');
+                            patternCanvas.width = 30;
+                            patternCanvas.height = 30;
+                            patternCtx.drawImage(iconImg, 0, 0, 30, 30);
+                            const pattern = ctx.createPattern(patternCanvas, 'repeat');
+
+                            // Заливаем арку паттерном
+                            ctx.fillStyle = pattern;
+                            ctx.beginPath();
+                            ctx.moveTo(centerX, centerY);
+                            ctx.arc(centerX, centerY, radius, arc._model.startAngle, arc._model.endAngle);
+                            ctx.lineTo(centerX, centerY);
+                            ctx.fill();
+                        }
                     });
                 }
             };
