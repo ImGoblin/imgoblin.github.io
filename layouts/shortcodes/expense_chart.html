@@ -1,3 +1,42 @@
+<div style="width: 300px; height: 300px; margin: 0 auto;">
+    <canvas id="expenseChart-{{ .Get 1 }}"></canvas>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    fetch('{{ .Get 0 }}')
+        .then(response => response.text())
+        .then(csvText => {
+            const rows = csvText.trim().split('\n').slice(1);
+            const categories = {};
+            rows.forEach(row => {
+                const cols = row.split(',');
+                const month = cols[0].trim();
+                const category = cols[1].trim();
+                const amount = parseFloat(cols[4].trim());
+                if (month === '{{ .Get 1 }}') {
+                    if (!categories[category]) {
+                        categories[category] = 0;
+                    }
+                    categories[category] += amount;
+                }
+            });
+            const icons = {
+                'Корма': '/icons/dog_food.svg',
+                'Медикаменты': '/icons/veterinary.svg',
+                'Обработка от паразитов': '/icons/ticks.svg'
+                // Добавьте пути к иконкам для других категорий
+            };
+            const ctx = document.getElementById('expenseChart-{{ .Get 1 }}').getContext('2d');
+
+            // Загружаем иконки в Image объекты
+            const iconImages = {};
+            for (const [category, url] of Object.entries(icons)) {
+                const img = new Image();
+                img.src = url;
+                iconImages[category] = img;
+            }
+
+            // Создаем кастомный плагин для заполнения иконками
 const iconPlugin = {
     id: 'iconPlugin',
     beforeDraw(chart) {
@@ -36,11 +75,12 @@ const iconPlugin = {
                 iconCtx.putImageData(imageData, 0, 0);
 
                 // Создаем паттерн из измененной иконки
+                const iconSize = 20; // размер иконки
+                const iconSpacing = iconSize * 1.5; // шаг между иконками, увеличиваем для большего расстояния
                 const patternCanvas = document.createElement('canvas');
                 const patternCtx = patternCanvas.getContext('2d');
-                const iconSize = 20;
-                patternCanvas.width = iconSize;
-                patternCanvas.height = iconSize;
+                patternCanvas.width = iconSpacing;
+                patternCanvas.height = iconSpacing;
                 patternCtx.drawImage(iconCanvas, 0, 0, iconSize, iconSize);
                 const pattern = ctx.createPattern(patternCanvas, 'repeat');
 
