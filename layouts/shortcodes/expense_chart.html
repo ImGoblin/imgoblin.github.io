@@ -53,14 +53,14 @@ document.addEventListener("DOMContentLoaded", function() {
                             // Вычисляем координаты центра и радиус арки
                             const centerX = (arc.x + arc.x) / 2;
                             const centerY = (arc.y + arc.y) / 2;
-                            const radius = (arc.outerRadius + arc.innerRadius);
+                            const radius = arc.outerRadius;
 
                             // Создаем паттерн из иконки
                             const patternCanvas = document.createElement('canvas');
                             const patternCtx = patternCanvas.getContext('2d');
                             patternCanvas.width = 30;
                             patternCanvas.height = 30;
-                            patternCtx.drawImage(iconImg, 0, 0, 15, 15);
+                            patternCtx.drawImage(iconImg, 0, 0, 25, 25);
                             const pattern = ctx.createPattern(patternCanvas, 'repeat');
 
                             // Заливаем арку паттерном
