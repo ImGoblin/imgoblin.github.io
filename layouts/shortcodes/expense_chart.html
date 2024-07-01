@@ -1,58 +1,7 @@
-const iconPlugin = {
-    id: 'iconPlugin',
-    beforeDraw(chart) {
-        const ctx = chart.ctx;
-        const dataset = chart.data.datasets[0];
-        const meta = chart.getDatasetMeta(0);
-        meta.data.forEach((arc, index) => {
-            const category = chart.data.labels[index];
-            const iconImg = iconImages[category];
-            if (iconImg) {
-                // Вычисляем координаты центра и радиус арки
-                const centerX = arc.x;
-                const centerY = arc.y;
-                const radius = (arc.outerRadius + arc.innerRadius) / 2;
-                
-                // Создаем вспомогательный canvas для изменения цвета иконки
-                const iconCanvas = document.createElement('canvas');
-                const iconCtx = iconCanvas.getContext('2d');
-                iconCanvas.width = iconImg.width;
-                iconCanvas.height = iconImg.height;
-                
-                // Рисуем иконку на вспомогательном canvas
-                iconCtx.drawImage(iconImg, 0, 0);
-                // Изменяем цвет иконки
-                const imageData = iconCtx.getImageData(0, 0, iconCanvas.width, iconCanvas.height);
-                const data = imageData.data;
-                for (let i = 0; i < data.length; i += 4) {
-                    // Берем цвет границы как базовый цвет и делаем его темнее
-                    data[i] = data[i] * 0.5; // Red
-                    data[i + 1] = data[i + 1] * 0.5; // Green
-                    data[i + 2] = data[i + 2] * 0.5; // Blue
-                    // Alpha остается без изменений
-                }
-                iconCtx.putImageData(imageData, 0, 0);
-
-                // Создаем паттерн из измененной иконки
-                const patternCanvas = document.createElement('canvas');
-                const patternCtx = patternCanvas.getContext('2d');
-                const iconSize = 20;
-                patternCanvas.width = iconSize;
-                patternCanvas.height = iconSize;
-                patternCtx.drawImage(iconCanvas, 0, 0, iconSize, iconSize);
-                const pattern = ctx.createPattern(patternCanvas, 'repeat');
-
-                // Заливаем арку паттерном
-                ctx.fillStyle = pattern;
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.arc(centerX, centerY, radius, arc.startAngle, arc.endAngle);
-                ctx.lineTo(centerX, centerY);
-                ctx.fill();
-            }
-        });
-    }
-};
+<div style="width: 300px; height: 300px; margin: 0 auto;">
+    <canvas id="expenseChart-{{ .Get 1 }}"></canvas>
+</div>
+<script>
 document.addEventListener("DOMContentLoaded", function() {
     fetch('{{ .Get 0 }}')
         .then(response => response.text())
@@ -71,17 +20,21 @@ document.addEventListener("DOMContentLoaded", function() {
                     categories[category] += amount;
                 }
             });
+
             const icons = {
                 'Корма': '/icons/dog_food.svg',
                 'Медикаменты': '/icons/veterinary.svg',
                 'Обработка от паразитов': '/icons/ticks.svg'
                 // Добавьте пути к иконкам для других категорий
             };
+
             const ctx = document.getElementById('expenseChart-{{ .Get 1 }}').getContext('2d');
+
             // Загружаем иконки в Image объекты
             const iconImages = {};
             let imagesLoaded = 0;
             const totalImages = Object.keys(icons).length;
+
             for (const [category, url] of Object.entries(icons)) {
                 const img = new Image();
                 img.src = url;
@@ -96,7 +49,67 @@ document.addEventListener("DOMContentLoaded", function() {
                 };
                 iconImages[category] = img;
             }
+
             function drawChart() {
+                const iconPlugin = {
+                    id: 'iconPlugin',
+                    beforeDraw(chart) {
+                        const ctx = chart.ctx;
+                        const dataset = chart.data.datasets[0];
+                        const meta = chart.getDatasetMeta(0);
+
+                        meta.data.forEach((arc, index) => {
+                            const category = chart.data.labels[index];
+                            const iconImg = iconImages[category];
+                            if (iconImg) {
+                                // Вычисляем координаты центра и радиус арки
+                                const centerX = arc.x;
+                                const centerY = arc.y;
+                                const radius = (arc.outerRadius + arc.innerRadius) / 2;
+                                
+                                // Создаем вспомогательный canvas для изменения цвета иконки
+                                const iconCanvas = document.createElement('canvas');
+                                const iconCtx = iconCanvas.getContext('2d');
+                                iconCanvas.width = iconImg.width;
+                                iconCanvas.height = iconImg.height;
+                                
+                                // Рисуем иконку на вспомогательном canvas
+                                iconCtx.drawImage(iconImg, 0, 0);
+
+                                // Изменяем цвет иконки
+                                const imageData = iconCtx.getImageData(0, 0, iconCanvas.width, iconCanvas.height);
+                                const data = imageData.data;
+                                for (let i = 0; i < data.length; i += 4) {
+                                    // Берем цвет границы как базовый цвет и делаем его темнее
+                                    data[i] = data[i] * 0.5; // Red
+                                    data[i + 1] = data[i + 1] * 0.5; // Green
+                                    data[i + 2] = data[i + 2] * 0.5; // Blue
+                                    // Alpha остается без изменений
+                                }
+                                iconCtx.putImageData(imageData, 0, 0);
+
+                                // Создаем паттерн из измененной иконки
+                                const iconSize = 20; // размер иконки
+                                const iconSpacing = iconSize * 1.5; // шаг между иконками, увеличиваем для большего расстояния
+                                const patternCanvas = document.createElement('canvas');
+                                const patternCtx = patternCanvas.getContext('2d');
+                                patternCanvas.width = iconSpacing;
+                                patternCanvas.height = iconSpacing;
+                                patternCtx.drawImage(iconCanvas, 0, 0, iconSize, iconSize);
+                                const pattern = ctx.createPattern(patternCanvas, 'repeat');
+
+                                // Заливаем арку паттерном
+                                ctx.fillStyle = pattern;
+                                ctx.beginPath();
+                                ctx.moveTo(centerX, centerY);
+                                ctx.arc(centerX, centerY, radius, arc.startAngle, arc.endAngle);
+                                ctx.lineTo(centerX, centerY);
+                                ctx.fill();
+                            }
+                        });
+                    }
+                };
+
                 new Chart(ctx, {
                     type: 'pie',
                     data: {
@@ -117,3 +130,4 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 });
+</script>
