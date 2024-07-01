@@ -72,27 +72,6 @@ document.addEventListener("DOMContentLoaded", function() {
                                 const iconSize = 20; // размер иконки
                                 const iconPadding = iconSize / 2; // отступ между иконками
 
-                                // Создаем паттерн из иконки с измененной толщиной и цветом линий
-                                const patternCanvas = document.createElement('canvas');
-                                const patternCtx = patternCanvas.getContext('2d');
-                                patternCanvas.width = iconSize;
-                                patternCanvas.height = iconSize;
-
-                                // Перекрашиваем иконку
-                                patternCtx.drawImage(iconImg, 0, 0, iconSize, iconSize);
-                                patternCtx.globalCompositeOperation = 'source-in';
-                                patternCtx.fillStyle = dataset.borderColor[index];
-                                patternCtx.globalAlpha = 0.6;
-                                patternCtx.fillRect(0, 0, iconSize, iconSize);
-
-                                // Настраиваем толщину линии
-                                patternCtx.globalCompositeOperation = 'source-over';
-                                patternCtx.strokeStyle = dataset.borderColor[index];
-                                patternCtx.lineWidth = 2;
-                                patternCtx.strokeRect(0, 0, iconSize, iconSize);
-
-                                const pattern = ctx.createPattern(patternCanvas, 'repeat');
-
                                 ctx.save();
                                 ctx.beginPath();
                                 ctx.moveTo(centerX, centerY);
@@ -102,8 +81,26 @@ document.addEventListener("DOMContentLoaded", function() {
                                 ctx.clip();
 
                                 // Рисуем иконки в квадратной сетке
-                                ctx.fillStyle = pattern;
-                                ctx.fill();
+                                ctx.globalAlpha = 0.6; // Прозрачность иконок
+                                ctx.strokeStyle = 'transparent'; // Прозрачные границы
+
+                                // Вычисляем количество иконок и расстояние между ними
+                                const numIcons = Math.ceil(Math.sqrt(iconImg.length));
+                                const angleStep = (endAngle - startAngle) / numIcons;
+
+                                for (let i = 0; i < numIcons; i++) {
+                                    const angle = startAngle + i * angleStep;
+                                    const x = centerX + (outerRadius + innerRadius) / 2 * Math.cos(angle);
+                                    const y = centerY + (outerRadius + innerRadius) / 2 * Math.sin(angle);
+
+                                    ctx.save();
+                                    ctx.translate(x, y);
+                                    ctx.rotate(angle + Math.PI / 2); // Поворот иконки
+
+                                    ctx.drawImage(iconImg, -iconSize / 2, -iconSize / 2, iconSize, iconSize);
+
+                                    ctx.restore();
+                                }
 
                                 ctx.restore();
                             }
