@@ -22,9 +22,9 @@ document.addEventListener("DOMContentLoaded", function() {
             });
 
             const icons = {
-                'Корма': '/icons/dog_food.svg',
-                'Медикаменты': '/icons/veterinary.svg',
-                'Обработка от паразитов': '/icons/ticks.svg'
+                'Корма': '/static/icons/dog_food.svg',
+                'Медикаменты': '/static/icons/veterinary.svg',
+                'Обработка от паразитов': '/static/icons/ticks.svg'
                 // Добавьте пути к иконкам для других категорий
             };
 
@@ -46,10 +46,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 };
                 img.onerror = () => {
                     console.error(`Error loading image: ${url}`);
-                    imagesLoaded++;
-                    if (imagesLoaded === totalImages) {
-                        drawChart();
-                    }
                 };
                 iconImages[category] = img;
             }
@@ -86,22 +82,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
                                         // Вычисляем координаты для иконки
                                         const angle = startAngle + (endAngle - startAngle) / 2;
-                                        const iconX = centerX + Math.cos(angle) * radius * 0.5; // Меняем коэффициент для расположения на сетке
-                                        const iconY = centerY + Math.sin(angle) * radius * 0.5; // Меняем коэффициент для расположения на сетке
+                                        const iconX = centerX + Math.cos(angle) * radius / 2;
+                                        const iconY = centerY + Math.sin(angle) * radius / 2;
 
                                         // Рисуем иконку
                                         const category = Object.keys(categories)[index];
                                         const iconImg = iconImages[category];
                                         if (iconImg) {
-                                            const iconSize = 30; // размер иконки
+                                            const iconSize = 20; // размер иконки
                                             const iconOffsetX = iconSize / 2;
                                             const iconOffsetY = iconSize / 2;
-                                            // Тень для иконки
-                                            ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-                                            ctx.shadowBlur = 5;
                                             ctx.drawImage(iconImg, iconX - iconOffsetX, iconY - iconOffsetY, iconSize, iconSize);
-                                            ctx.shadowColor = 'transparent'; // возвращаемся к обычному состоянию
-                                            ctx.shadowBlur = 0;
                                         }
                                     });
                                 }
