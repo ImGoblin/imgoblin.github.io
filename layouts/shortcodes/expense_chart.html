@@ -58,9 +58,9 @@ document.addEventListener("DOMContentLoaded", function() {
                             // Создаем паттерн из иконки
                             const patternCanvas = document.createElement('canvas');
                             const patternCtx = patternCanvas.getContext('2d');
-                            patternCanvas.width = 15;
-                            patternCanvas.height = 15;
-                            patternCtx.drawImage(iconImg, 0, 0, 30, 30);
+                            patternCanvas.width = 30;
+                            patternCanvas.height = 30;
+                            patternCtx.drawImage(iconImg, 0, 0, 15, 15);
                             const pattern = ctx.createPattern(patternCanvas, 'repeat');
 
                             // Заливаем арку паттерном
