@@ -51,9 +51,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         const iconImg = iconImages[category];
                         if (iconImg) {
                             // Вычисляем координаты центра и радиус арки
-                            const centerX = (arc._model.x + arc._model.x) / 2;
-                            const centerY = (arc._model.y + arc._model.y) / 2;
-                            const radius = (arc._model.outerRadius + arc._model.innerRadius) / 2;
+                            const centerX = (arc.x + arc.x) / 2;
+                            const centerY = (arc.y + arc.y) / 2;
+                            const radius = (arc.outerRadius + arc.innerRadius) / 2;
 
                             // Создаем паттерн из иконки
                             const patternCanvas = document.createElement('canvas');
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             ctx.fillStyle = pattern;
                             ctx.beginPath();
                             ctx.moveTo(centerX, centerY);
-                            ctx.arc(centerX, centerY, radius, arc._model.startAngle, arc._model.endAngle);
+                            ctx.arc(centerX, centerY, radius, arc.startAngle, arc.endAngle);
                             ctx.lineTo(centerX, centerY);
                             ctx.fill();
                         }
