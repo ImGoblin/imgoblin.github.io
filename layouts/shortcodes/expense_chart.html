@@ -51,11 +51,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             function drawChart() {
-                // Вычисляем размер ячейки сетки и ее отступы
-                const gridSize = 50; // размер ячейки сетки
-                const iconSize = 20; // размер иконки
-                const padding = iconSize / 2; // отступ для центрирования иконки
-
                 // Рисуем диаграмму
                 new Chart(ctx, {
                     type: 'pie',
@@ -77,24 +72,32 @@ document.addEventListener("DOMContentLoaded", function() {
                                     const ctx = chart.ctx;
                                     const meta = chart.getDatasetMeta(0);
 
-                                    // Рисуем иконки на точках сетки
-                                    Object.keys(categories).forEach((category, index) => {
-                                        const arc = meta.data[index];
-                                        if (arc) {
-                                            const centerX = arc.x;
-                                            const centerY = arc.y;
+                                    // Рисуем иконки внутри каждого сектора
+                                    meta.data.forEach((arc, index) => {
+                                        const centerX = arc.x;
+                                        const centerY = arc.y;
+                                        const radius = arc.outerRadius;
+                                        const startAngle = arc.startAngle;
+                                        const endAngle = arc.endAngle;
 
-                                            // Вычисляем координаты иконки на точке сетки
-                                            const gridX = Math.floor(centerX / gridSize) * gridSize + gridSize / 2;
-                                            const gridY = Math.floor(centerY / gridSize) * gridSize + gridSize / 2;
+                                        // Вычисляем координаты для иконки
+                                        const angle = startAngle + (endAngle - startAngle) / 2;
+                                        const iconX = centerX + Math.cos(angle) * radius * 0.5; // Меняем коэффициент для расположения на сетке
+                                        const iconY = centerY + Math.sin(angle) * radius * 0.5; // Меняем коэффициент для расположения на сетке
 
-                                            const iconImg = iconImages[category];
-                                            if (iconImg) {
-                                                const iconX = gridX - iconSize / 2;
-                                                const iconY = gridY - iconSize / 2;
-
-                                                ctx.drawImage(iconImg, iconX, iconY, iconSize, iconSize);
-                                            }
+                                        // Рисуем иконку
+                                        const category = Object.keys(categories)[index];
+                                        const iconImg = iconImages[category];
+                                        if (iconImg) {
+                                            const iconSize = 15; // размер иконки
+                                            const iconOffsetX = iconSize / 2;
+                                            const iconOffsetY = iconSize / 2;
+                                            // Тень для иконки
+                                            ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                                            ctx.shadowBlur = 5;
+                                            ctx.drawImage(iconImg, iconX - iconOffsetX, iconY - iconOffsetY, iconSize, iconSize);
+                                            ctx.shadowColor = 'transparent'; // возвращаемся к обычному состоянию
+                                            ctx.shadowBlur = 0;
                                         }
                                     });
                                 }
