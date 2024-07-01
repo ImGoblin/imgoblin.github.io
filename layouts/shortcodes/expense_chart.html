@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 // Вычисляем координаты центра и радиус арки
                                 const centerX = arc.x;
                                 const centerY = arc.y;
-                                const radius = (arc.outerRadius + arc.innerRadius) / 2;
+                                const radius = arc.outerRadius;
                                 
                                 // Создаем вспомогательный canvas для изменения цвета иконки
                                 const iconCanvas = document.createElement('canvas');
