@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const icons = {
                 'Корма': '/icons/dog_food.svg',
                 'Медикаменты': '/icons/veterinary.svg',
-                'Обработка от паразитов': '/icons/ticks.svg'
+                'Обработка от паразитов': '/static/icons/ticks.svg'
                 // Добавьте пути к иконкам для других категорий
             };
 
@@ -49,27 +49,42 @@ document.addEventListener("DOMContentLoaded", function() {
                     meta.data.forEach((arc, index) => {
                         const category = chart.data.labels[index];
                         const iconImg = iconImages[category];
-                        if (iconImg) {
-                            // Вычисляем координаты центра и радиус арки
+                        if (iconImg && arc) {
+                            // Координаты центра и радиус арки
                             const centerX = (arc.x + arc.x) / 2;
                             const centerY = (arc.y + arc.y) / 2;
-                            const radius = (arc.outerRadius + arc.innerRadius) / 2;
+                            const outerRadius = arc.outerRadius;
+                            const innerRadius = arc.innerRadius;
+                            const startAngle = arc.startAngle;
+                            const endAngle = arc.endAngle;
+                            const iconSize = 20; // размер иконки
+                            const iconPadding = iconSize / 2; // отступ между иконками
 
-                            // Создаем паттерн из иконки
-                            const patternCanvas = document.createElement('canvas');
-                            const patternCtx = patternCanvas.getContext('2d');
-                            patternCanvas.width = 30;
-                            patternCanvas.height = 30;
-                            patternCtx.drawImage(iconImg, 0, 0, 30, 30);
-                            const pattern = ctx.createPattern(patternCanvas, 'repeat');
-
-                            // Заливаем арку паттерном
-                            ctx.fillStyle = pattern;
+                            ctx.save();
                             ctx.beginPath();
                             ctx.moveTo(centerX, centerY);
-                            ctx.arc(centerX, centerY, radius, arc.startAngle, arc.endAngle);
-                            ctx.lineTo(centerX, centerY);
-                            ctx.fill();
+                            ctx.arc(centerX, centerY, outerRadius, startAngle, endAngle);
+                            ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true);
+                            ctx.closePath();
+                            ctx.clip();
+
+                            // Заливаем область иконками
+                            const radiusStep = iconSize + iconPadding;
+                            const angleStep = (iconSize + iconPadding) / outerRadius;
+                            for (let r = innerRadius + iconPadding; r < outerRadius; r += radiusStep) {
+                                for (let angle = startAngle; angle < endAngle; angle += angleStep) {
+                                    const x = centerX + r * Math.cos(angle);
+                                    const y = centerY + r * Math.sin(angle);
+
+                                    // Устанавливаем цвет
+                                    ctx.fillStyle = chart.data.datasets[0].borderColor[index];
+                                    ctx.globalAlpha = 0.5; // Полупрозрачный эффект
+
+                                    ctx.drawImage(iconImg, x - iconSize / 2, y - iconSize / 2, iconSize, iconSize);
+                                }
+                            }
+
+                            ctx.restore();
                         }
                     });
                 }
