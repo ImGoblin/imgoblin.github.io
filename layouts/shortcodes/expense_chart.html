@@ -80,34 +80,21 @@ document.addEventListener("DOMContentLoaded", function() {
                                 ctx.closePath();
                                 ctx.clip();
 
-                                // Рассчитываем количество иконок в квадратной сетке
-                                const gridRows = Math.ceil(Math.sqrt(iconImg.length));
-                                const gridCols = gridRows;
+                                // Рассчитываем расстояние между иконками в сетке
+                                const gridSpacing = iconSize * Math.sqrt(2);
 
-                                // Расстояние между иконками в сетке
-                                const gridSpacing = iconSize * Math.sqrt(2); // Диагональ между иконками
+                                // Рисуем иконки в квадратной сетке под углом 45 градусов
+                                for (let y = centerY - outerRadius; y < centerY + outerRadius; y += gridSpacing) {
+                                    for (let x = centerX - outerRadius; x < centerX + outerRadius; x += gridSpacing) {
+                                        const rotatedX = (x - centerX) * Math.cos(Math.PI / 4) - (y - centerY) * Math.sin(Math.PI / 4) + centerX;
+                                        const rotatedY = (x - centerX) * Math.sin(Math.PI / 4) + (y - centerY) * Math.cos(Math.PI / 4) + centerY;
 
-                                // Смещение центра диаграммы
-                                const offsetX = centerX - outerRadius;
-                                const offsetY = centerY - outerRadius;
-
-                                // Рисуем иконки в квадратной сетке
-                                ctx.fillStyle = dataset.borderColor[index];
-                                ctx.globalAlpha = 0.5; // Полупрозрачный эффект
-
-                                for (let row = 0; row < gridRows; row++) {
-                                    for (let col = 0; col < gridCols; col++) {
-                                        const x = offsetX + col * gridSpacing;
-                                        const y = offsetY + row * gridSpacing;
-
-                                        ctx.save();
-                                        ctx.translate(x, y);
-                                        ctx.rotate(Math.PI / 4); // Поворот на 45 градусов
-
-                                        // Рисуем иконку
-                                        ctx.drawImage(iconImg, -iconSize / 2, -iconSize / 2, iconSize, iconSize);
-
-                                        ctx.restore();
+                                        if (ctx.isPointInPath(rotatedX, rotatedY)) {
+                                            ctx.save();
+                                            ctx.translate(rotatedX, rotatedY);
+                                            ctx.drawImage(iconImg, -iconSize / 2, -iconSize / 2, iconSize, iconSize);
+                                            ctx.restore();
+                                        }
                                     }
                                 }
 
