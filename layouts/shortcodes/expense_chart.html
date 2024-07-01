@@ -32,100 +32,66 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Загружаем иконки в Image объекты
             const iconImages = {};
-            let imagesLoaded = 0;
-            const totalImages = Object.keys(icons).length;
-
             for (const [category, url] of Object.entries(icons)) {
                 const img = new Image();
                 img.src = url;
-                img.onload = () => {
-                    imagesLoaded++;
-                    if (imagesLoaded === totalImages) {
-                        drawChart();
-                    }
-                };
-                img.onerror = () => {
-                    console.error(`Error loading image: ${url}`);
-                };
                 iconImages[category] = img;
             }
 
-            function drawChart() {
-                const iconPlugin = {
-                    id: 'iconPlugin',
-                    beforeDraw(chart) {
-                        const ctx = chart.ctx;
-                        const dataset = chart.data.datasets[0];
-                        const meta = chart.getDatasetMeta(0);
+            // Создаем кастомный плагин для заполнения иконками
+            const iconPlugin = {
+                id: 'iconPlugin',
+                beforeDraw(chart) {
+                    const ctx = chart.ctx;
+                    const dataset = chart.data.datasets[0];
+                    const meta = chart.getDatasetMeta(0);
 
-                        meta.data.forEach((arc, index) => {
-                            const category = chart.data.labels[index];
-                            const iconImg = iconImages[category];
-                            if (iconImg && arc) {
-                                const centerX = arc.x;
-                                const centerY = arc.y;
-                                const outerRadius = arc.outerRadius;
-                                const innerRadius = arc.innerRadius;
-                                const startAngle = arc.startAngle;
-                                const endAngle = arc.endAngle;
+                    meta.data.forEach((arc, index) => {
+                        const category = chart.data.labels[index];
+                        const iconImg = iconImages[category];
+                        if (iconImg) {
+                            // Вычисляем координаты центра и радиус арки
+                            const centerX = (arc.x + arc.x) / 2;
+                            const centerY = (arc.y + arc.y) / 2;
+                            const radius = (arc.outerRadius + arc.innerRadius) / 2;
 
-                                const iconSize = 20; // размер иконки
-                                const iconPadding = iconSize / 2; // отступ между иконками
-                                const gridSpacing = iconSize * Math.sqrt(2); // расстояние между иконками в сетке
+                            // Создаем паттерн из иконки
+                            const patternCanvas = document.createElement('canvas');
+                            const patternCtx = patternCanvas.getContext('2d');
+                            patternCanvas.width = 30;
+                            patternCanvas.height = 30;
+                            patternCtx.drawImage(iconImg, 0, 0, 30, 30);
+                            const pattern = ctx.createPattern(patternCanvas, 'repeat');
 
-                                ctx.save();
-                                ctx.beginPath();
-                                ctx.moveTo(centerX, centerY);
-                                ctx.arc(centerX, centerY, outerRadius, startAngle, endAngle);
-                                ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true);
-                                ctx.closePath();
-                                ctx.clip();
-
-                                // Рисуем иконки в квадратной сетке под углом 45 градусов
-                                for (let y = -outerRadius; y < outerRadius; y += gridSpacing) {
-                                    for (let x = -outerRadius; x < outerRadius; x += gridSpacing) {
-                                        const rotatedX = (x * Math.cos(Math.PI / 4)) - (y * Math.sin(Math.PI / 4));
-                                        const rotatedY = (x * Math.sin(Math.PI / 4)) + (y * Math.cos(Math.PI / 4));
-
-                                        const drawX = centerX + rotatedX;
-                                        const drawY = centerY + rotatedY;
-
-                                        if (ctx.isPointInPath(drawX, drawY)) {
-                                            console.log(`Drawing icon at (${drawX}, ${drawY}) in sector ${category}`);
-                                            ctx.save();
-                                            ctx.translate(drawX, drawY);
-                                            ctx.drawImage(iconImg, -iconSize / 2, -iconSize / 2, iconSize, iconSize);
-                                            ctx.restore();
-                                        }
-                                    }
-                                }
-
-                                ctx.restore();
-                            }
-                        });
-                    }
-                };
-
-                new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: Object.keys(categories),
-                        datasets: [{
-                            data: Object.values(categories),
-                            backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
-                            borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            iconPlugin
+                            // Заливаем арку паттерном
+                            ctx.fillStyle = pattern;
+                            ctx.beginPath();
+                            ctx.moveTo(centerX, centerY);
+                            ctx.arc(centerX, centerY, radius, arc.startAngle, arc.endAngle);
+                            ctx.lineTo(centerX, centerY);
+                            ctx.fill();
                         }
-                    }
-                });
-            }
+                    });
+                }
+            };
+
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(categories),
+                    datasets: [{
+                        data: Object.values(categories),
+                        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+                        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                },
+                plugins: [iconPlugin]
+            });
         });
 });
 </script>
