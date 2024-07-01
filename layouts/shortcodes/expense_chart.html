@@ -46,6 +46,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 };
                 img.onerror = () => {
                     console.error(`Error loading image: ${url}`);
+                    imagesLoaded++;
+                    if (imagesLoaded === totalImages) {
+                        drawChart();
+                    }
                 };
                 iconImages[category] = img;
             }
@@ -89,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                         const category = Object.keys(categories)[index];
                                         const iconImg = iconImages[category];
                                         if (iconImg) {
-                                            const iconSize = 15; // размер иконки
+                                            const iconSize = 30; // размер иконки
                                             const iconOffsetX = iconSize / 2;
                                             const iconOffsetY = iconSize / 2;
                                             // Тень для иконки
