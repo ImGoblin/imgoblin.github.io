@@ -32,81 +32,77 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Загружаем иконки в Image объекты
             const iconImages = {};
+            let imagesLoaded = 0;
+            const totalImages = Object.keys(icons).length;
+
             for (const [category, url] of Object.entries(icons)) {
                 const img = new Image();
                 img.src = url;
+                img.onload = () => {
+                    imagesLoaded++;
+                    if (imagesLoaded === totalImages) {
+                        drawChart();
+                    }
+                };
+                img.onerror = () => {
+                    console.error(`Error loading image: ${url}`);
+                };
                 iconImages[category] = img;
             }
 
-            // Создаем кастомный плагин для заполнения иконками
-            const iconPlugin = {
-                id: 'iconPlugin',
-                beforeDraw(chart) {
-                    const ctx = chart.ctx;
-                    const dataset = chart.data.datasets[0];
-                    const meta = chart.getDatasetMeta(0);
+            function drawChart() {
+                // Вычисляем размер ячейки сетки и ее отступы
+                const gridSize = 25; // размер ячейки сетки
+                const iconSize = 10; // размер иконки
+                const padding = iconSize / 2; // отступ для центрирования иконки
 
-                    meta.data.forEach((arc, index) => {
-                        const category = chart.data.labels[index];
-                        const iconImg = iconImages[category];
-                        if (iconImg && arc) {
-                            // Координаты центра и радиус арки
-                            const centerX = (arc.x + arc.x) / 2;
-                            const centerY = (arc.y + arc.y) / 2;
-                            const outerRadius = arc.outerRadius;
-                            const innerRadius = arc.innerRadius;
-                            const startAngle = arc.startAngle;
-                            const endAngle = arc.endAngle;
-                            const iconSize = 20; // размер иконки
-                            const iconPadding = iconSize / 2; // отступ между иконками
+                // Рисуем диаграмму
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: Object.keys(categories),
+                        datasets: [{
+                            data: Object.values(categories),
+                            backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+                            borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            iconPlugin: {
+                                beforeDraw(chart) {
+                                    const ctx = chart.ctx;
+                                    const meta = chart.getDatasetMeta(0);
 
-                            ctx.save();
-                            ctx.beginPath();
-                            ctx.moveTo(centerX, centerY);
-                            ctx.arc(centerX, centerY, outerRadius, startAngle, endAngle);
-                            ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true);
-                            ctx.closePath();
-                            ctx.clip();
+                                    // Рисуем иконки на точках сетки
+                                    Object.keys(categories).forEach((category, index) => {
+                                        const arc = meta.data[index];
+                                        if (arc) {
+                                            const centerX = arc.x;
+                                            const centerY = arc.y;
 
-                            // Заливаем область иконками
-                            const radiusStep = iconSize + iconPadding;
-                            const angleStep = (iconSize + iconPadding) / outerRadius;
-                            for (let r = innerRadius + iconPadding; r < outerRadius; r += radiusStep) {
-                                for (let angle = startAngle; angle < endAngle; angle += angleStep) {
-                                    const x = centerX + r * Math.cos(angle);
-                                    const y = centerY + r * Math.sin(angle);
+                                            // Вычисляем координаты иконки на точке сетки
+                                            const gridX = Math.floor(centerX / gridSize) * gridSize + gridSize / 2;
+                                            const gridY = Math.floor(centerY / gridSize) * gridSize + gridSize / 2;
 
-                                    // Устанавливаем цвет
-                                    ctx.fillStyle = chart.data.datasets[0].borderColor[index];
-                                    ctx.globalAlpha = 0.5; // Полупрозрачный эффект
+                                            const iconImg = iconImages[category];
+                                            if (iconImg) {
+                                                const iconX = gridX - iconSize / 2;
+                                                const iconY = gridY - iconSize / 2;
 
-                                    ctx.drawImage(iconImg, x - iconSize / 2, y - iconSize / 2, iconSize, iconSize);
+                                                ctx.drawImage(iconImg, iconX, iconY, iconSize, iconSize);
+                                            }
+                                        }
+                                    });
                                 }
                             }
-
-                            ctx.restore();
                         }
-                    });
-                }
-            };
-
-            new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: Object.keys(categories),
-                    datasets: [{
-                        data: Object.values(categories),
-                        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
-                        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                },
-                plugins: [iconPlugin]
-            });
+                    }
+                });
+            }
         });
 });
 </script>
