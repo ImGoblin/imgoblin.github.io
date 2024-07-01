@@ -51,7 +51,72 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             function drawChart() {
-                // Рисуем диаграмму
+                const iconPlugin = {
+                    id: 'iconPlugin',
+                    beforeDraw(chart) {
+                        const ctx = chart.ctx;
+                        const dataset = chart.data.datasets[0];
+                        const meta = chart.getDatasetMeta(0);
+
+                        meta.data.forEach((arc, index) => {
+                            const category = chart.data.labels[index];
+                            const iconImg = iconImages[category];
+                            if (iconImg && arc) {
+                                const centerX = arc.x;
+                                const centerY = arc.y;
+                                const outerRadius = arc.outerRadius;
+                                const innerRadius = arc.innerRadius;
+                                const startAngle = arc.startAngle;
+                                const endAngle = arc.endAngle;
+
+                                const iconSize = 20; // размер иконки
+                                const iconPadding = iconSize / 2; // отступ между иконками
+
+                                ctx.save();
+                                ctx.beginPath();
+                                ctx.moveTo(centerX, centerY);
+                                ctx.arc(centerX, centerY, outerRadius, startAngle, endAngle);
+                                ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true);
+                                ctx.closePath();
+                                ctx.clip();
+
+                                // Рассчитываем количество иконок в квадратной сетке
+                                const gridRows = Math.ceil(Math.sqrt(iconImg.length));
+                                const gridCols = gridRows;
+
+                                // Расстояние между иконками в сетке
+                                const gridSpacing = iconSize * Math.sqrt(2); // Диагональ между иконками
+
+                                // Смещение центра диаграммы
+                                const offsetX = centerX - outerRadius;
+                                const offsetY = centerY - outerRadius;
+
+                                // Рисуем иконки в квадратной сетке
+                                ctx.fillStyle = dataset.borderColor[index];
+                                ctx.globalAlpha = 0.5; // Полупрозрачный эффект
+
+                                for (let row = 0; row < gridRows; row++) {
+                                    for (let col = 0; col < gridCols; col++) {
+                                        const x = offsetX + col * gridSpacing;
+                                        const y = offsetY + row * gridSpacing;
+
+                                        ctx.save();
+                                        ctx.translate(x, y);
+                                        ctx.rotate(Math.PI / 4); // Поворот на 45 градусов
+
+                                        // Рисуем иконку
+                                        ctx.drawImage(iconImg, -iconSize / 2, -iconSize / 2, iconSize, iconSize);
+
+                                        ctx.restore();
+                                    }
+                                }
+
+                                ctx.restore();
+                            }
+                        });
+                    }
+                };
+
                 new Chart(ctx, {
                     type: 'pie',
                     data: {
@@ -67,36 +132,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            iconPlugin: {
-                                beforeDraw(chart) {
-                                    const ctx = chart.ctx;
-                                    const meta = chart.getDatasetMeta(0);
-
-                                    // Рисуем иконки внутри каждого сектора
-                                    meta.data.forEach((arc, index) => {
-                                        const centerX = arc.x;
-                                        const centerY = arc.y;
-                                        const radius = arc.outerRadius;
-                                        const startAngle = arc.startAngle;
-                                        const endAngle = arc.endAngle;
-
-                                        // Вычисляем координаты для иконки
-                                        const angle = startAngle + (endAngle - startAngle) / 2;
-                                        const iconX = centerX + Math.cos(angle) * radius / 2;
-                                        const iconY = centerY + Math.sin(angle) * radius / 2;
-
-                                        // Рисуем иконку
-                                        const category = Object.keys(categories)[index];
-                                        const iconImg = iconImages[category];
-                                        if (iconImg) {
-                                            const iconSize = 20; // размер иконки
-                                            const iconOffsetX = iconSize / 2;
-                                            const iconOffsetY = iconSize / 2;
-                                            ctx.drawImage(iconImg, iconX - iconOffsetX, iconY - iconOffsetY, iconSize, iconSize);
-                                        }
-                                    });
-                                }
-                            }
+                            iconPlugin
                         }
                     }
                 });
