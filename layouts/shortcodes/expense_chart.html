@@ -90,10 +90,13 @@ document.addEventListener("DOMContentLoaded", function() {
                                         const rotatedY = (x - centerX) * Math.sin(Math.PI / 4) + (y - centerY) * Math.cos(Math.PI / 4) + centerY;
 
                                         if (ctx.isPointInPath(rotatedX, rotatedY)) {
+                                            console.log(`Drawing icon at (${rotatedX}, ${rotatedY}) in sector ${category}`);
                                             ctx.save();
                                             ctx.translate(rotatedX, rotatedY);
                                             ctx.drawImage(iconImg, -iconSize / 2, -iconSize / 2, iconSize, iconSize);
                                             ctx.restore();
+                                        } else {
+                                            console.log(`Skipping icon at (${rotatedX}, ${rotatedY}) - not in path`);
                                         }
                                     }
                                 }
