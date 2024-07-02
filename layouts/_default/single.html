@@ -25,7 +25,7 @@
                         {{ if eq (len $dates) 2 }}
                             {{ $startDate := index $dates 0 }}
                             {{ $endDate := index $dates 1 }}
-                            <br>Дата поездки &mdash; {{ dateFormat "02 January 2006" $startDate }} - {{ dateFormat "02 January 2006" $endDate }}
+                            <br>Даты поездки &mdash; {{ dateFormat "02 January 2006" $startDate }} - {{ dateFormat "02 January 2006" $endDate }}
                         {{ else if eq (len $dates) 1 }}
                             {{ $singleDate := index $dates 0 }}
                             <br>Дата поездки &mdash; {{ dateFormat "02 January 2006" $singleDate }}
