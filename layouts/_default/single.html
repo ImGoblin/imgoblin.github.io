@@ -21,7 +21,7 @@
                         Публикации ещё нет
                     {{ end }}
                     {{ if .Params.travelDate }}
-                        {{ $dates := split .Params.travelDate " - " }}
+                        {{ $dates := split .Params.travelDate " | " }}
                         {{ if eq (len $dates) 2 }}
                             {{ $startDate := index $dates 0 }}
                             {{ $endDate := index $dates 1 }}
