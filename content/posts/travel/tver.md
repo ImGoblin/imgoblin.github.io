@@ -2,7 +2,7 @@
 title: "Тверь Козлородящая"
 description: "Сказ о том, как козлы на Волге встали в круг"
 date: 2024-06-27T12:00:00+03:00
-travelDate: 2024-01-10T12:00:00+03:00
+travelDate: 2024-01-06T12:00:00+03:00
 draft: false
 section: travel
 image: images/tver/mapoftver.jpg
