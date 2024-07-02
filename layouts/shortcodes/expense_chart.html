@@ -52,83 +52,96 @@ document.addEventListener("DOMContentLoaded", function() {
 
             function drawChart() {
                 const iconPlugin = {
-                        id: 'iconPlugin',
-                        beforeDraw(chart) {
-                            const ctx = chart.ctx;
-                            const dataset = chart.data.datasets[0];
-                            const meta = chart.getDatasetMeta(0);
-                    
-                            meta.data.forEach((arc, index) => {
-                                const category = chart.data.labels[index];
-                                const iconImg = iconImages[category];
-                                if (iconImg) {
-                                    const centerX = arc.x;
-                                    const centerY = arc.y;
-                                    const outerRadius = arc.outerRadius;
-                                    const innerRadius = arc.innerRadius;
-                                    const startAngle = arc.startAngle;
-                                    const endAngle = arc.endAngle;
-                    
-                                    const iconSize = 40; // размер иконки
-                                    const iconPadding = 60; // отступ между иконками
-                    
-                                    // Создаем паттерн из иконки с увеличенным размером
-                                    const patternCanvas = document.createElement('canvas');
-                                    const patternCtx = patternCanvas.getContext('2d');
-                                    const patternSize = iconSize + iconPadding;
-                                    patternCanvas.width = patternSize;
-                                    patternCanvas.height = patternSize;
-                    
-                                    // Перекрашиваем иконку
-                                    patternCtx.drawImage(iconImg, 0, 0, iconSize, iconSize);
-                                    patternCtx.globalCompositeOperation = 'source-in';
-                                    patternCtx.fillStyle = dataset.borderColor[index];
-                                    patternCtx.globalAlpha = 0.6;
-                                    patternCtx.fillRect(0, 0, iconSize, iconSize);
-                    
-                                    // Настраиваем толщину линии
-                                    patternCtx.globalCompositeOperation = 'source-over';
-                                    patternCtx.strokeStyle = 'transparent';
-                                    patternCtx.lineWidth = 2;
-                                    patternCtx.strokeRect(0, 0, iconSize, iconSize);
-                    
-                                    const pattern = ctx.createPattern(patternCanvas, 'repeat');
-                    
-                                    ctx.save();
-                                    ctx.beginPath();
-                                    ctx.moveTo(centerX, centerY);
-                                    ctx.arc(centerX, centerY, outerRadius, startAngle, endAngle);
-                                    ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true);
-                                    ctx.closePath();
-                                    ctx.clip();
-                    
-                                    // Рисуем иконки в квадратной сетке
-                                    ctx.fillStyle = pattern;
-                                    ctx.fill();
-                    
-                                    ctx.restore();
-                                }
-                            });
-                        }
-                    };
-                    
-                    new Chart(ctx, {
-                        type: 'pie',
-                        data: {
-                            labels: Object.keys(categories),
-                            datasets: [{
-                                data: Object.values(categories),
-                                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
-                                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                        },
-                        plugins: [iconPlugin]
-                    });
+                    id: 'iconPlugin',
+                    beforeDraw(chart) {
+                        const ctx = chart.ctx;
+                        const dataset = chart.data.datasets[0];
+                        const meta = chart.getDatasetMeta(0);
+
+                        meta.data.forEach((arc, index) => {
+                            const category = chart.data.labels[index];
+                            const iconImg = iconImages[category];
+                            if (iconImg) {
+                                const centerX = arc.x;
+                                const centerY = arc.y;
+                                const outerRadius = arc.outerRadius;
+                                const innerRadius = arc.innerRadius;
+                                const startAngle = arc.startAngle;
+                                const endAngle = arc.endAngle;
+
+                                const iconSize = 40; // размер иконки
+                                const iconPadding = 60; // отступ между иконками
+
+                                // Создаем паттерн из иконки с увеличенным размером
+                                const patternCanvas = document.createElement('canvas');
+                                const patternCtx = patternCanvas.getContext('2d');
+                                const patternSize = iconSize + iconPadding;
+                                patternCanvas.width = patternSize;
+                                patternCanvas.height = patternSize;
+
+                                // Перекрашиваем иконку
+                                patternCtx.drawImage(iconImg, 0, 0, iconSize, iconSize);
+                                patternCtx.globalCompositeOperation = 'source-in';
+                                patternCtx.fillStyle = dataset.borderColor[index];
+                                patternCtx.globalAlpha = 0.6;
+                                patternCtx.fillRect(0, 0, iconSize, iconSize);
+
+                                // Настраиваем толщину линии
+                                patternCtx.globalCompositeOperation = 'source-over';
+                                patternCtx.strokeStyle = 'transparent';
+                                patternCtx.lineWidth = 2;
+                                patternCtx.strokeRect(0, 0, iconSize, iconSize);
+
+                                const pattern = ctx.createPattern(patternCanvas, 'repeat');
+
+                                ctx.save();
+                                ctx.beginPath();
+                                ctx.moveTo(centerX, centerY);
+                                ctx.arc(centerX, centerY, outerRadius, startAngle, endAngle);
+                                ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true);
+                                ctx.closePath();
+                                ctx.clip();
+
+                                // Рисуем иконки в квадратной сетке
+                                ctx.fillStyle = pattern;
+                                ctx.fill();
+
+                                ctx.restore();
+                            }
+                        });
+                    }
+                };
+
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: Object.keys(categories),
+                        datasets: [{
+                            data: Object.values(categories),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                    },
+                    plugins: [iconPlugin]
                 });
             }
         });
