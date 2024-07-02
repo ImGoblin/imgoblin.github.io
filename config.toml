@@ -1,7 +1,7 @@
 baseURL = "incrediblegoblin.com"
 languageCode = "ru-ru"
 title = "Gøblin"
-theme = "ezhil"
+theme = "gbln"
 
 copyright = " © "
 
