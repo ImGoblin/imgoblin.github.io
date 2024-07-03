@@ -438,6 +438,19 @@ table th, table td {
 
 /* Мобильные стили */
 @media (max-width: 767px) {
+    .header .site-description .nav.social ul.flat li a {
+        height: 30px; /* Уменьшаем высоту элементов для мобильных устройств */
+        width: 30px; /* Уменьшаем ширину элементов для мобильных устройств */
+    }
+
+    .header .site-description .nav.social ul.flat li a img {
+        height: 16px; /* Уменьшаем размер иконок для мобильных устройств */
+        width: 16px;
+    }
+
+    .header .site-description .nav.social ul.flat li {
+        margin-right: 5px; /* Уменьшаем отступ между элементами для мобильных устройств */
+    }
     body {
         padding: 20px;
     }
