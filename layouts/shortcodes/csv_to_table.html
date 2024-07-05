@@ -1,28 +1,32 @@
-{{ with $file := .Get 0 }}
-  {{ with resources.Get $file }}
-    {{ with . | transform.Unmarshal }}
-      <table>
-        <thead>
-          <tr>
-            {{ range index . 0 }}
-              <th>{{ . }}</th>
-            {{ end }}
-          </tr>
-        </thead>
-        <tbody>
-          {{ range after 1 . }}
+{{ $file := .Get 0 }}
+{{ $column := .Get 1 }}
+
+{{ with resources.Get (printf "csv/%s" $file) }}
+  {{ with . | transform.Unmarshal }}
+    <table>
+      <thead>
+        <tr>
+          {{ range index . 0 }}
+            <th>{{ . }}</th>
+          {{ end }}
+        </tr>
+      </thead>
+      <tbody>
+        {{ range . }}
+          {{ $row := . }}
+          {{ if eq (index $row 0) $column }}
             <tr>
-              {{ range . }}
+              {{ range $row }}
                 <td>{{ . }}</td>
               {{ end }}
             </tr>
           {{ end }}
-        </tbody>
-      </table>
-    {{ end }}
+        {{ end }}
+      </tbody>
+    </table>
   {{ else }}
-    {{ errorf "The %q shortcode was unable to find %s. See %s" $.Name $file $.Position }}
+    {{ errorf "The %q shortcode failed to unmarshal CSV data from %s. See %s" $.Name $file $.Position }}
   {{ end }}
 {{ else }}
-  {{ errorf "The %q shortcode requires one positional argument, the path to the CSV file relative to the assets directory. See %s" .Name .Position }}
+  {{ errorf "The %q shortcode was unable to find the CSV file %q. See %s" $.Name $file $.Position }}
 {{ end }}
