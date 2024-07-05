@@ -1,4 +1,4 @@
-{ $file := .Get 0 }}
+{{ $file := .Get 0 }}
 {{ $column := .Get 1 }}
 
 {{ with resources.Get (printf "csv/%s" $file) }}
