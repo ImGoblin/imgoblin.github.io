@@ -6,32 +6,26 @@ body {
     line-height: 1.6;
     font-size: 16px;
 }
-
 html, button, input, select, textarea {
     color: #000000;
 }
-
 ::-moz-selection {
     background: #b3d4fc;
     text-shadow: none;
 }
-
 ::selection {
     background: #b3d4fc;
     text-shadow: none;
 }
-
 /* Контейнеры */
 .container {
     max-width: 800px;
     margin-top: 50px;
 }
-
 .wrapper {
     max-width: 760px;
     margin: 0 auto;
 }
-
 /* Заголовки */
 h1, h2, h3, h4, h5, h6 {
     font-family: Telegram Sans, sans-serif;
@@ -40,53 +34,42 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 200;
     text-decoration: none;
 }
-
 h1 {
     font-size: 2.75rem;
 }
-
 h2 {
     font-size: 2rem;
 }
-
 h3 {
     font-size: 1.6rem;
 }
-
 h4 {
     font-size: 1.2rem;
 }
-
 h5 {
     font-size: 1rem;
 }
-
 h6 {
     font-size: .9rem;
 }
-
 /* Ссылки */
 a {
     color: #000000;
     text-decoration: none;
     word-break: break-word;
 }
-
 a:hover {
     color: #000000;
     text-decoration: none;
 }
-
 /* Ссылки в постах и футере */
 .post a, .footer a {
     color: #5fa800;
 }
-
 .post a:hover, .footer a:hover {
     color: #5fa800;
     text-decoration: none;
 }
-
 /* Меню */
 .header nav ul.flat li a {
     color: #000000;
@@ -94,39 +77,32 @@ a:hover {
     display: flex;
     align-items: center; /* Выравнивание элементов по вертикали */
 }
-
 .header nav ul.flat li a img.menu-icon {
     margin-left: 8px; /* Отступ между текстом и иконкой */
 }
-
 .header nav ul.flat li a:hover {
     color: #000000;
     text-decoration: none;
 }
-
 /* Заголовок сайта */
 .header .site-title a {
     color: #000000 !important;
     text-decoration: none !important;
 }
-
 /* Изображения */
 img {
     margin: 10px auto;
     max-width: 100%;
     display: block;
 }
-
 a img {
     border: none;
 }
-
 /* Фигуры */
 figure {
     margin: 0;
     text-align: center;
 }
-
 /* Цитаты */
 blockquote {
     margin-left: 1rem;
@@ -137,46 +113,37 @@ blockquote {
     border-color: #000000;
     padding-left: 20px;
 }
-
 blockquote cite {
     font-size: 70%;
     opacity: .8;
 }
-
 blockquote em {
     font-weight: 600;
 }
-
 /* Списки */
 ul {
     padding-left: 15px;
     list-style: disc inside;
 }
-
 ul.flat {
     margin: 0;
     padding: 0;
 }
-
 ul.flat li {
     display: inline-block;
     list-style: none;
     margin-left: 0;
 }
-
 .post ul li {
     margin-bottom: 10px;
 }
-
 .post ul li p {
     display: inline;
 }
-
 /* Поля ввода */
 textarea {
     resize: vertical;
 }
-
 /* Блоки кода */
 .highlight pre {
     margin-bottom: 0;
@@ -184,62 +151,50 @@ textarea {
     padding: 20px;
     background-color: transparent !important;
 }
-
 .highlight {
     background: 0 0;
     background-color: #FAFAFA;
 }
-
 pre code {
     display: inline-block;
 }
-
 /* Выравнивание */
 .align-center {
     text-align: center;
 }
-
 .align-left {
     text-align: left;
 }
-
 .align-right {
     text-align: right;
 }
-
 .markdown {
     text-align: justify;
 }
-
 /* Заголовок страницы */
 .page-title {
     margin: 0;
     text-decoration: none;
     margin-bottom: 0;
 }
-
 /* Меньший текст */
 .smaller {
     font-size: 70%;
 }
-
 /* Предотвращение схлопывания */
 .prevent-collapse {
     min-height: .1rem;
 }
-
 /* Отступы в навигации */
 .header nav ul,
 .header nav li {
     margin: 0;
 }
-
 /* Социальные иконки */
 .header .site-description nav ul svg {
     max-height: 20px;
     margin-left: 5px;
 }
-
 /* Заголовки секций */
 .section .section-header {
     font-size: 1rem;
@@ -249,70 +204,57 @@ pre code {
     margin-bottom: 20px;
     letter-spacing: 1px;
 }
-
 /* Стили для постов */
 .recent-posts .posts .post {
     margin-bottom: 1px;
 }
-
 .post .post-header {
     margin-bottom: 0px;
 }
-
 .post .post-header .title {
     margin: 0;
 }
-
 .post .post-header .meta {
     font-size: 0.8rem;
     color: #888;
     margin-top: 5px;
 }
-
 .post .post-header .description {
     font-size: 1rem; /* такой же размер, как и внутри постов */
     margin: 5px 0 0 0;
 }
-
 /* Ссылки для раздела "Читать больше" */
 .read-more {
     text-align: right;
     margin-top: 10px;
 }
-
 .read-more a {
     font-weight: 600;
 }
 .read-more a:hover {
     text-decoration: none;
 }
-
 /* Отступы между секциями */
 .recent-posts.section.travel {
     margin-bottom: 50px;
 }
-
 .recent-posts.section.programming {
     margin-top: 50px;
 }
-
 .recent-posts.section.travel .last-post {
     margin-bottom: 10px;
 }
-
 /* Отображение заголовков при наведении на главной и в разделах */
 .recent-posts .post:hover .title,
 .section .post:hover .title {
     text-decoration: none;
     color: #000000;
 }
-
 /* Заголовок сайта */
 .header {
     margin-bottom: 20px;
     padding-bottom: 20px;
 }
-
 .header h1,
 .header h2 {
     margin: 0;
@@ -320,20 +262,16 @@ pre code {
     font-size: 2rem;
     line-height: 1.3em;
 }
-
 .header h2 {
     font-size: 1.125rem;
 }
-
 .header nav {
     margin-top: 0px;
     border-top: 1px solid #f4f4f4;
 }
-
 .header nav ul.flat {
     padding: 0;
 }
-
 .header nav ul.flat li {
     display: inline-block;
     list-style: none;
@@ -341,44 +279,36 @@ pre code {
     margin-right: 10px;
     margin-top: 10px;
 }
-
 .header .site-description {
     display: flex;
     align-items: center; /* Выравнивание элементов по центру по вертикали */
 }
-
 .header .site-description h2 {
     margin: 0; /* Убираем внешние отступы у заголовка */
     font-size: 1.2rem; /* Примерный размер шрифта, можете настроить под свои нужды */
 }
-
 .header .site-description nav {
     margin-left: 15px; /* Отступ слева для навигации */
 }
-
 .header .site-description .nav.social {
     display: flex; /* Флекс-контейнер для социальных иконок */
     align-items: center; /* Выравнивание по центру по вертикали */
     margin-left: auto; /* Перемещаем социальные иконки в конец контейнера */
 }
-
 .header .site-description .nav.social ul.flat {
     display: flex; /* Устанавливаем флекс-контейнер для списка иконок */
     list-style: none; /* Убираем маркеры списка */
     padding: 0; /* Убираем внутренний отступ у списка */
     margin: 0; /* Убираем внешние отступы */
 }
-
 .header .site-description .nav.social ul.flat li {
     margin: 0 10px; /* Внешние отступы между иконками */
 }
-
 .header .site-description .nav.social ul.flat .report-icon img {
     height: 22px;
     width: 22px;
     margin: 0; /* Убираем внешние отступы */
 }
-
 .header .site-description .nav.social ul.flat a {
     display: flex; /* Устанавливаем флекс-контейнер для элементов списка */
     align-items: center; /* Выравнивание иконок по вертикали */
@@ -387,7 +317,7 @@ pre code {
 }
 
 .header .site-description .nav.social ul.flat a:hover {
-    text-decoration: none; /* Убираем подчеркивание у ссылок при наведении */
+    text-decoration: none; /* Убираем подчеркивание при наведении */
 }
 
 .header .site-description .nav.social .flat a svg.feather.feather-github {
@@ -396,122 +326,103 @@ pre code {
 
 .header .site-description .nav.social .flat a svg.feather.feather-send {
     color: #0088cc;
+}
 
-/* Стили для таблиц */
+nav ul.flat li a:hover {
+    text-decoration: none;
+}
+
+/* Посты */
+.post-content {
+    margin-bottom: 1px;
+    text-align: justify; /* Выравнивание текста по ширине */
+}
+
+.post-content .title {
+    margin-bottom: 1px;
+}
+
+.post-content .description {
+    margin-top: 5px;
+    margin-bottom: 1px;
+}
+
+.description {
+    font-size: 1rem; /* Подогнан под размер обычного текста */
+    line-height: 1.4;
+    color: #6c757d; /* Светло-серый цвет */
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 400; /* Обычный вес текста */
+}
+
+/* Общие стили для таблицы */
 table {
-    width: 100%; /* Устанавливаем ширину таблицы */
-    border-collapse: collapse; /* Убираем промежутки между ячейками */
-    margin-bottom: 1rem; /* Отступ снизу */
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
 table th, table td {
-    padding: 0.75rem; /* Отступы внутри ячеек */
-    text-align: left; /* Выравнивание текста по левому краю */
-    border: 1px solid #dee2e6; /* Граница ячеек */
+    padding: 10px;
+    border: 1px solid #dddddd;
 }
 
-table th {
-    font-weight: bold; /* Полужирный текст для заголовков */
-    background-color: #f8f9fa; /* Фон для заголовков */
-}
-
-/* Медиазапросы для адаптивного дизайна */
+/* Мобильные стили */
 @media (max-width: 767px) {
-    /* Изменение размера таблицы */
-    table, thead, tbody, th, td, tr {
-        display: block; /* Блоковое отображение для адаптации */
-        width: 100%; /* Устанавливаем ширину в 100% */
-    }
-
-    table thead {
-        display: none; /* Скрываем заголовок таблицы */
-    }
-
-    table tr {
-        margin-bottom: 1rem; /* Отступ снизу для строк */
-        display: flex; /* Устанавливаем флекс-контейнер для строк */
-        flex-direction: column; /* Вертикальное расположение ячеек */
-    }
-
-    table td {
-        text-align: right; /* Выравнивание текста по правому краю */
-        padding-left: 50%; /* Отступ слева для создания эффекта */
-        position: relative; /* Относительное позиционирование для псевдоэлементов */
-    }
-
-    table td::before {
-        content: attr(data-label); /* Используем атрибут data-label для меток */
-        position: absolute; /* Абсолютное позиционирование для псевдоэлемента */
-        left: 0; /* Располагаем слева */
-        width: 50%; /* Ширина метки */
-        padding-left: 1rem; /* Отступ слева для метки */
-        white-space: nowrap; /* Запрещаем перенос текста */
-        text-align: left; /* Выравнивание текста по левому краю */
-        font-weight: bold; /* Полужирный текст для меток */
-    }
-}
     .header .site-description .nav.social ul.flat li a {
         height: 30px; /* Уменьшаем высоту элементов для мобильных устройств */
         width: 30px; /* Уменьшаем ширину элементов для мобильных устройств */
     }
-
     .header .site-description .nav.social ul.flat li a img {
         height: 16px; /* Уменьшаем размер иконок для мобильных устройств */
         width: 16px;
     }
-
     .header .site-description .nav.social ul.flat li {
         margin-right: 5px; /* Уменьшаем отступ между элементами для мобильных устройств */
+    }
+        table {
+        width: 100%; /* Занимает 100% ширины родительского контейнера */
+        margin-bottom: 10px;
     }
     body {
         padding: 20px;
     }
-
     h1 {
         font-size: 1.8rem;
     }
-
     h2 {
         font-size: 1.6rem;
     }
-
     h3 {
         font-size: 1.2rem;
     }
-
     h4 {
         font-size: 1rem;
     }
-
     .container {
         margin-top: 10px;
     }
-
     .slick-carousel {
         width: 100%; /* Ширина слайдера на мобильных устройствах */
         height: auto; /* Высота автоматически подстраивается под содержимое */
     }
-
     .slick-carousel .slick-slide {
         width: 100%; /* Ширина слайда на мобильных устройствах */
         height: auto; /* Высота автоматически подстраивается под содержимое */
     }
-
     .slick-carousel-caption {
         width: 100%; /* Ширина подписи на мобильных устройствах */
     }
 }
-
 /* Дополнительные стили */
 .post-tags a {
     margin-right: 5px;
 }
-
 .post-tags .tags li {
     margin-bottom: 0;
     margin-top: 20px;
 }
-
 .post-tags .tags a {
     display: inline-block;
     border: 1px solid #5fa800;
@@ -523,7 +434,6 @@ table th {
     text-decoration: none;
     margin: 0 1px;
 }
-
 .tag-cloud a {
     display: inline-block;
     border: 1px solid #5fa800;
@@ -535,12 +445,10 @@ table th {
     text-decoration: none;
     margin: 0 1px;
 }
-
 .list .posts .post .meta {
     margin-bottom: 0;
     margin-left: 5px;
 }
-
 .footer {
     text-align: right;
     font-size: 0.75em;
@@ -549,15 +457,12 @@ table th {
     padding: 20px 0;
     margin-top: 40px;
 }
-
 .tag-cloud {
     margin-top: 20px;
 }
-
 .tag-cloud a {
     margin-right: 15px;
 }
-
 .pagination {
     margin: 0;
     padding: 0;
@@ -565,27 +470,22 @@ table th {
     display: flex;
     justify-content: space-between;
 }
-
 .pagination li {
     list-style: none;
     display: inline-block;
     margin: 0;
     padding: 0;
 }
-
 .pagination .page-prev {
     margin-right: 20px;
     padding-right: 20px;
 }
-
 .pagination .page-item.page-prev {
     text-align: left;
 }
-
 .pagination .page-item.page-next {
     text-align: right;
 }
-
 /* Прочие элементы */
 fieldset {
     border: 0;
