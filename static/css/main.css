@@ -355,21 +355,17 @@ nav ul.flat li a:hover {
     margin-bottom: 0.5rem;
     font-weight: 400; /* Обычный вес текста */
 }
-
 /* Общие стили для таблицы */
-* Стили для таблиц */
 table {
     width: 100%; /* Устанавливаем ширину таблицы */
     border-collapse: collapse; /* Убираем промежутки между ячейками */
     margin-bottom: 1rem; /* Отступ снизу */
 }
-
 table th, table td {
     padding: 0.75rem; /* Отступы внутри ячеек */
     text-align: left; /* Выравнивание текста по левому краю */
     border: 1px solid #dee2e6; /* Граница ячеек */
 }
-
 table th {
     font-weight: bold; /* Полужирный текст для заголовков */
     background-color: #f8f9fa; /* Фон для заголовков */
