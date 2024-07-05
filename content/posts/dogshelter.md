@@ -20,5 +20,5 @@ type: "page"
 {{< expense_chart "/csv/expenses_data.csv" "Май" >}}
 ### Июнь
 В юине собрано 6500 рублей. Все было израсходовано 5 июля на следующие категории товаров.
-{{< csv-to-table "expenses_data.csv" "Июнь">}}
+{{< csv-to-table "/csv/expenses_data.csv" "Июнь">}}
 {{< expense_chart "/csv/expenses_data.csv" "Июнь" >}}
