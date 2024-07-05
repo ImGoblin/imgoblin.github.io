@@ -390,9 +390,12 @@ pre code {
     text-decoration: none; /* Убираем подчеркивание у ссылок при наведении */
 }
 
-.header .site-description .nav.social ul.flat a path {
-    stroke: #000000; /* Устанавливаем цвет обводки иконок */
+.header .site-description .nav.social .flat a svg.feather.feather-github {
+    color: #000000;
 }
+
+.header .site-description .nav.social .flat a svg.feather.feather-send {
+    color: #0088cc;
 
 /* Стили для таблиц */
 table {
@@ -413,7 +416,7 @@ table th {
 }
 
 /* Медиазапросы для адаптивного дизайна */
-@media (max-width: 600px) {
+@media (max-width: 767px) {
     /* Изменение размера таблицы */
     table, thead, tbody, th, td, tr {
         display: block; /* Блоковое отображение для адаптации */
