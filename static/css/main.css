@@ -387,57 +387,66 @@ pre code {
 }
 
 .header .site-description .nav.social ul.flat a:hover {
-    text-decoration: none; /* Убираем подчеркивание при наведении */
+    text-decoration: none; /* Убираем подчеркивание у ссылок при наведении */
 }
 
-.header .site-description .nav.social .flat a svg.feather.feather-github {
-    color: #000000;
-}
-
-.header .site-description .nav.social .flat a svg.feather.feather-send {
-    color: #0088cc;
-}
-
-nav ul.flat li a:hover {
-    text-decoration: none;
-}
-
-/* Посты */
-.post-content {
-    margin-bottom: 1px;
-    text-align: justify; /* Выравнивание текста по ширине */
-}
-
-.post-content .title {
-    margin-bottom: 1px;
-}
-
-.post-content .description {
-    margin-top: 5px;
-    margin-bottom: 1px;
-}
-
-.description {
-    font-size: 1rem; /* Подогнан под размер обычного текста */
-    line-height: 1.4;
-    color: #6c757d; /* Светло-серый цвет */
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: 400; /* Обычный вес текста */
+.header .site-description .nav.social ul.flat a path {
+    stroke: #000000; /* Устанавливаем цвет обводки иконок */
 }
 
 /* Стили для таблиц */
-table th {
-    background-color: #f4f4f4;
+table {
+    width: 100%; /* Устанавливаем ширину таблицы */
+    border-collapse: collapse; /* Убираем промежутки между ячейками */
+    margin-bottom: 1rem; /* Отступ снизу */
 }
 
 table th, table td {
-    padding: 10px 20px;
-    border: 1px solid #dddddd;
+    padding: 0.75rem; /* Отступы внутри ячеек */
+    text-align: left; /* Выравнивание текста по левому краю */
+    border: 1px solid #dee2e6; /* Граница ячеек */
 }
 
-/* Мобильные стили */
-@media (max-width: 767px) {
+table th {
+    font-weight: bold; /* Полужирный текст для заголовков */
+    background-color: #f8f9fa; /* Фон для заголовков */
+}
+
+/* Медиазапросы для адаптивного дизайна */
+@media (max-width: 600px) {
+    /* Изменение размера таблицы */
+    table, thead, tbody, th, td, tr {
+        display: block; /* Блоковое отображение для адаптации */
+        width: 100%; /* Устанавливаем ширину в 100% */
+    }
+
+    table thead {
+        display: none; /* Скрываем заголовок таблицы */
+    }
+
+    table tr {
+        margin-bottom: 1rem; /* Отступ снизу для строк */
+        display: flex; /* Устанавливаем флекс-контейнер для строк */
+        flex-direction: column; /* Вертикальное расположение ячеек */
+    }
+
+    table td {
+        text-align: right; /* Выравнивание текста по правому краю */
+        padding-left: 50%; /* Отступ слева для создания эффекта */
+        position: relative; /* Относительное позиционирование для псевдоэлементов */
+    }
+
+    table td::before {
+        content: attr(data-label); /* Используем атрибут data-label для меток */
+        position: absolute; /* Абсолютное позиционирование для псевдоэлемента */
+        left: 0; /* Располагаем слева */
+        width: 50%; /* Ширина метки */
+        padding-left: 1rem; /* Отступ слева для метки */
+        white-space: nowrap; /* Запрещаем перенос текста */
+        text-align: left; /* Выравнивание текста по левому краю */
+        font-weight: bold; /* Полужирный текст для меток */
+    }
+}
     .header .site-description .nav.social ul.flat li a {
         height: 30px; /* Уменьшаем высоту элементов для мобильных устройств */
         width: 30px; /* Уменьшаем ширину элементов для мобильных устройств */
