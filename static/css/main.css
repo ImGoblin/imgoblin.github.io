@@ -373,7 +373,7 @@ table th, table td {
 table th {
     font-weight: bold; /* Полужирный текст для заголовков */
     background-color: #f8f9fa; /* Фон для заголовков */
-
+}
 /* Мобильные стили */
 @media (max-width: 767px) {
     .header .site-description .nav.social ul.flat li a {
