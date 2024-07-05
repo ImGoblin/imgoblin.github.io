@@ -357,16 +357,22 @@ nav ul.flat li a:hover {
 }
 
 /* Общие стили для таблицы */
+* Стили для таблиц */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+    width: 100%; /* Устанавливаем ширину таблицы */
+    border-collapse: collapse; /* Убираем промежутки между ячейками */
+    margin-bottom: 1rem; /* Отступ снизу */
 }
 
 table th, table td {
-    padding: 10px;
-    border: 1px solid #dddddd;
+    padding: 0.75rem; /* Отступы внутри ячеек */
+    text-align: left; /* Выравнивание текста по левому краю */
+    border: 1px solid #dee2e6; /* Граница ячеек */
 }
+
+table th {
+    font-weight: bold; /* Полужирный текст для заголовков */
+    background-color: #f8f9fa; /* Фон для заголовков */
 
 /* Мобильные стили */
 @media (max-width: 767px) {
