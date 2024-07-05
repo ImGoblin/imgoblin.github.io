@@ -1,28 +1,26 @@
-{{ with $file := .Get 0 }}
-  {{ with resources.Get $file }}
-    {{ with . | transform.Unmarshal }}
-      <table>
-        <thead>
-          <tr>
-            {{ range index . 0 }}
-              <th>{{ . }}</th>
-            {{ end }}
-          </tr>
-        </thead>
-        <tbody>
-          {{ range after 1 . }}
-            <tr>
-              {{ range . }}
-                <td>{{ . }}</td>
-              {{ end }}
-            </tr>
+{{ $file := .Get 0 }}
+{{ $path := (print "static" $file) }}
+{{ with .Site.GetPage "page" $path }}
+  {{ $csv := readFile $path }}
+  {{ $data := $csv | transform.UnmarshalCSV }}
+  <table>
+    <thead>
+      <tr>
+        {{ range index $data 0 }}
+          <th>{{ . }}</th>
+        {{ end }}
+      </tr>
+    </thead>
+    <tbody>
+      {{ range after 1 $data }}
+        <tr>
+          {{ range . }}
+            <td>{{ . }}</td>
           {{ end }}
-        </tbody>
-      </table>
-    {{ end }}
-  {{ else }}
-    {{ errorf "The %q shortcode was unable to find %s. See %s" $.Name $file $.Position }}
-  {{ end }}
+        </tr>
+      {{ end }}
+    </tbody>
+  </table>
 {{ else }}
-  {{ errorf "The %q shortcode requires one positional argument, the path to the CSV file relative to the assets directory. See %s" .Name .Position }}
+  {{ errorf "The %q shortcode was unable to find %s. See %s" $.Name $file $.Position }}
 {{ end }}
