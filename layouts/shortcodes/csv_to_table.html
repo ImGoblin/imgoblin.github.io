@@ -3,7 +3,7 @@
 
 {{ with resources.Get (printf "csv/%s" $file) }}
   {{ with . | transform.Unmarshal }}
-    <div class="table-container">
+    <div class="responsive-table-wrapper">
       <table class="responsive-table">
         <thead>
           <tr>
