@@ -6,7 +6,8 @@
     <table>
       <thead>
         <tr>
-          {{ range index . 0 }}
+          {{ $headers := index . 0 }}
+          {{ range $headers }}
             <th>{{ . }}</th>
           {{ end }}
         </tr>
@@ -16,8 +17,8 @@
           {{ $row := . }}
           {{ if eq (index $row 0) $column }}
             <tr>
-              {{ range $row }}
-                <td>{{ . }}</td>
+              {{ range $index, $cell := $row }}
+                <td data-label="{{ index $headers $index }}">{{ $cell }}</td>
               {{ end }}
             </tr>
           {{ end }}
