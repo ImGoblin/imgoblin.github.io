@@ -386,7 +386,7 @@ nav ul.flat li a:hover {
     }
     .responsive-table {
         font-size: 0.5em; /* Ещё большее уменьшение размера шрифта на мобильных устройствах */
-        padding: 0rem;
+        padding: -10rem;
         margin: 0rem;
     }
     body {
