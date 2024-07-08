@@ -385,7 +385,7 @@ nav ul.flat li a:hover {
         margin-right: 5px; /* Уменьшаем отступ между элементами для мобильных устройств */
     }
     .responsive-table {
-        font-size: 0.8rem; /* Ещё большее уменьшение размера шрифта на мобильных устройствах */
+        font-size: 0.6rem; /* Ещё большее уменьшение размера шрифта на мобильных устройствах */
     }
     .responsive-table th, .responsive-table td {
         padding: 0.1rem;
