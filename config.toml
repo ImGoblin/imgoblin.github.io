@@ -1,4 +1,4 @@
-baseURL = "incrediblegoblin.com"
+baseURL = "https://incrediblegoblin.com"
 languageCode = "ru-ru"
 title = "Gøblin"
 theme = "gbln"
