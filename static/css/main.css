@@ -356,9 +356,8 @@ nav ul.flat li a:hover {
     font-weight: 400; /* Обычный вес текста */
 }
 /* Общие стили для таблицы */
-.table-container {
-  width: 100%;
-  overflow: hidden;
+.responsive-table-wrapper {
+  overflow-x: auto;
 }
 
 .responsive-table {
@@ -370,7 +369,7 @@ nav ul.flat li a:hover {
   padding: 0.75rem;
   border: 1px solid #dee2e6;
   text-align: left;
-  font-size: 0.9em; /* Уменьшение размера шрифта */
+  font-size: 0.9em;
 }
 /* Мобильные стили */
 @media (max-width: 767px) {
