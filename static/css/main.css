@@ -368,7 +368,7 @@ nav ul.flat li a:hover {
 .responsive-table th, .responsive-table td {
   padding: 0.75rem;
   border: 1px solid #dee2e6;
-  text-align: left;
+  text-align: center;
   font-size: 0.9em;
 }
 /* Мобильные стили */
@@ -387,6 +387,7 @@ nav ul.flat li a:hover {
     .responsive-table {
         font-size: 0.5em; /* Ещё большее уменьшение размера шрифта на мобильных устройствах */
         padding: 0rem;
+        margin: 0rem;
     }
     body {
         padding: 20px;
