@@ -356,19 +356,21 @@ nav ul.flat li a:hover {
     font-weight: 400; /* Обычный вес текста */
 }
 /* Общие стили для таблицы */
-table {
-    width: 100%; /* Устанавливаем ширину таблицы */
-    border-collapse: collapse; /* Убираем промежутки между ячейками */
-    margin-bottom: 1rem; /* Отступ снизу */
+.table-container {
+  width: 100%;
+  overflow: hidden;
 }
-table th, table td {
-    padding: 0.75rem; /* Отступы внутри ячеек */
-    text-align: left; /* Выравнивание текста по левому краю */
-    border: 1px solid #dee2e6; /* Граница ячеек */
+
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
 }
-table th {
-    font-weight: bold; /* Полужирный текст для заголовков */
-    background-color: #f8f9fa; /* Фон для заголовков */
+
+.responsive-table th, .responsive-table td {
+  padding: 0.75rem;
+  border: 1px solid #dee2e6;
+  text-align: left;
+  font-size: 0.9em; /* Уменьшение размера шрифта */
 }
 /* Мобильные стили */
 @media (max-width: 767px) {
@@ -383,44 +385,8 @@ table th {
     .header .site-description .nav.social ul.flat li {
         margin-right: 5px; /* Уменьшаем отступ между элементами для мобильных устройств */
     }
-    table, thead, tbody, th, td, tr {
-        display: block; /* Отображаем все элементы как блоки */
-    }
-
-    thead tr {
-        position: absolute; /* Скрываем заголовок таблицы */
-        top: -9999px;
-        left: -9999px;
-    }
-
-    tr {
-        margin: 0 0 1rem 0; /* Добавляем отступы между строками */
-    }
-
-    tr:nth-child(odd) {
-        background: #f8f9fa; /* Чередуем цвет строк для лучшей читаемости */
-    }
-
-    td {
-        border: none; /* Убираем границы ячеек */
-        border-bottom: 1px solid #dee2e6; /* Добавляем нижнюю границу */
-        position: relative;
-        padding-left: 50%; /* Добавляем отступ слева для псевдо-элемента */
-        white-space: normal; /* Перенос слов внутри ячеек */
-        text-align: left; /* Выравнивание текста по левому краю */
-    }
-
-    td:before {
-        position: absolute;
-        top: 50%;
-        left: 10px;
-        width: calc(50% - 20px);
-        padding-right: 10px;
-        white-space: nowrap;
-        text-align: left;
-        font-weight: bold; /* Полужирный текст для псевдо-элемента */
-        transform: translateY(-50%);
-        content: attr(data-label); /* Получаем заголовок из атрибута data-label */
+    .responsive-table {
+        font-size: 0.8em; /* Ещё большее уменьшение размера шрифта на мобильных устройствах */
     }
     body {
         padding: 20px;
