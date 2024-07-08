@@ -360,12 +360,16 @@ table {
     width: 100%; /* Устанавливаем ширину таблицы */
     border-collapse: collapse; /* Убираем промежутки между ячейками */
     margin-bottom: 1rem; /* Отступ снизу */
+    table-layout: fixed; /* Фиксированное расположение таблицы */
+    word-wrap: break-word; /* Перенос слов для длинного контента */
 }
+
 table th, table td {
     padding: 0.75rem; /* Отступы внутри ячеек */
     text-align: left; /* Выравнивание текста по левому краю */
     border: 1px solid #dee2e6; /* Граница ячеек */
 }
+
 table th {
     font-weight: bold; /* Полужирный текст для заголовков */
     background-color: #f8f9fa; /* Фон для заголовков */
@@ -383,39 +387,6 @@ table th {
     .header .site-description .nav.social ul.flat li {
         margin-right: 5px; /* Уменьшаем отступ между элементами для мобильных устройств */
     }
-    table, table th, table td {
-        font-size: 12px; /* Уменьшаем размер шрифта для мобильных устройств */
-    }
-
-    table {
-        display: block; /* Делаем таблицу блочной */
-        width: 100%; /* Занимает 100% ширины родительского контейнера */
-        overflow: hidden; /* Скрываем любые переполнения */
-    }
-
-    table th, table td {
-        word-wrap: break-word; /* Разбиваем слова при необходимости */
-        display: block; /* Делаем ячейки блочными */
-        width: 100%; /* Занимает 100% ширины родительского контейнера */
-        box-sizing: border-box; /* Включаем паддинг и границы в ширину */
-    }
-
-    table th {
-        text-align: left; /* Выравниваем текст по левому краю */
-        background-color: #f8f9fa; /* Фон для заголовков */
-    }
-
-    table tr {
-        display: flex; /* Делаем строки блочными и флекс-контейнерами */
-        flex-direction: column; /* Располагаем ячейки по вертикали */
-        width: 100%; /* Занимает 100% ширины родительского контейнера */
-    }
-
-    table tr th, table tr td {
-        display: flex; /* Делаем ячейки флекс-элементами */
-        width: 100%; /* Занимает 100% ширины родительского контейнера */
-    }
-
     body {
         padding: 20px;
     }
