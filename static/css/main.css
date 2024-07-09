@@ -206,10 +206,10 @@ pre code {
 }
 /* Стили для постов */
 p {
-    text-indent: 0px;
+    text-indent: 25px;
 }
 .datastyle {
-	text-indent: 0px;
+     text-indent: 0px;
 }
 .recent-posts .posts .post {
     margin-bottom: 1px;
