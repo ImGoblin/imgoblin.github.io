@@ -205,6 +205,12 @@ pre code {
     letter-spacing: 1px;
 }
 /* Стили для постов */
+p {
+    text-indent: 0px;
+]
+.datastyle {
+	text-indent: 0px;
+}
 .recent-posts .posts .post {
     margin-bottom: 1px;
 }
