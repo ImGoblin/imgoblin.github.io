@@ -17,6 +17,9 @@ html, button, input, select, textarea {
     background: #b3d4fc;
     text-shadow: none;
 }
+p {
+    text-indent: 2em; /* Отступ первой строки в абзаце */
+}
 /* Контейнеры */
 .container {
     max-width: 800px;
