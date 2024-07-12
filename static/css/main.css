@@ -229,6 +229,38 @@ p {
     font-size: 1rem; /* такой же размер, как и внутри постов */
     margin: 5px 0 0 0;
 }
+
+/* Дополнительные стили для спойлера */
+.spoiler {
+  margin: 10px 0;
+  background-color: #ffffff;
+  border: 1px solid #e2e5e8;
+  border-radius: 4px;
+  padding: 0;
+}
+
+.spoiler summary {
+  cursor: pointer;
+  padding: 10px;
+  font-weight: bold;
+  color: #2196F3;
+  user-select: none;
+  list-style: none; /* Убирает маркер у summary */
+}
+
+.spoiler summary:hover {
+  background-color: #f1f1f1;
+}
+
+.spoiler-content {
+  padding: 10px;
+  border-top: 1px solid #e2e5e8;
+  display: none;
+}
+
+.spoiler[open] .spoiler-content {
+  display: block;
+}
 /* Ссылки для раздела "Читать больше" */
 .read-more {
     text-align: right;
