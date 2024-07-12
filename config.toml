@@ -59,7 +59,7 @@ icon = "github"
 url = "https://github.com/ImGoblin"
 [[params.social]]
 name = "Telegram"
-icon = "send"
+icon = "/icons/TGLogo.svg"
 url = "https://t.me/itisgoblin"
 
 
