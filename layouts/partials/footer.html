@@ -1,7 +1,7 @@
 <div class="footer wrapper">
-	<nav class="nav">
-		<div>{{ with .Site.Copyright }} © 2024-{{ now.Format "2006" }} | {{ end }} Gøblin Incredible Technologies | Built with <a href="https://gohugo.io">Hugo</a></div>
-	</nav>
+    <nav class="nav">
+        <div>{{ with .Site.Copyright }} © 2024-{{ now.Format "2006" }} | {{ end }} Gøblin Incredible Technologies | Built with <a href="https://gohugo.io">Hugo</a></div>
+    </nav>
 </div>
 
 {{ if not .Site.IsServer }}
@@ -9,3 +9,7 @@
 {{- with .Site.Params.Social -}}
 <script>feather.replace()</script>
 {{- end -}}
+
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "17f289e9aa6345c5a1dfa61d306ee99b"}'></script>
+<!-- End Cloudflare Web Analytics -->
