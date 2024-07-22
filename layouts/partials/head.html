@@ -8,19 +8,11 @@
         <nav class="nav social">
             <ul class="flat">
                 {{- range .Site.Params.Social }}
-                    {{- if eq .name "Отчёты из приюта" }}
-                    <li class="report-icon">
+                    <li class="social-icon">
                         <a href="{{ .url }}" title="{{ .name }}">
-                            <img src="{{ .icon | absURL }}" alt="{{ .name }}" height="22" width="22">
+                            <img src="{{ .icon | absURL }}" alt="{{ .name }} icon" height="22" width="22">
                         </a>
                     </li>
-                    {{- else }}
-                    <li>
-                        <a href="{{ .url }}" title="{{ .name }}">
-                            <i data-feather="{{ .icon }}"></i>
-                        </a>
-                    </li>
-                    {{- end }}
                 {{- end }}
             </ul>
         </nav>
