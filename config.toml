@@ -1,4 +1,4 @@
-baseURL = "https://incrediblegoblin.com"
+baseURL = "incrediblegoblin.com"
 languageCode = "ru-ru"
 title = "Gøblin"
 theme = "gbln"
@@ -42,12 +42,17 @@ weight = 3
 [[menu.main]]
 name = "Обо мне"
 url = "/about"
+weight = 5
+
+[[menu.main]]
+name = "Велопедеразм"
+url = "/posts/bicycle"
 weight = 4
 
 [[menu.main]]
 name = "Поиск по тегам"
 url = "/tags"
-weight = 5
+weight = 6
 
 [[params.social]]
 name = "Отчёты из приюта"
@@ -55,11 +60,11 @@ icon = "/icons/dog-icon.svg"
 url = "/posts/dogshelter"
 [[params.social]]
 name = "Github"
-icon = "/icons/github-mark.svg"
+icon = "github"
 url = "https://github.com/ImGoblin"
 [[params.social]]
 name = "Telegram"
-icon = "/icons/TGLogo.svg"
+icon = "send"
 url = "https://t.me/itisgoblin"
 
 
