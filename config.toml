@@ -1,4 +1,4 @@
-baseURL = "incrediblegoblin.com"
+baseURL = "https://incrediblegoblin.com/"
 languageCode = "ru-ru"
 title = "Gøblin"
 theme = "gbln"
@@ -60,11 +60,11 @@ icon = "/icons/dog-icon.svg"
 url = "/posts/dogshelter"
 [[params.social]]
 name = "Github"
-icon = "github"
+icon = "/icons/github-mark.svg"
 url = "https://github.com/ImGoblin"
 [[params.social]]
 name = "Telegram"
-icon = "send"
+icon = "/icons/TGLogo.svg"
 url = "https://t.me/itisgoblin"
 
 
