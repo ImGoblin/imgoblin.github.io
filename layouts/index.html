@@ -118,7 +118,7 @@
             </div>
         </div>
         <!-- Секция Велопедеразм -->
-        <div class="recent-posts section cycling">
+        <div class="recent-posts section bicycle">
             <h2 class="section-header">
                 Последние посты о велопедеразме
             </h2>
@@ -126,7 +126,7 @@
                 {{ $firstCyclingPost := true }}
                 {{ $postCount = 0 }}
                 {{ range .Site.RegularPages.ByDate.Reverse }}
-                    {{ if eq .Params.section "cycling" }}
+                    {{ if eq .Params.section "bicycle" }}
                         {{ $postCount = add $postCount 1 }}
                         {{ if le $postCount 5 }}
                             <a href="{{ .RelPermalink }}" class="post">
@@ -162,7 +162,7 @@
                 {{ end }}
                 {{ if gt $postCount 5 }}
                     <div class="read-more">
-                        <a href="/section/cycling">Читать больше в разделе Велопедеразм>>></a>
+                        <a href="/section/bicycle">Читать больше в разделе Велопедеразм>>></a>
                     </div>
                 {{ end }}
             </div>
