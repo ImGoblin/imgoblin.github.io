@@ -1,73 +1,70 @@
 <!DOCTYPE html>
 <html>
 {{ partial "header.html" . }}
-<head>
-    <link rel="canonical" href="{{ .Permalink }}">
-</head>
 <body>
-    <div class="container wrapper post">
+    <div class="container wrapper">
         {{ partial "head.html" . }}
-
-        <div class="post-header">
-            <h1 class="title">{{ .Title }}</h1>
-            {{ if .Description }}
-                <div class="description">{{ .Description }}</div>
-            {{ end }}
-            {{ if not (in .Permalink "/about/") }}
-                <div class="meta">
-                    {{ if .Date }}
-                        Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}
-                    {{ else }}
-                        Публикации ещё нет
-                    {{ end }}
-                    {{ if .Params.travelDate }}
-                        {{ $dates := split .Params.travelDate "|" }}
-                        {{ if eq (len $dates) 2 }}
-                            {{ $startDate := index $dates 0 }}
-                            {{ $endDate := index $dates 1 }}
-                            <br>Даты поездки &mdash; {{ dateFormat "2 January 2006" $startDate }} - {{ dateFormat "2 January 2006" $endDate }}
-                        {{ else if eq (len $dates) 1 }}
-                            {{ $singleDate := index $dates 0 }}
-                            <br>Дата поездки &mdash; {{ dateFormat "2 January 2006" $singleDate }}
-                        {{ end }}
-                    {{ end }}
-                    {{ if .Draft }}
-                        <span class="draft-label">DRAFT</span>
-                    {{ end }}
-                </div>
-            {{ end }}
-        </div>
-
-        <div class="markdown">
-            {{ .Content }}
-        </div>
-
-        <div class="post-tags">
-            {{ if ne .Type "page" }}
-                {{ $tags := slice }}
-                {{ if .Params.tags }}
-                    {{ if reflect.IsSlice .Params.tags }}
-                        {{ $tags = .Params.tags }}
-                    {{ else }}
-                        {{ $tags = split .Params.tags ", " }}
-                    {{ end }}
+        {{ with .Content }}{{ . }}{{ end }}
+        <div class="recent-posts section">
+            <h2 class="section-header">
+                {{ if in .Permalink "/travel/" }}
+                    Последние посты про путешествия
+                {{ else if in .Permalink "/programming/" }}
+                    Последние посты о мамкином программисте
+                {{ else if in .Permalink "/cycling/" }}
+                    Последние посты о велопедеразме
+                {{ else }}
+                    Последние посты в {{ .Section }}
                 {{ end }}
-                {{ if gt (len $tags) 0 }}
-                    <nav class="nav tags">
-                        <ul class="flat">
-                            {{ range $tags }}
-                                <li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></li>
-                            {{ end }}
-                        </ul>
-                    </nav>
+            </h2>
+            <div class="posts">
+                {{ $pages := .Pages }}
+                {{ if gt (len $pages) 0 }}
+                    {{ range $pages }}
+                        <div class="post">
+                            <a href="{{ .RelPermalink }}" class="post-link">
+                                <div class="post-content">
+                                    <div class="post-header">
+                                        <h3 class="title">{{ .Title }}</h3>
+                                        <p class="description">
+                                            {{ if .Params.description }}
+                                                {{ .Params.description }}
+                                            {{ else }}
+                                                {{ .Summary }}&hellip;
+                                            {{ end }}
+                                        </p>
+                                        <div class="meta">
+                                            {{ if .Date }}
+                                                Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}
+                                            {{ else }}
+                                                Публикации ещё нет
+                                            {{ end }}
+                                            {{ if .Params.travelDate }}
+                                                {{ $dates := split .Params.travelDate "|" }}
+                                                {{ if eq (len $dates) 2 }}
+                                                    {{ $startDate := index $dates 0 }}
+                                                    {{ $endDate := index $dates 1 }}
+                                                    <p class="datastyle">Даты поездки &mdash; {{ dateFormat "2 January 2006" $startDate }} - {{ dateFormat "2 January 2006" $endDate }}</p>
+                                                {{ else if eq (len $dates) 1 }}
+                                                    {{ $singleDate := index $dates 0 }}
+                                                    <p class="datastyle">Дата поездки &mdash; {{ dateFormat "2 January 2006" $singleDate }}</p>
+                                                {{ end }}
+                                            {{ end }}
+                                            {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ with .Params.image }}
+                                    <img src="{{ . }}" alt="Thumbnail" class="post-thumbnail">
+                                {{ end }}
+                            </a>
+                        </div>
+                    {{ end }}
+                {{ else }}
+                    <p>Все посты в {{ if in .Permalink "/travel/" }} путешествиях {{ else if in .Permalink "/programming/" }} программировании {{ else if in .Permalink "/cycling/" }} велопедеразме {{ else }} этом разделе {{ end }} куда-то разбежались</p>
                 {{ end }}
-            {{ end }}
+            </div>
         </div>
-
-        {{ if not (in .Permalink "/about/") }}
-            {{- partial "telegram_comments.html" . -}}
-        {{ end }}
-
     </div>
     {{ partial "footer.html" . }}
 </body>
