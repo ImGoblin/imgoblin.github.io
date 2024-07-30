@@ -21,7 +21,7 @@ def process_image(image_path):
 def process_directory(directory):
     for root, _, files in os.walk(directory):
         for file in files:
-            if file.lower().endswith(('png', 'jpg', 'jpeg', 'gif', 'bmp')):
+            if file.lower().endswith(('png', 'jpg', 'jpeg', 'bmp')):
                 image_path = os.path.join(root, file)
                 process_image(image_path)
 
