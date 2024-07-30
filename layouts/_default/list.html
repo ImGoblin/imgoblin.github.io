@@ -11,7 +11,7 @@
                     Последние посты про путешествия
                 {{ else if in .Permalink "/programming/" }}
                     Последние посты о мамкином программисте
-                {{ else if in .Permalink "/cycling/" }}
+                {{ else if in .Permalink "/bicycle/" }}
                     Последние посты о велопедеразме
                 {{ else }}
                     Последние посты в {{ .Section }}
@@ -61,7 +61,7 @@
                         </div>
                     {{ end }}
                 {{ else }}
-                    <p>Все посты {{ if in .Permalink "/travel/" }} о путешествиях {{ else if in .Permalink "/programming/" }} о программировании {{ else if in .Permalink "/cycling/" }} о велопедеразме {{ else }} этом разделе {{ end }} куда-то разбежались</p>
+                    <p>Все посты {{ if in .Permalink "/travel/" }} о путешествиях {{ else if in .Permalink "/programming/" }} о программировании {{ else if in .Permalink "/bicycle/" }} о велопедеразме {{ else }} этом разделе {{ end }} куда-то разбежались</p>
                 {{ end }}
             </div>
         </div>
