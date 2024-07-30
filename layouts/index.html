@@ -117,6 +117,56 @@
                 {{ end }}
             </div>
         </div>
+        <!-- Секция Велопедеразм -->
+        <div class="recent-posts section cycling">
+            <h2 class="section-header">
+                Последние посты о велопедеразме
+            </h2>
+            <div class="posts">
+                {{ $firstCyclingPost := true }}
+                {{ $postCount = 0 }}
+                {{ range .Site.RegularPages.ByDate.Reverse }}
+                    {{ if eq .Params.section "cycling" }}
+                        {{ $postCount = add $postCount 1 }}
+                        {{ if le $postCount 5 }}
+                            <a href="{{ .RelPermalink }}" class="post">
+                                <div class="post-content">
+                                    <div class="post-header">
+                                        <h3 class="title">{{ .Title }}</h3>
+                                        <p class="description">
+                                            {{ if .Params.description }}
+                                                {{ .Params.description }}
+                                            {{ else if $firstCyclingPost }}
+                                                {{ .Summary }}&hellip; <!-- Используем Summary из первого поста -->
+                                            {{ else }}
+                                                {{ .Summary }}&hellip;
+                                            {{ end }}
+                                        </p>
+                                        <div class="meta">
+                                            {{ if .Date }}
+                                                Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}
+                                            {{ end }}
+                                            {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ if $firstCyclingPost }}
+                                    {{ with .Params.image }}
+                                        <img src="{{ . }}" alt="Thumbnail">
+                                    {{ end }}
+                                    {{ $firstCyclingPost = false }}
+                                {{ end }}
+                            </a>
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+                {{ if gt $postCount 5 }}
+                    <div class="read-more">
+                        <a href="/section/cycling">Читать больше в разделе Велопедеразм>>></a>
+                    </div>
+                {{ end }}
+            </div>
+        </div>
     </div>
     {{ partial "footer.html" . }}
 </body>
