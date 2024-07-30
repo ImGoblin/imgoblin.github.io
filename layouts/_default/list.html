@@ -11,6 +11,8 @@
                     Последние посты про путешествия
                 {{ else if in .Permalink "/programming/" }}
                     Последние посты о мамкином программисте
+                {{ else if in .Permalink "/cycling/" }}
+                    Последние посты о велопедеразме
                 {{ else }}
                     Последние посты в {{ .Section }}
                 {{ end }}
@@ -37,17 +39,17 @@
                                             {{ else }}
                                                 Публикации ещё нет
                                             {{ end }}
-                                               {{ if .Params.travelDate }}
-                                                    {{ $dates := split .Params.travelDate "|" }}
-                                                    {{ if eq (len $dates) 2 }}
-                                                        {{ $startDate := index $dates 0 }}
-                                                        {{ $endDate := index $dates 1 }}
-                                                        <p class="datastyle">Даты поездки &mdash; {{ dateFormat "2 January 2006" $startDate }} - {{ dateFormat "2 January 2006" $endDate }}</p>
-                                                    {{ else if eq (len $dates) 1 }}
-                                                        {{ $singleDate := index $dates 0 }}
-                                                        <p class="datastyle">Дата поездки &mdash; {{ dateFormat "2 January 2006" $singleDate }}</p>
-                                                    {{ end }}
+                                            {{ if .Params.travelDate }}
+                                                {{ $dates := split .Params.travelDate "|" }}
+                                                {{ if eq (len $dates) 2 }}
+                                                    {{ $startDate := index $dates 0 }}
+                                                    {{ $endDate := index $dates 1 }}
+                                                    <p class="datastyle">Даты поездки &mdash; {{ dateFormat "2 January 2006" $startDate }} - {{ dateFormat "2 January 2006" $endDate }}</p>
+                                                {{ else if eq (len $dates) 1 }}
+                                                    {{ $singleDate := index $dates 0 }}
+                                                    <p class="datastyle">Дата поездки &mdash; {{ dateFormat "2 January 2006" $singleDate }}</p>
                                                 {{ end }}
+                                            {{ end }}
                                             {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
                                         </div>
                                     </div>
@@ -59,7 +61,7 @@
                         </div>
                     {{ end }}
                 {{ else }}
-                    <p>Все посты в {{ if in .Permalink "/travel/" }} путешествиях {{ else if in .Permalink "/programming/" }} программировании {{ else }} этом разделе {{ end }} куда-то разбежались</p>
+                    <p>Все посты {{ if in .Permalink "/travel/" }} о путешествиях {{ else if in .Permalink "/programming/" }} о программировании {{ else if in .Permalink "/cycling/" }} о велопедеразме {{ else }} этом разделе {{ end }} куда-то разбежались</p>
                 {{ end }}
             </div>
         </div>
