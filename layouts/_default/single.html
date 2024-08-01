@@ -63,13 +63,14 @@
                         {{ end }}
                     {{ else }}
                         <p>Все посты в {{ if in .Permalink "/travel/" }} путешествиях {{ else if in .Permalink "/programming/" }} программировании {{ else if in .Permalink "/cycling/" }} велопедеразме {{ else }} этом разделе {{ end }} куда-то разбежались</p>
-                    {{ end }}
-                </div>
-            </div>
+                {{ end }}
+            {{ end }}
+        </div>
+
         {{ if not (in .Permalink "/about/") }}
             {{- partial "telegram_comments.html" . -}}
         {{ end }}
+
     </div>
     {{ partial "footer.html" . }}
 </body>
-</html>
