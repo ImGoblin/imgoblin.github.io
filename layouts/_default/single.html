@@ -66,6 +66,8 @@
                     {{ end }}
                 </div>
             </div>
+        {{ if not (in .Permalink "/about/") }}
+            {{- partial "telegram_comments.html" . -}}
         {{ end }}
     </div>
     {{ partial "footer.html" . }}
