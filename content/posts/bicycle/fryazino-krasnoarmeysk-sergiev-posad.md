@@ -5,7 +5,7 @@ date: 2024-07-29T12:00:00+03:00
 travelDate: 2024-06-30T12:00:00+03:00
 draft: false
 section: bicycle
-image: /images/fryazino-krasnoarmeysk-sergiev-posad/fryazino-krasnoarmeysk-sergiev-posad.gif
+image: /images/fryazino-krasnoarmeysk-sergiev-posad/the_tree.jpg
 tags: ["Велосипед", "Фрязино->Красноармейск->Сергиев-Посад", "Фрязино", "Красноармейск", "Сергиев-Посад", "Мнение"]
 ---
 ## Нетословие
