@@ -20,7 +20,7 @@ tags: ["Велосипед", "Фрязино->Красноармейск->Сер
 
 Мы проехали от Фрязино, через Красноармейск до Сергиев-Посада и ещё дали по нему небольшой крюк. А самое главное --- я НЕ заебался. Вообще. Типа мы целый день крутили педали, а я даже не устал. Видимо за счёт того, что на работу я еду аки ебанутый обгоняя автомобильный поток, я поднабрался выносливости и теперь могу себе позволить гонять на большие расстояния нежели раньше.
 
-{{< figure src="/images/fryazino-krasnoarmeysk-sergiev-posad/fryazino-krasnoarmeysk-sergiev-posad.gif?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=100" title="Тут должен был быть Полёт шмеля" >}}
+{{< figure src="/images/fryazino-krasnoarmeysk-sergiev-posad/fryazino-krasnoarmeysk-sergiev-posad.gif?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2700&q=100" title="Тут должен был быть Полёт шмеля" >}}
 
 Трек оказался весьма живописным, местами пересекали речку Ворю, в которой повсеместно купается народ. 
 
