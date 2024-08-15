@@ -5,7 +5,7 @@ date: 2024-07-13T00:00:00+03:00
 travelDate: 2023-08-30T12:00:00+03:00|2023-09-01T12:00:00+03:00
 draft: false
 section: travel
-image: images/tver/mapoftver.jpg
+image: images/kursk/tram.jpg
 tags: ["Путешествие", "Россия", "Курск"]
 ---
 ## Увертюра
