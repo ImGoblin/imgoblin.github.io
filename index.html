@@ -1,115 +1,120 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 {{ partial "header.html" . }}
 <body>
     <div class="container wrapper">
         {{ partial "head.html" . }}
+
         <!-- Секция Travel -->
         <div class="recent-posts section travel">
-            <h2 class="section-header">
-                Последние посты про путешествия
-            </h2>
-            <div class="posts">
-                {{ $firstTravelPost := true }}
-                {{ $postCount := 0 }}
-                {{ range .Site.RegularPages.ByDate.Reverse }}
-                    {{ if eq .Params.section "travel" }}
-                        {{ $postCount = add $postCount 1 }}
-                        {{ if le $postCount 5 }}
-                            <a href="{{ .RelPermalink }}" class="post">
-                                <div class="post-content">
-                                    <div class="post-header">
-                                        <h3 class="title">{{ .Title }}</h3>
-                                        <p class="description">
-                                            {{ if .Params.description }}
-                                                {{ .Params.description }}
-                                            {{ else if $firstTravelPost }}
-                                                {{ .Summary }}&hellip; <!-- Используем Summary из первого поста -->
-                                            {{ else }}
-                                                {{ .Summary }}&hellip;
-                                            {{ end }}
-                                        </p>
-                                        <div class="meta">
-                                            {{ if .Date }}
-                                                Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}
-                                            {{ else }}
-                                                Публикации еще нет
-                                            {{ end }}
-                                            {{ if .Params.travelDate }}
-                                                <br>Дата поездки &mdash; {{ dateFormat "2 January 2006" .Params.travelDate }}
-                                            {{ end }}
-                                            {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
-                                        </div>
-                                    </div>
-                                </div>
-                                {{ if $firstTravelPost }}
-                                    {{ with .Params.image }}
-                                        <img src="{{ . }}" alt="Thumbnail">
-                                    {{ end }}
-                                    {{ $firstTravelPost = false }}
-                                {{ end }}
-                            </a>
-                        {{ end }}
-                    {{ end }}
-                {{ end }}
-                {{ if gt $postCount 5 }}
-                    <div class="read-more">
-                        <a href="/section/travel">Читать больше в разделе Travel>>></a>
-                    </div>
-                {{ end }}
-            </div>
+            <h2 class="section-header">Последние посты про путешествия</h2>
+            {{ $travelPosts := (where .Site.RegularPages "Params.section" "travel") }}
+            {{ template "renderPolaroidPosts" $travelPosts }}
         </div>
-        <!-- Секция Programming -->
-        <div class="recent-posts section programming">
-            <h2 class="section-header">
-                Последние посты о мамкином программисте
-            </h2>
-            <div class="posts">
-                {{ $firstProgrammingPost := true }}
-                {{ $postCount = 0 }}
-                {{ range .Site.RegularPages.ByDate.Reverse }}
-                    {{ if eq .Params.section "programming" }}
-                        {{ $postCount = add $postCount 1 }}
-                        {{ if le $postCount 5 }}
-                            <a href="{{ .RelPermalink }}" class="post">
-                                <div class="post-content">
-                                    <div class="post-header">
-                                        <h3 class="title">{{ .Title }}</h3>
-                                        <p class="description">
-                                            {{ if .Params.description }}
-                                                {{ .Params.description }}
-                                            {{ else if $firstProgrammingPost }}
-                                                {{ .Summary }}&hellip; <!-- Используем Summary из первого поста -->
-                                            {{ else }}
-                                                {{ .Summary }}&hellip;
-                                            {{ end }}
-                                        </p>
-                                        <div class="meta">
-                                            {{ if .Date }}
-                                                Опубликован &mdash; {{ dateFormat "2 January 2006" .Date }}
-                                            {{ end }}
-                                            {{ if .Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
-                                        </div>
-                                    </div>
-                                </div>
-                                {{ if $firstProgrammingPost }}
-                                    {{ with .Params.image }}
-                                        <img src="{{ . }}" alt="Thumbnail">
-                                    {{ end }}
-                                    {{ $firstProgrammingPost = false }}
-                                {{ end }}
-                            </a>
-                        {{ end }}
-                    {{ end }}
-                {{ end }}
-                {{ if gt $postCount 5 }}
-                    <div class="read-more">
-                        <a href="/section/programming">Читать больше в разделе Programming>>></a>
-                    </div>
-                {{ end }}
-            </div>
+
+        <!-- Секция Велопедеразм -->
+        <div class="recent-posts section bicycle">
+            <h2 class="section-header">Последние посты про велопедеразм</h2>
+            {{ $bicyclePosts := (where .Site.RegularPages "Params.section" "bicycle") }}
+            {{ template "renderPolaroidPosts" $bicyclePosts }}
         </div>
+
     </div>
+
     {{ partial "footer.html" . }}
+
+    <!-- Шаблон для вывода постов в формате Polaroid -->
+    {{ define "renderPolaroidPosts" }}
+        {{ $posts := . }}
+        <div class="posts-grid">
+            {{ $postCount := len $posts }}
+            {{ if eq $postCount 1 }}
+                <!-- Один пост по центру -->
+                <div class="post polaroid center-column">
+                    <a href="{{ (index $posts 0).RelPermalink }}">
+                        <div class="post-image">
+                            {{ with (index $posts 0).Params.image }}
+                                <img src="{{ . }}" alt="Thumbnail">
+                            {{ end }}
+                        </div>
+                        <div class="post-content">
+                            <h3 class="title">{{ (index $posts 0).Title }}</h3>
+                            <p class="meta">Опубликован: {{ dateFormat "2 January 2006" (index $posts 0).Date }}</p>
+                        </div>
+                    </a>
+                </div>
+            {{ else if eq $postCount 2 }}
+                <!-- Два поста по краям -->
+                <div class="post polaroid left-column">
+                    <a href="{{ (index $posts 0).RelPermalink }}">
+                        <div class="post-image">
+                            {{ with (index $posts 0).Params.image }}
+                                <img src="{{ . }}" alt="Thumbnail">
+                            {{ end }}
+                        </div>
+                        <div class="post-content">
+                            <h3 class="title">{{ (index $posts 0).Title }}</h3>
+                            <p class="meta">Опубликован: {{ dateFormat "2 January 2006" (index $posts 0).Date }}</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="post polaroid right-column">
+                    <a href="{{ (index $posts 1).RelPermalink }}">
+                        <div class="post-image">
+                            {{ with (index $posts 1).Params.image }}
+                                <img src="{{ . }}" alt="Thumbnail">
+                            {{ end }}
+                        </div>
+                        <div class="post-content">
+                            <h3 class="title">{{ (index $posts 1).Title }}</h3>
+                            <p class="meta">Опубликован: {{ dateFormat "2 January 2006" (index $posts 1).Date }}</p>
+                        </div>
+                    </a>
+                </div>
+            {{ else if ge $postCount 3 }}
+                <!-- Три или больше постов -->
+                <div class="post polaroid left-column">
+                    <a href="{{ (index $posts 0).RelPermalink }}">
+                        <div class="post-image">
+                            {{ with (index $posts 0).Params.image }}
+                                <img src="{{ . }}" alt="Thumbnail">
+                            {{ end }}
+                        </div>
+                        <div class="post-content">
+                            <h3 class="title">{{ (index $posts 0).Title }}</h3>
+                            <p class="meta">Опубликован: {{ dateFormat "2 January 2006" (index $posts 0).Date }}</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="post polaroid center-column">
+                    <a href="{{ (index $posts 1).RelPermalink }}">
+                        <div class="post-image">
+                            {{ with (index $posts 1).Params.image }}
+                                <img src="{{ . }}" alt="Thumbnail">
+                            {{ end }}
+                        </div>
+                        <div class="post-content">
+                            <h3 class="title">{{ (index $posts 1).Title }}</h3>
+                            <p class="meta">Опубликован: {{ dateFormat "2 January 2006" (index $posts 1).Date }}</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="post polaroid right-column">
+                    <a href="{{ (index $posts 2).RelPermalink }}">
+                        <div class="post-image">
+                            {{ with (index $posts 2).Params.image }}
+                                <img src="{{ . }}" alt="Thumbnail">
+                            {{ end }}
+                        </div>
+                        <div class="post-content">
+                            <h3 class="title">{{ (index $posts 2).Title }}</h3>
+                            <p class="meta">Опубликован: {{ dateFormat "2 January 2006" (index $posts 2).Date }}</p>
+                        </div>
+                    </a>
+                </div>
+            {{ end }}
+        </div>
+    {{ end }}
+
 </body>
 </html>

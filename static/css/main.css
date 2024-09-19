@@ -1,4 +1,51 @@
-/* Основные стили */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.post.polaroid {
+    background: white;
+    border: 0.5em solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px; /* Закругление углов карточек */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Плавный переход */
+}
+
+.post.polaroid:hover {
+    transform: translateY(-10px); /* Приподнимает карточку */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Усиливает тень */
+}
+
+.post-image img {
+    width: 100%;
+    height: auto;
+}
+
+.center-column {
+    grid-column: 2 / 3;
+}
+
+.left-column {
+    grid-column: 1 / 2;
+}
+
+.right-column {
+    grid-column: 3 / 4;
+}
+
+body, html, button, input, select, textarea {
+    font-family: Telegram Sans, sans-serif;
+    font-weight: 400;
+    color: #000000;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
 body {
     font-family: Telegram Sans, sans-serif;
     font-weight: 400;
@@ -64,10 +111,10 @@ a:hover {
 }
 /* Ссылки в постах и футере */
 .post a, .footer a {
-    color: #5fa800;
+    color: #000000;
 }
 .post a:hover, .footer a:hover {
-    color: #5fa800;
+    color: #000000;
     text-decoration: none;
 }
 /* Меню */
@@ -102,7 +149,6 @@ a img {
 figure {
     margin: 0;
     text-align: center;
-    font-size: 1.5rem;
 }
 /* Цитаты */
 blockquote {
@@ -208,6 +254,9 @@ pre code {
 /* Стили для постов */
 p {
     text-indent: 25px;
+	font-size: 12px;
+	margin-block-end: 0.1em;
+	margin-block-start: 0.1em;
 }
 .datastyle {
      text-indent: 0px;
@@ -222,12 +271,12 @@ p {
     margin: 0;
 }
 .post .post-header .meta {
-    font-size: 0.8rem;
+    font-size: 12px;
     color: #888;
     margin-top: 5px;
 }
 .post .post-header .description {
-    font-size: 1rem; /* такой же размер, как и внутри постов */
+    font-size: 14px; /* такой же размер, как и внутри постов */
     margin: 5px 0 0 0;
 }
 
@@ -379,6 +428,7 @@ nav ul.flat li a:hover {
 
 .post-content .title {
     margin-bottom: 1px;
+	font-size: 18px;
 }
 
 .post-content .description {

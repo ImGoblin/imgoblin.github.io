@@ -35,24 +35,19 @@ url = "/posts/travel"
 weight = 2
 
 [[menu.main]]
-name = "Прогаем жопой"
-url = "/posts/programming"
-weight = 3
-
-[[menu.main]]
 name = "Обо мне"
 url = "/about"
-weight = 5
+weight = 4
 
 [[menu.main]]
 name = "Велопедеразм"
 url = "/posts/bicycle"
-weight = 4
+weight = 3
 
 [[menu.main]]
 name = "Поиск по тегам"
 url = "/tags"
-weight = 6
+weight = 5
 
 [[params.social]]
 name = "Отчёты из приюта"

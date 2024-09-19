@@ -5,7 +5,7 @@ date: 2024-08-30T10:00:00+03:00
 travelDate: 2024-04-20T12:00:00+03:00|2024-08-11T12:00:00+03:00
 draft: false
 section: bicycle
-image: images/analringofmoscow/analring.jpg
+image: images/analringofmoscow/moscow_river.jpg
 tags: ["Велосипед", "Москва", "Мнение"]
 ---
 ## Предпослесловие

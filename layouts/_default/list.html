@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 {{ partial "header.html" . }}
 <body>
@@ -17,12 +17,17 @@
                     Последние посты в {{ .Section }}
                 {{ end }}
             </h2>
-            <div class="posts">
+            <div class="posts-grid">
                 {{ $pages := .Pages }}
                 {{ if gt (len $pages) 0 }}
                     {{ range $pages }}
-                        <div class="post">
+                        <div class="post polaroid">
                             <a href="{{ .RelPermalink }}" class="post-link">
+                                <div class="post-image">
+                                    {{ with .Params.image }}
+                                        <img src="{{ . }}" alt="Thumbnail" class="post-thumbnail">
+                                    {{ end }}
+                                </div>
                                 <div class="post-content">
                                     <div class="post-header">
                                         <h3 class="title">{{ .Title }}</h3>
@@ -54,9 +59,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{ with .Params.image }}
-                                    <img src="{{ . }}" alt="Thumbnail" class="post-thumbnail">
-                                {{ end }}
                             </a>
                         </div>
                     {{ end }}
