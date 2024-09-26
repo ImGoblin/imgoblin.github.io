@@ -19,6 +19,13 @@
             {{ template "renderPolaroidPosts" $bicyclePosts }}
         </div>
 
+        <!-- Секция Головные мюсли -->
+        <div class="recent-posts section life">
+            <h2 class="section-header">Последние посты про мюсли</h2>
+            {{ $lifePosts := (where .Site.RegularPages "Params.section" "life") }}
+            {{ template "renderPolaroidPosts" $lifePosts }}
+        </div>
+
     </div>
 
     {{ partial "footer.html" . }}
@@ -31,87 +38,134 @@
             {{ if eq $postCount 1 }}
                 <!-- Один пост по центру -->
                 <div class="post polaroid center-column">
-                    <a href="{{ (index $posts 0).RelPermalink }}">
+                    {{ $post := index $posts 0 }}
+                    <a href="{{ $post.RelPermalink }}">
                         <div class="post-image">
-                            {{ with (index $posts 0).Params.image }}
+                            {{ with $post.Params.image }}
                                 <img src="{{ . }}" alt="Thumbnail">
                             {{ end }}
                         </div>
                         <div class="post-content">
-                            <h3 class="title">{{ (index $posts 0).Title }}</h3>
-                            <p class="meta">Опубликован: {{ dateFormat "2 January 2006" (index $posts 0).Date }}</p>
+                            <div class="post-header">
+                                <h3 class="title">{{ $post.Title }}</h3>
+                                <p class="description">
+                                    {{ if $post.Params.description }}
+                                        {{ $post.Params.description }}
+                                    {{ else }}
+                                        {{ $post.Summary }}&hellip;
+                                    {{ end }}
+                                </p>
+                                <div class="meta">
+                                    {{ if $post.Date }}
+                                        Опубликован &mdash; {{ dateFormat "2 January 2006" $post.Date }}
+                                    {{ else }}
+                                        Публикации ещё нет
+                                    {{ end }}
+                                    {{ if $post.Params.travelDate }}
+                                        {{ $dates := split $post.Params.travelDate "|" }}
+                                        {{ if eq (len $dates) 2 }}
+                                            {{ $startDate := index $dates 0 }}
+                                            {{ $endDate := index $dates 1 }}
+                                            <p class="datastyle">Даты поездки &mdash; {{ dateFormat "2 January 2006" $startDate }} - {{ dateFormat "2 January 2006" $endDate }}</p>
+                                        {{ else if eq (len $dates) 1 }}
+                                            {{ $singleDate := index $dates 0 }}
+                                            <p class="datastyle">Дата поездки &mdash; {{ dateFormat "2 January 2006" $singleDate }}</p>
+                                        {{ end }}
+                                    {{ end }}
+                                    {{ if $post.Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
+                                </div>
+                            </div>
                         </div>
                     </a>
                 </div>
             {{ else if eq $postCount 2 }}
                 <!-- Два поста по краям -->
-                <div class="post polaroid left-column">
-                    <a href="{{ (index $posts 0).RelPermalink }}">
-                        <div class="post-image">
-                            {{ with (index $posts 0).Params.image }}
-                                <img src="{{ . }}" alt="Thumbnail">
-                            {{ end }}
-                        </div>
-                        <div class="post-content">
-                            <h3 class="title">{{ (index $posts 0).Title }}</h3>
-                            <p class="meta">Опубликован: {{ dateFormat "2 January 2006" (index $posts 0).Date }}</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="post polaroid right-column">
-                    <a href="{{ (index $posts 1).RelPermalink }}">
-                        <div class="post-image">
-                            {{ with (index $posts 1).Params.image }}
-                                <img src="{{ . }}" alt="Thumbnail">
-                            {{ end }}
-                        </div>
-                        <div class="post-content">
-                            <h3 class="title">{{ (index $posts 1).Title }}</h3>
-                            <p class="meta">Опубликован: {{ dateFormat "2 January 2006" (index $posts 1).Date }}</p>
-                        </div>
-                    </a>
-                </div>
+                {{ range $i, $post := $posts }}
+                    <div class="post polaroid {{ if eq $i 0 }}left-column{{ else }}right-column{{ end }}">
+                        <a href="{{ $post.RelPermalink }}">
+                            <div class="post-image">
+                                {{ with $post.Params.image }}
+                                    <img src="{{ . }}" alt="Thumbnail">
+                                {{ end }}
+                            </div>
+                            <div class="post-content">
+                                <div class="post-header">
+                                    <h3 class="title">{{ $post.Title }}</h3>
+                                    <p class="description">
+                                        {{ if $post.Params.description }}
+                                            {{ $post.Params.description }}
+                                        {{ else }}
+                                            {{ $post.Summary }}&hellip;
+                                        {{ end }}
+                                    </p>
+                                    <div class="meta">
+                                        {{ if $post.Date }}
+                                            Опубликован &mdash; {{ dateFormat "2 January 2006" $post.Date }}
+                                        {{ else }}
+                                            Публикации ещё нет
+                                        {{ end }}
+                                        {{ if $post.Params.travelDate }}
+                                            {{ $dates := split $post.Params.travelDate "|" }}
+                                            {{ if eq (len $dates) 2 }}
+                                                {{ $startDate := index $dates 0 }}
+                                                {{ $endDate := index $dates 1 }}
+                                                <p class="datastyle">Даты поездки &mdash; {{ dateFormat "2 January 2006" $startDate }} - {{ dateFormat "2 January 2006" $endDate }}</p>
+                                            {{ else if eq (len $dates) 1 }}
+                                                {{ $singleDate := index $dates 0 }}
+                                                <p class="datastyle">Дата поездки &mdash; {{ dateFormat "2 January 2006" $singleDate }}</p>
+                                            {{ end }}
+                                        {{ end }}
+                                        {{ if $post.Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {{ end }}
             {{ else if ge $postCount 3 }}
                 <!-- Три или больше постов -->
-                <div class="post polaroid left-column">
-                    <a href="{{ (index $posts 0).RelPermalink }}">
-                        <div class="post-image">
-                            {{ with (index $posts 0).Params.image }}
-                                <img src="{{ . }}" alt="Thumbnail">
-                            {{ end }}
-                        </div>
-                        <div class="post-content">
-                            <h3 class="title">{{ (index $posts 0).Title }}</h3>
-                            <p class="meta">Опубликован: {{ dateFormat "2 January 2006" (index $posts 0).Date }}</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="post polaroid center-column">
-                    <a href="{{ (index $posts 1).RelPermalink }}">
-                        <div class="post-image">
-                            {{ with (index $posts 1).Params.image }}
-                                <img src="{{ . }}" alt="Thumbnail">
-                            {{ end }}
-                        </div>
-                        <div class="post-content">
-                            <h3 class="title">{{ (index $posts 1).Title }}</h3>
-                            <p class="meta">Опубликован: {{ dateFormat "2 January 2006" (index $posts 1).Date }}</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="post polaroid right-column">
-                    <a href="{{ (index $posts 2).RelPermalink }}">
-                        <div class="post-image">
-                            {{ with (index $posts 2).Params.image }}
-                                <img src="{{ . }}" alt="Thumbnail">
-                            {{ end }}
-                        </div>
-                        <div class="post-content">
-                            <h3 class="title">{{ (index $posts 2).Title }}</h3>
-                            <p class="meta">Опубликован: {{ dateFormat "2 January 2006" (index $posts 2).Date }}</p>
-                        </div>
-                    </a>
-                </div>
+                {{ range $i, $post := first 3 $posts }}
+                    <div class="post polaroid {{ if eq $i 0 }}left-column{{ else if eq $i 1 }}center-column{{ else }}right-column{{ end }}">
+                        <a href="{{ $post.RelPermalink }}">
+                            <div class="post-image">
+                                {{ with $post.Params.image }}
+                                    <img src="{{ . }}" alt="Thumbnail">
+                                {{ end }}
+                            </div>
+                            <div class="post-content">
+                                <div class="post-header">
+                                    <h3 class="title">{{ $post.Title }}</h3>
+                                    <p class="description">
+                                        {{ if $post.Params.description }}
+                                            {{ $post.Params.description }}
+                                        {{ else }}
+                                            {{ $post.Summary }}&hellip;
+                                        {{ end }}
+                                    </p>
+                                    <div class="meta">
+                                        {{ if $post.Date }}
+                                            Опубликован &mdash; {{ dateFormat "2 January 2006" $post.Date }}
+                                        {{ else }}
+                                            Публикации ещё нет
+                                        {{ end }}
+                                        {{ if $post.Params.travelDate }}
+                                            {{ $dates := split $post.Params.travelDate "|" }}
+                                            {{ if eq (len $dates) 2 }}
+                                                {{ $startDate := index $dates 0 }}
+                                                {{ $endDate := index $dates 1 }}
+                                                <p class="datastyle">Даты поездки &mdash; {{ dateFormat "2 January 2006" $startDate }} - {{ dateFormat "2 January 2006" $endDate }}</p>
+                                            {{ else if eq (len $dates) 1 }}
+                                                {{ $singleDate := index $dates 0 }}
+                                                <p class="datastyle">Дата поездки &mdash; {{ dateFormat "2 January 2006" $singleDate }}</p>
+                                            {{ end }}
+                                        {{ end }}
+                                        {{ if $post.Params.draft }} <span class="draft-label">DRAFT</span> {{ end }}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {{ end }}
             {{ end }}
         </div>
     {{ end }}
