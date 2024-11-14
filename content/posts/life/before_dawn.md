@@ -4,7 +4,7 @@ description: "Самая тёмная ночь перед рассветом"
 date: 2024-11-14T10:00:00+03:00
 draft: false
 section: life
-image: images/before_dawn/before_dawn.jpg
+image: images/before_dawn/before_dawn.JPG
 tags: ["Головные мюсли"]
 ---
 ## В начале был пиздец
