@@ -9,8 +9,8 @@
             <h2 class="section-header">
                 {{ if in .Permalink "/travel/" }}
                     Последние посты про путешествия
-                {{ else if in .Permalink "/programming/" }}
-                    Последние посты о мамкином программисте
+                {{ else if in .Permalink "/life/" }}
+                    Последние посты про мюсли
                 {{ else if in .Permalink "/bicycle/" }}
                     Последние посты о велопедеразме
                 {{ else }}
@@ -63,7 +63,7 @@
                         </div>
                     {{ end }}
                 {{ else }}
-                    <p>Все посты {{ if in .Permalink "/travel/" }} о путешествиях {{ else if in .Permalink "/programming/" }} о программировании {{ else if in .Permalink "/bicycle/" }} о велопедеразме {{ else }} этом разделе {{ end }} куда-то разбежались</p>
+                    <p>Все посты {{ if in .Permalink "/travel/" }} о путешествиях {{ else if in .Permalink "/life/" }} про мюсли {{ else if in .Permalink "/bicycle/" }} о велопедеразме {{ else }} этом разделе {{ end }} куда-то разбежались</p>
                 {{ end }}
             </div>
         </div>
