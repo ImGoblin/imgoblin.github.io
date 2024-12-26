@@ -65,7 +65,7 @@ _[Предыдущая часть](https://incrediblegoblin.com/posts/travel/irk
 
 Неподалёку от станции притаилась одна из многочисленных противообвальных галерей --- галерея №14 «Ангасольская-1». Не стану загружать вас историческими фактами о ней --- я же всё-таки не википедия, да и, надеюсь, вы заходите сюда совсем не за этим. Скажу лишь, что это сооружение радует глаз и завораживает своей атмосферой.
 
-{{< carousel id="4" images="/images/baikal_express_part_1/Gallery_No_14_Angasolskaya.jpg,/images/baikal_express_part_1/Gallery_No_14_Angasolskaya_2.jpg,/images/baikal_express_part_1/Gallery_No_14_Angasolskaya_3.jpg" captions="Вид на противообвальную галерею №14 «Ангасольская-1»|Остатки былого величия|А это уже новая параллельная ветка" >}}
+{{< carousel id="4" images="/images/baikal_express_part_1/gallery_No_14_Angasolskaya.jpg,/images/baikal_express_part_1/gallery_No_14_Angasolskaya_2.jpg,/images/baikal_express_part_1/gallery_No_14_Angasolskaya_3.jpg" captions="Вид на противообвальную галерею №14 «Ангасольская-1»|Остатки былого величия|А это уже новая параллельная ветка" >}}
 
 Пока остальные пассажиры лениво перемещались по верху, я, не теряя времени, устремился вниз, погружаясь в новые приключения с головой.
 
@@ -73,7 +73,7 @@ _[Предыдущая часть](https://incrediblegoblin.com/posts/travel/irk
 
 В этот раз я настолько увлёкся, что, когда наш верный Росинант впервые нервно выдохнул пар, рвясь вперёд, я всё ещё находился под мостами --- слишком уж умиротворяюще было в том укромном уголке.
 
-{{< carousel id="6" images="/images/baikal_express_part_1/old_angasolka_with_train.jpg,/images/baikal_express_part_1/old_angasolka_3.jpg,/images/baikal_express_part_1/old_angasolka_2.jpg,/images/baikal_express_part_1/Old_Angasolka._A_View_into_the_future.jpg,/images/baikal_express_part_1/train_2.jpg" captions="" >}}
+{{< carousel id="6" images="/images/baikal_express_part_1/old_angasolka_with_train.jpg,/images/baikal_express_part_1/old_angasolka_3.jpg,/images/baikal_express_part_1/old_angasolka_2.jpg,/images/baikal_express_part_1/old_Angasolka._A_View_into_the_future.jpg,/images/baikal_express_part_1/train_2.jpg" captions="" >}}
 
 Вернувшись в вагон, предварительно удостоившись нагоняя от проводников за свою нерасторопность, я застал мирно сопящую Аню, почти свернувшуюся в клубок. Будить её, конечно, я не стал --- просто забрался на свою полку и задремал до следующей остановки.
 
