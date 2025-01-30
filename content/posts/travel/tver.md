@@ -5,7 +5,7 @@ date: 2024-06-27T12:00:00+03:00
 travelDate: 2024-01-06T12:00:00+03:00
 draft: false
 section: travel
-image: images/tver/mapoftver.jpg
+image: images/tver/cool.jpg
 tags: ["Путешествие", "Россия", "Тверь"]
 ---
 ## Пустословие
